@@ -1,0 +1,10 @@
+Version 1.0 Alpha
+=================
+
+- First public release.
+
+
+Chris Oldwood 
+(gort@cix.co.uk)
+
+19th June 2003
