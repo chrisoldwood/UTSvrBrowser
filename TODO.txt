@@ -1,7 +1,21 @@
-- Master Game filter.
+- Finish game summary dialog.
 
-- MOD filter.
+- Tidy up "Ping Options" dialog (PropertySheet).
 
-- Custom filter.
+- Sort out .ini default values.
 
-- Game summary.
+- Filters dialog.
+
+- Filter types (GameTypes, Players, Std/Custom Maps).
+
+- Rank servers by players/pings/secure etc.
+
+- Detect CSHP, PURE etc.
+
+- Time-out on inital query.
+
+- Stop polling sockets - Use EventSelect().
+
+- Store lowercase version of host name.
+
+- Add game type column.
