@@ -94,10 +94,6 @@ SOURCE=.\AboutDlg.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\App.rc
-# End Source File
-# Begin Source File
-
 SOURCE=.\AppCmds.cpp
 # End Source File
 # Begin Source File
@@ -223,6 +219,10 @@ SOURCE=.\SummaryDlg.cpp
 # Begin Source File
 
 SOURCE=.\UTSvrBrowser.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\UTSvrBrowser.rc
 # End Source File
 # End Group
 # Begin Group "Header Files"
