@@ -41,8 +41,14 @@ public:
 		MAP_TITLE,
 		MAP_NAME,
 		GAME_TYPE,
+		MOD_NAME,
 		NUM_PLAYERS,
 		MAX_PLAYERS,
+		PING_TIME,
+		LAST_ERROR,
+		FAV_ID,
+
+		NUM_COLUMNS,
 	};
 
 	//
@@ -56,12 +62,23 @@ public:
 		MAP_TITLE_LEN  = MAX_PATH,
 		MAP_NAME_LEN   = MAX_PATH,
 		GAME_TYPE_LEN  = MAX_PATH,
+		MOD_NAME_LEN   = MAX_PATH,
 	};
 
 	//
 	// Methods (overriden).
 	//
 	virtual CRow& CreateRow();
+
+	//
+	// Status codes.
+	//
+	enum
+	{
+		ERROR_NONE,
+		ERROR_FAILED,
+		ERROR_TIMED_OUT,
+	};
 };
 
 /******************************************************************************

@@ -35,12 +35,16 @@ CServers::CServers(CMDB& oDB)
 	AddColumn("IPKey",       MDCT_FXDSTR,   IP_KEY_LEN,     CColumn::UNIQUE  );
 	AddColumn("IPAddress",   MDCT_FXDSTR,   IP_ADDRESS_LEN, CColumn::DEFAULTS);
 	AddColumn("IPPort",      MDCT_INT,      0,              CColumn::DEFAULTS);
-	AddColumn("HostName",    MDCT_FXDSTR,   HOST_NAME_LEN,  CColumn::DEFAULTS);
-	AddColumn("MapTitle",    MDCT_FXDSTR,   MAP_TITLE_LEN,  CColumn::DEFAULTS);
-	AddColumn("MapName",     MDCT_FXDSTR,   MAP_NAME_LEN,   CColumn::DEFAULTS);
-	AddColumn("GameType",    MDCT_FXDSTR,   GAME_TYPE_LEN,  CColumn::DEFAULTS);
+	AddColumn("HostName",    MDCT_VARSTR,   HOST_NAME_LEN,  CColumn::DEFAULTS);
+	AddColumn("MapTitle",    MDCT_VARSTR,   MAP_TITLE_LEN,  CColumn::DEFAULTS);
+	AddColumn("MapName",     MDCT_VARSTR,   MAP_NAME_LEN,   CColumn::DEFAULTS);
+	AddColumn("GameType",    MDCT_VARSTR,   GAME_TYPE_LEN,  CColumn::DEFAULTS);
+	AddColumn("ModName",     MDCT_VARSTR,   MOD_NAME_LEN,   CColumn::DEFAULTS);
 	AddColumn("NumPlayers",  MDCT_INT,      0,              CColumn::DEFAULTS);
 	AddColumn("MaxPlayers",  MDCT_INT,      0,              CColumn::DEFAULTS);
+	AddColumn("PingTime",    MDCT_INT,      0,              CColumn::DEFAULTS);
+	AddColumn("LastError",   MDCT_INT,      0,              CColumn::DEFAULTS);
+	AddColumn("FavID",       MDCT_INT,      0,              CColumn::NULLABLE);
 }
 
 /******************************************************************************
@@ -83,8 +87,12 @@ CRow& CServers::CreateRow()
 	oRow[MAP_TITLE]   = "";
 	oRow[MAP_NAME]    = "";
 	oRow[GAME_TYPE]   = "";
+	oRow[MOD_NAME]    = "";
 	oRow[NUM_PLAYERS] = 0;
 	oRow[MAX_PLAYERS] = 0;
+	oRow[PING_TIME]   = 999;
+	oRow[LAST_ERROR]  = ERROR_NONE;
+	oRow[FAV_ID]      = null;
 	
 	return oRow;
 }
