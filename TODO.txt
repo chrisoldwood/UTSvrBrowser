@@ -1,0 +1,7 @@
+- Master Game filter.
+
+- MOD filter.
+
+- Custom filter.
+
+- Game summary.
