@@ -30,26 +30,42 @@ public:
 	//
 	// Properties.
 	//
-	int SortColumn() const;
+	int   SortColumn() const;
+	CRow* SelectedRow() const;
 
 	//
 	// Methods.
 	//
 	void RefreshView();
+	void RefreshRow(CRow& oRow);
+	void RefreshAllRows();
 	void Sort(int nColumn);
+	void ToggleColumn(int nColumn);
+	void AutoSizeColumns();
+	void SelectRow(int nRow);
 
 	//
 	// Column indices.
 	//
 	enum Column
 	{
-		IP_ADDRESS,
-		IP_PORT,
 		HOST_NAME,
+		MOD_NAME,
 		MAP_TITLE,
 		GAME_TYPE,
 		PLAYERS,
+		PING_TIME,
+		IP_ADDRESS,
+		IP_PORT,
+//		LAST_ERROR,
+
+		NUM_COLUMNS,
 	};
+
+	//
+	// Constants.
+	//
+	static const int DEF_COLUMN_WIDTH;
 
 protected:
 	//
@@ -67,14 +83,21 @@ protected:
 	// Message processors.
 	//
 	virtual void OnInitDialog();
+	virtual void OnDestroy();
 	LRESULT OnGridSelchange(NMHDR& oNMHeader);
 	LRESULT OnGridRightClick(NMHDR& oNMHeader);
+	LRESULT OnGridDoubleClick(NMHDR& oNMHeader);
 	LRESULT OnGridClickColumn(NMHDR& oNMHeader);
 
 	//
 	// Internal methods.
 	//
+	CRow*   GridRow(int nRow) const;
 	CString FmtPlayers(const CRow& oRow);
+	CString FmtPingTime(const CRow& oRow);
+	CString FmtLastErr(const CRow& oRow);
+	CString FmtModName(const CRow& oRow);
+	int     TableColumn(int nColumn);
 };
 
 /******************************************************************************
@@ -84,9 +107,34 @@ protected:
 *******************************************************************************
 */
 
+inline CRow* CAppDlg::GridRow(int nRow) const
+{
+	ASSERT((nRow >= 0) && (nRow < m_lvGrid.ItemCount()));
+
+	return (CRow*) m_lvGrid.ItemPtr(nRow);
+}
+
 inline int CAppDlg::SortColumn() const
 {
 	return m_nSortColumn;
+}
+
+inline CRow* CAppDlg::SelectedRow() const
+{
+	CRow* pRow = NULL;
+
+	if (m_lvGrid.IsSelection())
+		pRow = GridRow(m_lvGrid.Selection());
+
+	return pRow;
+}
+
+inline void CAppDlg::SelectRow(int nRow)
+{
+	ASSERT((nRow >= 0) && (nRow < m_lvGrid.ItemCount()));
+
+	m_lvGrid.Select(nRow);
+	m_lvGrid.MakeItemVisible(nRow);
 }
 
 #endif //APPDLG_HPP
