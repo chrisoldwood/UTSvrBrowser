@@ -403,7 +403,23 @@ SOURCE=.\Toolbar.bmp
 # End Group
 # Begin Source File
 
+SOURCE=.\ReadMe.txt
+# End Source File
+# Begin Source File
+
+SOURCE=.\RelNotes.txt
+# End Source File
+# Begin Source File
+
 SOURCE=.\TODO.txt
+# End Source File
+# Begin Source File
+
+SOURCE=.\UTSBMods.ini
+# End Source File
+# Begin Source File
+
+SOURCE=.\UTSvrBrowser.ini
 # End Source File
 # End Target
 # End Project
