@@ -37,14 +37,15 @@ protected:
 	//
 	// Members.
 	//
-	CString			m_strAddress;
-	int				m_nPort;
-	CTCPCltSocket*	m_pSocket;
+	CString	m_strAddress;
+	int		m_nPort;
 
 	//
 	// Constants.
 	//
 	static const char* QUERY_STRING;
+	static const char* END_OF_RESPONSE;
+	static const char* FIELD_SEPS;
 };
 
 /******************************************************************************

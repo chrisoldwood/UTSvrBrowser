@@ -21,7 +21,10 @@
 **
 *******************************************************************************
 */
-const char* CMasterServer::QUERY_STRING = "\\gamename\\ut\\location\\0\\validate\\2/TYFMRc\\final\\\\list\\\\gamename\\ut\\final\\";
+
+const char* CMasterServer::QUERY_STRING	   = "\\gamename\\ut\\location\\0\\validate\\2/TYFMRc\\final\\\\list\\\\gamename\\ut\\final\\";
+const char* CMasterServer::END_OF_RESPONSE = "\\final\\";
+const char* CMasterServer::FIELD_SEPS      = "\\";
 
 /******************************************************************************
 ** Method:		Constructor.
@@ -38,7 +41,6 @@ const char* CMasterServer::QUERY_STRING = "\\gamename\\ut\\location\\0\\validate
 CMasterServer::CMasterServer(const char* pszAddress, int nPort)
 	: m_strAddress(pszAddress)
 	, m_nPort(nPort)
-	, m_pSocket(new CTCPCltSocket)
 {
 }
 
@@ -56,7 +58,6 @@ CMasterServer::CMasterServer(const char* pszAddress, int nPort)
 
 CMasterServer::~CMasterServer()
 {
-	delete m_pSocket;
 }
 
 /******************************************************************************
@@ -69,54 +70,50 @@ CMasterServer::~CMasterServer()
 **
 ** Returns:		The number of servers found.
 **
+** Exceptions:	CSocketException.
+**
 *******************************************************************************
 */
 
-int CMasterServer::QueryServers(const char* pszGameCode, CStrArray& astrAddresses)
+int CMasterServer::QueryServers(const char* /*pszGameCode*/, CStrArray& astrAddresses)
 {
-	ASSERT(pszGameCode != NULL);
+//	ASSERT(pszGameCode != NULL);
 
-	CString strResponse;
+	CTCPCltSocket oSocket;
+	CString       strResponse;
 
-	try
+	// Open a socket to the server.
+	oSocket.Connect(m_strAddress, m_nPort);
+
+	// Send query.
+	oSocket.Send(QUERY_STRING);
+
+	// Until we find the packet terminator.
+	while (strResponse.Find(END_OF_RESPONSE) == -1)
 	{
-		// Open a socket to the server.
-		m_pSocket->Connect(m_strAddress, m_nPort);
+		int nAvail, nRead;
 
-		// Send query.
-		m_pSocket->Send(QUERY_STRING);
-
-		// Until we find the packet terminator.
-		while (strResponse.Find("\\final\\") == -1)
+		// Anything to read?
+		if ((nAvail = oSocket.Available()) > 0)
 		{
-			int nAvail, nRead;
+			CBuffer oBuffer(nAvail);
 
-			// Anything to read?
-			if ((nAvail = m_pSocket->Available()) > 0)
+			// Anything read?
+			if ((nRead = oSocket.Recv(oBuffer)) > 0)
 			{
-				CBuffer oBuffer(nAvail);
-
-				// Anything read?
-				if ((nRead = m_pSocket->Recv(oBuffer)) > 0)
-				{
-					// Append to response buffer.
-					strResponse += oBuffer.ToString(nRead);
-				}
+				// Append to response buffer.
+				strResponse += oBuffer.ToString(nRead);
 			}
-
-			::Sleep(1);
 		}
-	}
-	catch (CSocketException& e)
-	{
-		TRACE1("SocketException: %s\n", e.ErrorText());
+
+		::Sleep(1);
 	}
 
 	// Close session.
-	m_pSocket->Close();
+	oSocket.Close();
 
 	// Split response buffer into separate fields.
-	if (strResponse.Split("\\", astrAddresses) > 0)
+	if (CStrTok::Split(strResponse, FIELD_SEPS, astrAddresses) > 0)
 	{
 		// Strip fields which don't contain an IP address.
 		for (int i = astrAddresses.Size()-1; i >= 0; --i)
