@@ -23,8 +23,8 @@ CFG=UTSvrBrowser - Win32 Debug
 
 # Begin Project
 # PROP AllowPerConfigDependencies 0
-# PROP Scc_ProjName ""
-# PROP Scc_LocalPath ""
+# PROP Scc_ProjName ""$/Win32/UTSvrBrowser", FADAAAAA"
+# PROP Scc_LocalPath "."
 CPP=cl.exe
 MTL=midl.exe
 RSC=rc.exe
@@ -114,7 +114,87 @@ SOURCE=.\AppWnd.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\FavFileDlg.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FavFiles.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Favourites.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FavouritesDlg.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FilterDlg.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FiltersDlg.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FindDlg.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FltMiscPage.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FltModsPage.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FltNamePage.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FltPortsPage.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\GameInfoDlg.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\GameServer.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\GameTypes.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MasterQueryDlg.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\MasterServer.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Mods.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MtrAddressPage.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MtrFirewallPage.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MtrTransformPage.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\PingOptsDlg.cpp
 # End Source File
 # Begin Source File
 
@@ -126,7 +206,19 @@ SOURCE=.\QueryJob.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\QueryResponse.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Servers.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Summary.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\SummaryDlg.cpp
 # End Source File
 # Begin Source File
 
@@ -162,7 +254,99 @@ SOURCE=.\AppWnd.hpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\FavFileDlg.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FavFiles.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Favourites.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FavouritesDlg.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Filter.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FilterDlg.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FiltersDlg.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FindDlg.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FltMiscPage.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FltModsPage.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FltNamePage.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\FltPortsPage.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\GameInfoDlg.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\GameServer.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\GameTypes.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MasterQueryDlg.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MasterQueryOpts.hpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\MasterServer.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Mods.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MtrAddressPage.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MtrFirewallPage.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MtrTransformPage.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\PingOpts.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\PingOptsDlg.hpp
 # End Source File
 # Begin Source File
 
@@ -174,11 +358,23 @@ SOURCE=.\QueryJob.hpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\QueryResponse.hpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Resource.h
 # End Source File
 # Begin Source File
 
 SOURCE=.\Servers.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\Summary.hpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\SummaryDlg.hpp
 # End Source File
 # Begin Source File
 
@@ -195,6 +391,10 @@ SOURCE=.\App.ico
 # Begin Source File
 
 SOURCE=.\App.rcv
+# End Source File
+# Begin Source File
+
+SOURCE=.\ListIcons.bmp
 # End Source File
 # Begin Source File
 
