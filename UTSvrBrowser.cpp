@@ -308,7 +308,7 @@ void CUTSvrBrowser::LoadAppConfig()
 	// Read the filters.
 	int nFilters = m_oAppIniFile.ReadInt("Filters", "Count", 0);
 
-	for (i = 0; i < nFilters; ++i)
+	for (int i = 0; i < nFilters; ++i)
 	{
 		CString strSection, strEntry;
 
