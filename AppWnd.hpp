@@ -31,13 +31,14 @@ public:
 	//
 	// Methods.
 	//
+	void UpdateTitle();
 
 	//
 	// Members.
 	//
 	CAppDlg		m_AppDlg;
 	CFrameMenu	m_Menu;
-	CAppToolBar	m_ToolBar;
+//	CAppToolBar	m_ToolBar;
 	CStatusBar	m_StatusBar;
 
 protected:

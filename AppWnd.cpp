@@ -66,8 +66,8 @@ void CAppWnd::OnCreate(const CRect& rcClient)
 	m_Menu.LoadRsc(IDR_APPMENU);
 	Menu(&m_Menu);
 
-	m_ToolBar.Create(*this, IDC_TOOL_BAR, rcClient);
-	ToolBar(&m_ToolBar);
+//	m_ToolBar.Create(*this, IDC_TOOL_BAR, rcClient);
+//	ToolBar(&m_ToolBar);
 
 	m_StatusBar.Create(*this, IDC_STATUS_BAR, rcClient);
 	StatusBar(&m_StatusBar);
@@ -96,4 +96,26 @@ bool CAppWnd::OnQueryClose()
 	App.m_rcLastPos = Placement();
 
 	return true;
+}
+
+/******************************************************************************
+** Method:		UpdateTitle()
+**
+** Description:	Update the title bar with the current filter name.
+**
+** Parameters:	None.
+**
+** Returns:		Nothing.
+**
+*******************************************************************************
+*/
+
+void CAppWnd::UpdateTitle()
+{
+	CString str = App.m_strTitle;
+
+	if (App.m_pFilter != NULL)
+		str += " - " + App.m_pFilter->m_strName;
+
+	Title(str);
 }
