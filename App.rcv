@@ -35,12 +35,12 @@ BEGIN
 		BLOCK "040904E4"
 		BEGIN
 			VALUE "FileDescription",  "UT Server Browser\0"
-			VALUE "FileVersion",      "1.0\0"
+			VALUE "FileVersion",      "1.0 Alpha\0"
 			VALUE "InternalName",     "UTSvrBrowser.exe\0"
 			VALUE "LegalCopyright",   "(C) Chris Oldwood 2003\0"
 			VALUE "OriginalFilename", "UTSvrBrowser.exe\0"
 			VALUE "ProductName",      "UT Server Browser\0"
-			VALUE "ProductVersion",   "1.0\0"
+			VALUE "ProductVersion",   "1.0 Alpha\0"
 #ifdef _DEBUG
 			VALUE "Comments",         "Debug Build\0"
 #endif

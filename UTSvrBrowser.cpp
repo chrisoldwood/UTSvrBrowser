@@ -28,9 +28,9 @@ CUTSvrBrowser App;
 */
 
 #ifdef _DEBUG
-const char* CUTSvrBrowser::VERSION      = "v1.0 [Debug]";
+const char* CUTSvrBrowser::VERSION      = "v1.0 Alpha [Debug]";
 #else
-const char* CUTSvrBrowser::VERSION      = "v1.0";
+const char* CUTSvrBrowser::VERSION      = "v1.0 Alpha";
 #endif
 
 const char* CUTSvrBrowser::APP_INI_FILE_VER   = "1.0";
@@ -45,7 +45,7 @@ bool        CUTSvrBrowser::DEF_AUTO_PING      = false;
 int         CUTSvrBrowser::DEF_PING_INTERVAL  = 10;
 const char* CUTSvrBrowser::CACHE_FILENAME     = "UTSvrBrowser.dat";
 const char* CUTSvrBrowser::CACHE_FILE_MAGIC   = "UTSB";
-uint16      CUTSvrBrowser::CACHE_FILE_VER     = 0x0102;
+uint16      CUTSvrBrowser::CACHE_FILE_VER     = 0x000A;
 
 /******************************************************************************
 ** Method:		Constructor
