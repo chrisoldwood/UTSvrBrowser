@@ -42,7 +42,8 @@ protected:
 	//
 	// Internal methods.
 	//
-	CString ExtractField(CStrArray& astrFields, const char* pszField);
+	CString FindModName(const char* pszGameType);
+	void    ConvertSymbols(CString& strString);
 };
 
 /******************************************************************************

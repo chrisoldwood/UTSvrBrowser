@@ -9,6 +9,7 @@
 */
 
 #include "AppHeaders.hpp"
+#include <limits.h>
 
 /******************************************************************************
 ** Method:		Constructor.
@@ -57,90 +58,101 @@ CQueryJob::~CQueryJob()
 
 void CQueryJob::Run()
 {
-	CString strAddr = m_oRow[CServers::IP_ADDRESS];
-	int     nPort   = m_oRow[CServers::IP_PORT];
-	DWORD   dwStart = ::GetTickCount();
+	// Clear exisiting data.
+	m_oRow[CServers::MAP_TITLE]   = "";
+	m_oRow[CServers::MAP_NAME]    = "";
+	m_oRow[CServers::NUM_PLAYERS] = 0;
+	m_oRow[CServers::MAX_PLAYERS] = 0;
+	m_oRow[CServers::PING_TIME]   = INT_MAX;
 
-	try
+	CGameServer    oServer(m_oRow[CServers::IP_ADDRESS], m_oRow[CServers::IP_PORT]);
+	CQueryResponse oResponse;
+
+	// Ping server and process response.
+	if (oServer.QueryInfo(oResponse))
 	{
-		CUDPCltSocket oSocket;
-		CString       strResponse;
+		CString strHostName = oResponse.FieldValue("hostname");
 
-		// Open a connection.
-		oSocket.Connect(strAddr, nPort);
+		// Trim excess whitespace from hostname?
+		if (App.m_oMtrQryOpts.m_bTrimSpace)
+			strHostName.Trim();
 
-		// Send the query.
-		oSocket.Send("\\info\\");
+		// Translate hostname symbols to letters?
+		if (App.m_oMtrQryOpts.m_bConvertSyms)
+			ConvertSymbols(strHostName);
 
-		// Until we find the packet terminator.
-		while (strResponse.Find("\\final\\") == -1)
-		{
-			int nAvail, nRead;
+		CString strMapTitle = oResponse.FieldValue("maptitle");
 
-			// Anything to read?
-			if ((nAvail = oSocket.Available()) > 0)
-			{
-				CBuffer oBuffer(nAvail);
+		// If no map title, use name instead.
+		if (strMapTitle.Empty())
+			strMapTitle = oResponse.FieldValue("mapname");
 
-				// Anything read?
-				if ((nRead = oSocket.Recv(oBuffer)) > 0)
-				{
-					// Append to response buffer.
-					strResponse += oBuffer.ToString(nRead);
-				}
-			}
-
-			// Abort query if it takes longer than 1 sec.
-			if ((::GetTickCount() - dwStart) > 1000)
-				break;
-
-			::Sleep(1);
-		}
-
-		// Close connection.
-		oSocket.Close();
-
-		// Got entire response?
-		if (strResponse.Find("\\final\\") != -1)
-		{
-			CStrArray astrFields;
-
-			// Split response in fields.
-			strResponse.Split("\\", astrFields);
-
-			// Extract relevant fields
-			m_oRow[CServers::HOST_NAME]   = ExtractField(astrFields, "hostname");
-			m_oRow[CServers::MAP_TITLE]   = ExtractField(astrFields, "maptitle");
-			m_oRow[CServers::MAP_NAME]    = ExtractField(astrFields, "mapname");
-			m_oRow[CServers::GAME_TYPE]   = ExtractField(astrFields, "gametype");
-			m_oRow[CServers::NUM_PLAYERS] = atoi(ExtractField(astrFields, "numplayers"));
-			m_oRow[CServers::MAX_PLAYERS] = atoi(ExtractField(astrFields, "maxplayers"));
-		}
+		// Extract relevant fields
+		m_oRow[CServers::HOST_NAME]   = strHostName;
+		m_oRow[CServers::MAP_TITLE]   = strMapTitle;
+		m_oRow[CServers::MAP_NAME]    = oResponse.FieldValue("mapname");
+		m_oRow[CServers::GAME_TYPE]   = oResponse.FieldValue("gametype");
+		m_oRow[CServers::MOD_NAME]    = FindModName(m_oRow[CServers::GAME_TYPE]);
+		m_oRow[CServers::NUM_PLAYERS] = atoi(oResponse.FieldValue("numplayers"));
+		m_oRow[CServers::MAX_PLAYERS] = atoi(oResponse.FieldValue("maxplayers"));
+		m_oRow[CServers::PING_TIME]   = oResponse.Time();
 	}
-	catch (CSocketException& /*e*/)
-	{
-//		TRACE3("SocketException (%s:%d): %s\n", strAddr, nPort, e.ErrorText());
-	}
+
+	// Set result.
+	m_oRow[CServers::LAST_ERROR] = oResponse.Error();
 }
 
 /******************************************************************************
-** Method:		ExtractField()
+** Method:		FindModName()
 **
-** Description:	Extracts a field from the response.
+** Description:	Find the name of the mod that corresponds to the game type.
 **
-** Parameters:	astrFields	The array of fields.
-**				pszField	The field name.
+** Parameters:	pszGameType		The game type.
+**
+** Returns:		The mod name or "".
+**
+*******************************************************************************
+*/
+
+CString CQueryJob::FindModName(const char* pszGameType)
+{
+	const char* pszModName = "";
+
+	// Lookup game type in table.
+	CRow* pModRow = App.m_oGameTypes.SelectRow(CGameTypes::GAME_TYPE, pszGameType);
+
+	if (pModRow != NULL)
+		pszModName = pModRow->Field(CGameTypes::MOD_NAME);
+
+	return pszModName;
+}
+
+/******************************************************************************
+** Method:		ConvertSymbols()
+**
+** Description:	Converts any symbols to standard letters.
+**
+** Parameters:	strString	The string to convert.
 **
 ** Returns:		Nothing.
 **
 *******************************************************************************
 */
 
-CString CQueryJob::ExtractField(CStrArray& astrFields, const char* pszField)
+void CQueryJob::ConvertSymbols(CString& strString)
 {
-	ASSERT(pszField != NULL);
+	static const char* pszSymbols = "@ß©Ð£Þ®§$¥";
+	static const char* pszLetters = "aBcDeprssy";
 
-	int nField = astrFields.Find(pszField);
+	int nLen = strString.Length();
 
-	return (nField != -1) ? astrFields[nField+1] : "";
+	// For all characters...
+	for (int i = 0; i < nLen; ++i)
+	{
+		const char* pcSymbol = strchr(pszSymbols, strString[i]);
+
+		// Remap, if a symbol.
+		if (pcSymbol != NULL)
+			strString[i] = pszLetters[pcSymbol-pszSymbols];
+	}
 }
