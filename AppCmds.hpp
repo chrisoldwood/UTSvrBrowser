@@ -33,12 +33,45 @@ public:
 	//
 
 	// Servers menu.
+	void OnServersPing();
+	void OnServersPingFiltered();
+	void OnServersPingAll();
 	void OnServersRefresh();
+	void OnServersFind();
+	void OnServersFindNext();
+	void OnServersAddFav();
+	void OnServersDelFav();
+	void OnServersSummary();
 	void OnServersExit();
 
-	// Sort menu.
-	void OnSortByName();
-	void OnSortByPlayers();
+	// Filter menu.
+	void OnFilterNone();
+	void OnFilter(int nCmdID);
+
+	// View menu.
+	void OnViewColumnName();
+	void OnViewColumnMod();
+	void OnViewColumnMap();
+	void OnViewColumnPlayers();
+	void OnViewColumnPing();
+	void OnViewColumnIPAddress();
+	void OnViewColumnIPPort();
+	void OnViewColumnAutoSize();
+	void OnViewSortByName();
+	void OnViewSortByMod();
+	void OnViewSortByMap();
+	void OnViewSortByPlayers();
+	void OnViewSortByPing();
+	void OnViewSortByIPAddress();
+	void OnViewSortByIPPort();
+	void OnViewSortBy(int eColumn);
+	void OnViewDetails();
+
+	// Options menu.
+	void OnOptionsMaster();
+	void OnOptionsPing();
+	void OnOptionsFilters();
+	void OnOptionsFavourites();
 
 	// Help menu.
 	void OnHelpAbout();
@@ -46,8 +79,25 @@ public:
 	//
 	// UI handlers.
 	//
-	void OnUISortByName();
-	void OnUISortByPlayers();
+	void OnUIServersPingFiltered();
+	void OnUIServersFindNext();
+	void OnUIServersAddFav();
+	void OnUIServersDelFav();
+	void OnUIFilter();
+	void OnUIViewSortByName();
+	void OnUIViewSortByMod();
+	void OnUIViewSortByMap();
+	void OnUIViewSortByPlayers();
+	void OnUIViewSortByPing();
+	void OnUIViewSortByIPAddress();
+	void OnUIViewSortByIPPort();
+	void OnUIViewSortBy(uint nCmdID, int nColumn);
+	void OnUIViewDetails();
+
+	//
+	// Command property methods.
+	//
+	virtual CString CmdHintStr(uint iCmdID) const;
 
 protected:
 	//
