@@ -102,7 +102,7 @@ CUTSvrBrowser::CUTSvrBrowser()
 CUTSvrBrowser::~CUTSvrBrowser()
 {
 	// Cleanup filters.
-	m_aoFilters.DeleteAll();
+	DeleteAll(m_aoFilters);
 }
 
 /******************************************************************************
@@ -295,7 +295,7 @@ void CUTSvrBrowser::LoadAppConfig()
 
 		strEntry.Format("Column[%d]", i);
 
-		m_anColWidths.Add(m_oAppIniFile.ReadInt("View", strEntry, CAppDlg::DEF_COLUMN_WIDTH));
+		m_anColWidths.push_back(m_oAppIniFile.ReadInt("View", strEntry, CAppDlg::DEF_COLUMN_WIDTH));
 	}
 
 	// Read pinging settings.
@@ -343,7 +343,7 @@ void CUTSvrBrowser::LoadAppConfig()
 		pFilter->m_astrNames  = m_oAppIniFile.ReadStrings(strSection, "Names", ',',   "");
 
 		// Add to collection.
-		m_aoFilters.Add(pFilter);
+		m_aoFilters.push_back(pFilter);
 	}
 
 	// Load the other configs.
@@ -417,9 +417,9 @@ void CUTSvrBrowser::SaveAppConfig()
 	if (m_bFltEdited)
 	{
 		// Write the filters.
-		m_oAppIniFile.WriteInt("Filters", "Count", m_aoFilters.Size());
+		m_oAppIniFile.WriteInt("Filters", "Count", m_aoFilters.size());
 
-		for (int i = 0; i < m_aoFilters.Size(); ++i)
+		for (uint i = 0; i < m_aoFilters.size(); ++i)
 		{
 			CFilter* pFilter = m_aoFilters[i];
 
@@ -712,7 +712,7 @@ void CUTSvrBrowser::StopPingTimer()
 CFilter* CUTSvrBrowser::FindFilter(const char* pszName) const
 {
 	// For all filters.
-	for (int i = 0; i < m_aoFilters.Size(); ++i)
+	for (uint i = 0; i < m_aoFilters.size(); ++i)
 	{
 		CFilter* pFilter = m_aoFilters[i];
 
@@ -738,7 +738,7 @@ CFilter* CUTSvrBrowser::FindFilter(const char* pszName) const
 int CUTSvrBrowser::FilterIndex(CFilter* pFilter) const
 {
 	// For all filters.
-	for (int i = 0; i < m_aoFilters.Size(); ++i)
+	for (uint i = 0; i < m_aoFilters.size(); ++i)
 	{
 		if (m_aoFilters[i] == pFilter)
 			return i;
@@ -830,7 +830,7 @@ void CUTSvrBrowser::BuildFilterMenu()
 		oMenu.RemoveItem(FIRST_FILTER_CMD_POS);
 
 	// Add all new filters.
-	for (int i = 0; i < m_aoFilters.Size(); ++i)
+	for (uint i = 0; i < m_aoFilters.size(); ++i)
 		oMenu.AppendCmd(ID_FIRST_FILTER_CMD+i, m_aoFilters[i]->m_strName);
 }
 

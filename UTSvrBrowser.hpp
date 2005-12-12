@@ -13,8 +13,8 @@
 #define UTSVRBROWSER_HPP
 
 // Template shorthands.
-typedef TArray<int> CIntArray;
-typedef TPtrArray<CFilter> CFilters;
+typedef std::vector<int> CIntArray;
+typedef std::vector<CFilter*> CFilters;
 
 /******************************************************************************
 ** 

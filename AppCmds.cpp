@@ -1006,7 +1006,7 @@ void CAppCmds::OnUIFilter()
 
 	oMenu.CheckCmd(ID_FILTER_NONE, (App.m_pFilter == NULL));
 
-	for (int i = 0; i < App.m_aoFilters.Size(); ++i)
+	for (uint i = 0; i < App.m_aoFilters.size(); ++i)
 		oMenu.CheckCmd(ID_FIRST_FILTER_CMD+i, (App.m_pFilter == App.m_aoFilters[i]));
 }
 

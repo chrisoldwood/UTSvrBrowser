@@ -126,7 +126,7 @@ void CAppDlg::OnDestroy()
 
 	// Save final column widths.
 	for (int i = 0; i < NUM_COLUMNS; ++i)
-		App.m_anColWidths.Set(i, m_lvGrid.ColumnWidth(i));
+		App.m_anColWidths[i] = m_lvGrid.ColumnWidth(i);
 }
 
 /******************************************************************************
@@ -314,8 +314,7 @@ void CAppDlg::ToggleColumn(int nColumn)
 	// Hide
 	else
 	{
-		App.m_anColWidths.Set(nColumn, nWidth);
-
+		App.m_anColWidths[nColumn] = nWidth;
 		m_lvGrid.ColumnWidth(nColumn, 0);  
 	}
 }
