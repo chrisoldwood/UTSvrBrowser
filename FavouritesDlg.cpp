@@ -131,8 +131,7 @@ void CFavouritesDlg::OnDetect()
 	// Try and find the regkey that contains the UT base path.
 	if (oKey.Open(HKEY_LOCAL_MACHINE, "SOFTWARE\\Unreal Technology\\Installed Apps\\UnrealTournament"))
 	{
-		strFolder  = oKey.QueryString("Folder", "");
-		strFolder += "System";
+		strFolder = oKey.QueryString("Folder", "") / "System";
 	}
 
 	// Detect failed?

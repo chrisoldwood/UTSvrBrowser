@@ -148,8 +148,7 @@ void CFavFileDlg::OnBrowse()
 	// Try and find the regkey that contains the UT base path.
 	if (oKey.Open(HKEY_LOCAL_MACHINE, "SOFTWARE\\Unreal Technology\\Installed Apps\\UnrealTournament"))
 	{
-		strDefDir  = oKey.QueryString("Folder", "");
-		strDefDir += "System";
+		strDefDir = oKey.QueryString("Folder", "") / "System";
 	}
 
 	// File extensions.
