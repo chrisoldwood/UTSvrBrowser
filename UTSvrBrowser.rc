@@ -172,7 +172,7 @@ BEGIN
     ICON            IDR_APPICON,IDC_STATIC,10,15,20,20
     CTEXT           "UT Server Browser",IDC_STATIC,40,10,70,10,
                     SS_CENTERIMAGE
-    CTEXT           "v1.0 Beta",IDC_VERSION,40,20,70,8,SS_CENTERIMAGE
+    CTEXT           "%s",IDC_VERSION,40,20,70,8,SS_CENTERIMAGE
     CTEXT           "Freeware",IDC_STATIC,40,30,70,8,SS_CENTERIMAGE
     CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,10,50,99,1
     CTEXT           "(C) Chris Oldwood 2003",IDC_STATIC,10,60,100,10,
