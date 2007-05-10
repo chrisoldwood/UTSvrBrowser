@@ -19,9 +19,10 @@
 *******************************************************************************
 */
 
-#include "wcl.hpp"		// Windows C++ library and core headers.
-#include "mdbl.hpp"		// Memory Database Library.
-#include "ncl.hpp"		// Network & Comms Library.
+#include <Core/Common.hpp>		// Core library common headers.
+#include <WCL/wcl.hpp>			// Windows C++ library.
+#include <MDBL/mdbl.hpp>		// Memory Database Library.
+#include <NCL/ncl.hpp>			// Network & Comms Library.
 
 /******************************************************************************
 **
