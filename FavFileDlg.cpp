@@ -142,13 +142,15 @@ bool CFavFileDlg::OnOk()
 
 void CFavFileDlg::OnBrowse()
 {
-	CRegKey oKey;
-	CPath   strDefDir;
+	WCL::RegKey oKey;
+	CPath       strDefDir;
 
 	// Try and find the regkey that contains the UT base path.
-	if (oKey.Open(HKEY_LOCAL_MACHINE, "SOFTWARE\\Unreal Technology\\Installed Apps\\UnrealTournament"))
+	if (WCL::RegKey::Exists(HKEY_LOCAL_MACHINE, "SOFTWARE\\Unreal Technology\\Installed Apps\\UnrealTournament"))
 	{
-		strDefDir = oKey.QueryString("Folder", "") / "System";
+		oKey.Open(HKEY_LOCAL_MACHINE, "SOFTWARE\\Unreal Technology\\Installed Apps\\UnrealTournament", KEY_READ);
+
+		strDefDir = oKey.ReadStringValue("Folder", "") / "System";
 	}
 
 	// File extensions.
