@@ -8,13 +8,8 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "FilterDlg.hpp"
-
-#ifdef _DEBUG
-// For memory leak detection.
-#define new DBGCRT_NEW
-#endif
 
 /******************************************************************************
 ** Method:		Default constructor.

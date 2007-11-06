@@ -12,9 +12,15 @@
 #ifndef MASTERQUERYDLG_HPP
 #define MASTERQUERYDLG_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/PropertySheet.hpp>
 #include "MtrAddressPage.hpp"
 #include "MtrFirewallPage.hpp"
 #include "MtrTransformPage.hpp"
+#include "MasterQueryOpts.hpp"
 
 /******************************************************************************
 ** 

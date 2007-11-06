@@ -12,6 +12,13 @@
 #ifndef QUERYJOB_HPP
 #define QUERYJOB_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/ThreadJob.hpp>
+#include <MDBL/Row.hpp>
+
 /******************************************************************************
 ** 
 ** The background job used to check the clock on a computer.

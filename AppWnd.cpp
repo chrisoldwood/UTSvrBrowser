@@ -8,7 +8,9 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "AppWnd.hpp"
+#include "UTSvrBrowser.hpp"
 
 /******************************************************************************
 ** Method:		Default constructor.

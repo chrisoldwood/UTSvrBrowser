@@ -12,6 +12,15 @@
 #ifndef FLTMODSPAGE_HPP
 #define FLTMODSPAGE_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+
+// Forward declarations.
+class CFilter;
+
 /******************************************************************************
 ** 
 ** The filter property page used to configure the mods.

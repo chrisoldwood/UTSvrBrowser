@@ -8,8 +8,9 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "ProgressDlg.hpp"
+#include "UTSvrBrowser.hpp"
 
 /******************************************************************************
 ** Method:		Default constructor.

@@ -12,6 +12,16 @@
 #ifndef FAVFILEDLG_HPP
 #define FAVFILEDLG_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+#include <WCL/Path.hpp>
+
+// Foward declarations.
+class CFavFiles;
+
 /******************************************************************************
 ** 
 ** The dialog used to edit the settings for a mods favourites file.

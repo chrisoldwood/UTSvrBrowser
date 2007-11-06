@@ -12,6 +12,13 @@
 #ifndef GAMESERVER_HPP
 #define GAMESERVER_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+// Forward declarations.
+class CQueryResponse;
+
 /******************************************************************************
 ** 
 ** A game server which is running a game.

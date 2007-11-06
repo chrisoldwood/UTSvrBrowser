@@ -12,6 +12,12 @@
 #ifndef QUERYRESPONSE_HPP
 #define QUERYRESPONSE_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/StrArray.hpp>
+
 /******************************************************************************
 ** 
 ** The response from a query sent to a master/game server.

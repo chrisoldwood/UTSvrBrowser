@@ -8,13 +8,9 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "MtrAddressPage.hpp"
-
-#ifdef _DEBUG
-// For memory leak detection.
-#define new DBGCRT_NEW
-#endif
+#include "MasterQueryOpts.hpp"
 
 /******************************************************************************
 ** Method:		Default constructor.

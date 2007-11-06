@@ -8,13 +8,14 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "GameServer.hpp"
+#include "UTSvrBrowser.hpp"
 #include <limits.h>
-
-#ifdef _DEBUG
-// For memory leak detection.
-#define new DBGCRT_NEW
-#endif
+#include <NCL/UDPCltSocket.hpp>
+#include <WCL/StrTok.hpp>
+#include "QueryResponse.hpp"
+#include <NCL/SocketException.hpp>
 
 /******************************************************************************
 **

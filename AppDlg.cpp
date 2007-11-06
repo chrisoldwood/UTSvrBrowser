@@ -8,8 +8,11 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "AppDlg.hpp"
+#include "UTSvrBrowser.hpp"
 #include <limits.h>
+#include <WCL/BusyCursor.hpp>
 
 /******************************************************************************
 **

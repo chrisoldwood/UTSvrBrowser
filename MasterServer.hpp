@@ -12,6 +12,10 @@
 #ifndef MASTERSERVER_HPP
 #define MASTERSERVER_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
 /******************************************************************************
 ** 
 ** A master server which holds the list of running games.

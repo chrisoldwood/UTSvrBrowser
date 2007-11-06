@@ -12,6 +12,15 @@
 #ifndef FLTPORTSPAGE_HPP
 #define FLTPORTSPAGE_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+
+// Forward declarations.
+class CFilter;
+
 /******************************************************************************
 ** 
 ** The filter property page used to configure the port range.

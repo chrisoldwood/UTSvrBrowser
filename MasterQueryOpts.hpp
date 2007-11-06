@@ -12,6 +12,10 @@
 #ifndef MASTERQUERYOPTS_HPP
 #define MASTERQUERYOPTS_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
 /******************************************************************************
 ** 
 ** The data class used to hold the master query settings.

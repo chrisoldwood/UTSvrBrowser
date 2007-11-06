@@ -8,7 +8,9 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "AppCmds.hpp"
+#include "UTSvrBrowser.hpp"
 #include "ProgressDlg.hpp"
 #include "FindDlg.hpp"
 #include "SummaryDlg.hpp"
@@ -18,6 +20,13 @@
 #include "FiltersDlg.hpp"
 #include "FavouritesDlg.hpp"
 #include "AboutDlg.hpp"
+#include <WCL/BusyCursor.hpp>
+#include "QueryJob.hpp"
+#include <WCL/ThreadPool.hpp>
+#include "MasterServer.hpp"
+#include <NCL/SocketException.hpp>
+#include <MDBL/WhereCmp.hpp>
+#include <MDBL/GroupSet.hpp>
 
 /******************************************************************************
 ** Method:		Constructor.

@@ -12,6 +12,13 @@
 #ifndef SUMMARY_HPP
 #define SUMMARY_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <MDBL/Table.hpp>
+#include "Mods.hpp"
+
 /******************************************************************************
 ** 
 ** The table used to hold the server summary.

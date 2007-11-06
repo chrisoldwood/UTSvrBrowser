@@ -12,6 +12,26 @@
 #ifndef UTSVRBROWSER_HPP
 #define UTSVRBROWSER_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/App.hpp>
+#include "AppWnd.hpp"
+#include "AppCmds.hpp"
+#include "Filter.hpp"
+#include <WCL/IniFile.hpp>
+#include "MasterQueryOpts.hpp"
+#include "PingOpts.hpp"
+#include <MDBL/MDB.hpp>
+#include "Mods.hpp"
+#include "GameTypes.hpp"
+#include "Servers.hpp"
+#include "FavFiles.hpp"
+#include "Favourites.hpp"
+#include "Summary.hpp"
+#include <MDBL/ResultSet.hpp>
+
 // Template shorthands.
 typedef std::vector<int> CIntArray;
 typedef std::vector<CFilter*> CFilters;

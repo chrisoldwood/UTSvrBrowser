@@ -12,6 +12,13 @@
 #ifndef GAMEINFODLG_HPP
 #define GAMEINFODLG_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+#include <MDBL/Row.hpp>
+
 /******************************************************************************
 ** 
 ** The dialog used to display the current game status.

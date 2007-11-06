@@ -12,6 +12,12 @@
 #ifndef SERVERS_HPP
 #define SERVERS_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <MDBL/Table.hpp>
+
 /******************************************************************************
 ** 
 ** The table used to store the server list.

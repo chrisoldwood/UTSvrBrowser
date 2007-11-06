@@ -12,6 +12,13 @@
 #ifndef FAVOURITESDLG_HPP
 #define FAVOURITESDLG_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+#include "FavFiles.hpp"
+
 /******************************************************************************
 ** 
 ** The dialog used to configure the favourites files.

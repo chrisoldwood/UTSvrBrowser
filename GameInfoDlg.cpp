@@ -8,13 +8,12 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "GameInfoDlg.hpp"
-
-#ifdef _DEBUG
-// For memory leak detection.
-#define new DBGCRT_NEW
-#endif
+#include <WCL/BusyCursor.hpp>
+#include "GameServer.hpp"
+#include "Servers.hpp"
+#include "QueryResponse.hpp"
 
 /******************************************************************************
 **

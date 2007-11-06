@@ -12,6 +12,13 @@
 #ifndef PINGOPTSDLG_HPP
 #define PINGOPTSDLG_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+#include "PingOpts.hpp"
+
 /******************************************************************************
 ** 
 ** The ping options dialog.

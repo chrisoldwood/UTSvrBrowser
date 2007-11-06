@@ -8,8 +8,15 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "UTSvrBrowser.hpp"
 #include <Legacy/STLUtils.hpp>
+#include <NCL/WinSock.hpp>
+#include <WCL/File.hpp>
+#include <WCL/StreamException.hpp>
+#include <WCL/StrTok.hpp>
+#include <MDBL/WhereCmp.hpp>
+#include <MDBL/WhereIn.hpp>
 
 /******************************************************************************
 **

@@ -8,12 +8,11 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
-
-#ifdef _DEBUG
-// For memory leak detection.
-#define new DBGCRT_NEW
-#endif
+#include "Common.hpp"
+#include "MasterServer.hpp"
+#include <NCL/TCPCltSocket.hpp>
+#include <WCL/StrTok.hpp>
+#include <WCL/StrArray.hpp>
 
 /******************************************************************************
 **

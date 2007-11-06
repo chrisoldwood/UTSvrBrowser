@@ -12,6 +12,12 @@
 #ifndef SUMMARYDLG_HPP
 #define SUMMARYDLG_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+
 /******************************************************************************
 ** 
 ** The dialog used to display the servers summary.

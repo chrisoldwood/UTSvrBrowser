@@ -12,6 +12,15 @@
 #ifndef MTRFIREWALLPAGE_HPP
 #define MTRFIREWALLPAGE_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/CommonUI.hpp>
+
+// Forward declarations.
+class CMasterQueryOpts;
+
 /******************************************************************************
 ** 
 ** The property page for the master server query firewall settings.

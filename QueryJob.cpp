@@ -8,8 +8,12 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
+#include "QueryJob.hpp"
+#include "UTSvrBrowser.hpp"
 #include <limits.h>
+#include "GameServer.hpp"
+#include "QueryResponse.hpp"
 
 /******************************************************************************
 ** Method:		Constructor.

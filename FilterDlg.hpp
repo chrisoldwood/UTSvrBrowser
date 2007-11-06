@@ -12,6 +12,11 @@
 #ifndef FILTERDLG_HPP
 #define FILTERDLG_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/PropertySheet.hpp>
 #include "FltNamePage.hpp"
 #include "FltModsPage.hpp"
 #include "FltPortsPage.hpp"

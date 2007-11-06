@@ -8,14 +8,11 @@
 *******************************************************************************
 */
 
-#include "AppHeaders.hpp"
+#include "Common.hpp"
 #include "FavouritesDlg.hpp"
 #include "FavFileDlg.hpp"
-
-#ifdef _DEBUG
-// For memory leak detection.
-#define new DBGCRT_NEW
-#endif
+#include "UTSvrBrowser.hpp"
+#include <WCL/RegKey.hpp>
 
 /******************************************************************************
 **

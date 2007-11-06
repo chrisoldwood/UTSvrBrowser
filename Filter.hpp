@@ -12,6 +12,12 @@
 #ifndef FILTER_HPP
 #define FILTER_HPP
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#include <WCL/StrArray.hpp>
+
 /******************************************************************************
 ** 
 ** The data class used to store the filter settings.
