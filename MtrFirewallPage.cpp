@@ -37,7 +37,7 @@ CMtrFirewallPage::CMtrFirewallPage(CMasterQueryOpts& oConfig)
 	END_CTRL_TABLE
 
 	DEFINE_CTRLMSG_TABLE
-		CMD_CTRLMSG(IDC_MASTER_PORTS, BN_CLICKED, OnClickFirewall)
+		CMD_CTRLMSG(IDC_MASTER_PORTS, BN_CLICKED, &CMtrFirewallPage::OnClickFirewall)
 	END_CTRLMSG_TABLE
 }
 
