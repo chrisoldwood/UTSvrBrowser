@@ -115,7 +115,7 @@ public:
 	//
 	// Filter methods.
 	//
-	CFilter* FindFilter(const char* pszName) const;
+	CFilter* FindFilter(const tchar* pszName) const;
 	int      FilterIndex(CFilter* pFilter) const;
 	void     ApplyFilter();
 	void     BuildFilterMenu();
@@ -137,7 +137,7 @@ public:
 	//
 	// Constants.
 	//
-	static const char* VERSION;
+	static const tchar* VERSION;
 
 protected:
 	//
@@ -157,17 +157,17 @@ protected:
 	//
 	// Constants.
 	//
-	static const char* APP_INI_FILE_VER;
-	static const char* MOD_INI_FILE_VER;
-	static const char* MOD_INI_FILE;
-	static const char* DEF_MASTER_ADDRESS;
+	static const tchar* APP_INI_FILE_VER;
+	static const tchar* MOD_INI_FILE_VER;
+	static const tchar* MOD_INI_FILE;
+	static const tchar* DEF_MASTER_ADDRESS;
 	static int         DEF_MASTER_PORT;
 	static int         DEF_PING_THREADS;
 	static int         DEF_PING_ATTEMPTS;
 	static uint        DEF_PING_WAIT_TIME;
 	static bool        DEF_AUTO_PING;
 	static int         DEF_PING_INTERVAL;
-	static const char* CACHE_FILENAME;
+	static const tchar* CACHE_FILENAME;
 	static const char* CACHE_FILE_MAGIC;
 	static uint16      CACHE_FILE_VER;
 };

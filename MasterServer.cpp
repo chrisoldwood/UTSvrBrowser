@@ -13,6 +13,7 @@
 #include <NCL/TCPCltSocket.hpp>
 #include <WCL/StrTok.hpp>
 #include <WCL/StrArray.hpp>
+#include <Core/AnsiWide.hpp>
 
 /******************************************************************************
 **
@@ -21,9 +22,9 @@
 *******************************************************************************
 */
 
-const char* CMasterServer::QUERY_STRING	   = "\\gamename\\ut\\location\\0\\validate\\2/TYFMRc\\final\\\\list\\\\gamename\\ut\\final\\";
-const char* CMasterServer::END_OF_RESPONSE = "\\final\\";
-const char* CMasterServer::FIELD_SEPS      = "\\";
+const char*  CMasterServer::QUERY_STRING    = "\\gamename\\ut\\location\\0\\validate\\2/TYFMRc\\final\\\\list\\\\gamename\\ut\\final\\";
+const tchar* CMasterServer::END_OF_RESPONSE = TXT("\\final\\");
+const tchar* CMasterServer::FIELD_SEPS      = TXT("\\");
 
 /******************************************************************************
 ** Method:		Constructor.
@@ -37,7 +38,7 @@ const char* CMasterServer::FIELD_SEPS      = "\\";
 *******************************************************************************
 */
 
-CMasterServer::CMasterServer(const char* pszAddress, int nPort)
+CMasterServer::CMasterServer(const tchar* pszAddress, int nPort)
 	: m_strAddress(pszAddress)
 	, m_nPort(nPort)
 {
@@ -74,7 +75,7 @@ CMasterServer::~CMasterServer()
 *******************************************************************************
 */
 
-int CMasterServer::QueryServers(const char* /*pszGameCode*/, CStrArray& astrAddresses)
+int CMasterServer::QueryServers(const tchar* /*pszGameCode*/, CStrArray& astrAddresses)
 {
 //	ASSERT(pszGameCode != NULL);
 
@@ -85,7 +86,7 @@ int CMasterServer::QueryServers(const char* /*pszGameCode*/, CStrArray& astrAddr
 	oSocket.Connect(m_strAddress, m_nPort);
 
 	// Send query.
-	oSocket.Send(QUERY_STRING);
+	oSocket.Send(QUERY_STRING, strlen(QUERY_STRING));
 
 	// Until we find the packet terminator.
 	while (strResponse.Find(END_OF_RESPONSE) == -1)
@@ -100,8 +101,10 @@ int CMasterServer::QueryServers(const char* /*pszGameCode*/, CStrArray& astrAddr
 			// Anything read?
 			if ((nRead = oSocket.Recv(oBuffer)) > 0)
 			{
+				const char* psz = static_cast<const char*>(oBuffer.Buffer());
+
 				// Append to response buffer.
-				strResponse += oBuffer.ToString(nRead);
+				strResponse += A2T(std::string(psz, psz+nRead));
 			}
 		}
 

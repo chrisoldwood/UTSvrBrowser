@@ -44,8 +44,8 @@ public:
 	const CString& FieldName(int nIndex) const;
 	const CString& FieldValue(int nIndex) const;
 
-	int     FindField(const char* pszField) const;
-	CString FieldValue(const char* pszField) const;
+	int     FindField(const tchar* pszField) const;
+	CString FieldValue(const tchar* pszField) const;
 
 	//
 	// Debug methods.

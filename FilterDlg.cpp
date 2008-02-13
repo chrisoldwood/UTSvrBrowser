@@ -31,12 +31,12 @@ CFilterDlg::CFilterDlg(CFilter& oFilter)
 //	, m_oMiscPage(oFilter)
 {
 	// Set the title.
-	m_strTitle = "Filter Settings";
+	m_strTitle = TXT("Filter Settings");
 
 	DEFINE_PAGE_TABLE
-		PAGE(&m_oNamePage,  "Name"   )
-		PAGE(&m_oModsPage,  "Mods"   )
-		PAGE(&m_oPortsPage, "Network")
-//		PAGE(&m_oMiscPage,  "Other"  )
+		PAGE(&m_oNamePage,  TXT("Name")   )
+		PAGE(&m_oModsPage,  TXT("Mods")   )
+		PAGE(&m_oPortsPage, TXT("Network"))
+//		PAGE(&m_oMiscPage,  TXT("Other")  )
 	END_PAGE_TABLE
 }

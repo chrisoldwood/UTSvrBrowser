@@ -27,6 +27,7 @@
 #include <NCL/SocketException.hpp>
 #include <MDBL/WhereCmp.hpp>
 #include <MDBL/GroupSet.hpp>
+#include <WCL/StrCvt.hpp>
 
 /******************************************************************************
 ** Method:		Constructor.
@@ -151,8 +152,8 @@ void CAppCmds::OnServersPingFiltered()
 	CProgressDlg Dlg;
 
 	Dlg.RunModeless(App.m_AppWnd);
-	Dlg.Title("Pinging Filtered Servers");
-	Dlg.UpdateLabel("Pinging servers...");
+	Dlg.Title(TXT("Pinging Filtered Servers"));
+	Dlg.UpdateLabel(TXT("Pinging servers..."));
 	App.m_AppWnd.Enable(false);
 
 		// Create a thread pool.
@@ -163,11 +164,14 @@ void CAppCmds::OnServersPingFiltered()
 	Dlg.InitMeter(App.m_oRS.Count());
 
 	// Start jobs to check all computers.
-	for (int i = 0; i < App.m_oRS.Count(); ++i)
-		oThreadPool.AddJob(new CQueryJob(App.m_oRS[i]));
+	for (size_t i = 0; i < App.m_oRS.Count(); ++i)
+	{
+		ThreadJobPtr pJob(new CQueryJob(App.m_oRS[i]));
+		oThreadPool.AddJob(pJob);
+	}
 
 	// Wait for jobs to complete OR user to cancel.
-	while (oThreadPool.CompletedJobCount() < App.m_oRS.Count())
+	while (oThreadPool.CompletedJobCount() < static_cast<size_t>(App.m_oRS.Count()))
 	{
 		Dlg.UpdateMeter(oThreadPool.CompletedJobCount());
 
@@ -176,7 +180,7 @@ void CAppCmds::OnServersPingFiltered()
 
 		if (Dlg.Abort())
 		{
-			Dlg.UpdateLabel("Cancelling...");
+			Dlg.UpdateLabel(TXT("Cancelling..."));
 			oThreadPool.CancelAllJobs();
 		}
 
@@ -213,8 +217,8 @@ void CAppCmds::OnServersPingAll()
 	CProgressDlg Dlg;
 
 	Dlg.RunModeless(App.m_AppWnd);
-	Dlg.Title("Pinging All Servers");
-	Dlg.UpdateLabel("Pinging servers...");
+	Dlg.Title(TXT("Pinging All Servers"));
+	Dlg.UpdateLabel(TXT("Pinging servers..."));
 	App.m_AppWnd.Enable(false);
 
 		// Create a thread pool.
@@ -225,11 +229,14 @@ void CAppCmds::OnServersPingAll()
 	Dlg.InitMeter(App.m_oServers.RowCount());
 
 	// Start jobs to check all computers.
-	for (int i = 0; i < App.m_oServers.RowCount(); ++i)
-		oThreadPool.AddJob(new CQueryJob(App.m_oServers[i]));
+	for (size_t i = 0; i < App.m_oServers.RowCount(); ++i)
+	{
+		ThreadJobPtr pJob(new CQueryJob(App.m_oServers[i]));
+		oThreadPool.AddJob(pJob);
+	}
 
 	// Wait for jobs to complete OR user to cancel.
-	while (oThreadPool.CompletedJobCount() < App.m_oServers.RowCount())
+	while (oThreadPool.CompletedJobCount() < static_cast<size_t>(App.m_oServers.RowCount()))
 	{
 		Dlg.UpdateMeter(oThreadPool.CompletedJobCount());
 
@@ -238,7 +245,7 @@ void CAppCmds::OnServersPingAll()
 
 		if (Dlg.Abort())
 		{
-			Dlg.UpdateLabel("Cancelling...");
+			Dlg.UpdateLabel(TXT("Cancelling..."));
 			oThreadPool.CancelAllJobs();
 		}
 
@@ -277,10 +284,10 @@ void CAppCmds::OnServersRefresh()
 	CProgressDlg Dlg;
 
 	Dlg.RunModeless(App.m_AppWnd);
-	Dlg.Title("Finding Servers");
+	Dlg.Title(TXT("Finding Servers"));
 	App.m_AppWnd.Enable(false);
 
-	Dlg.UpdateLabel("Querying " + App.m_oMtrQryOpts.m_strAddress + "...");
+	Dlg.UpdateLabel(TXT("Querying ") + App.m_oMtrQryOpts.m_strAddress + TXT("..."));
 
 	CMasterServer oMaster(App.m_oMtrQryOpts.m_strAddress, App.m_oMtrQryOpts.m_nPort);
 	CStrArray     astrAddresses;
@@ -288,13 +295,13 @@ void CAppCmds::OnServersRefresh()
 	try
 	{
 		// Fetch master list.
-		if (oMaster.QueryServers("ut", astrAddresses) > 0)
+		if (oMaster.QueryServers(TXT("ut"), astrAddresses) > 0)
 		{
 			// Trash old servers table.
 			App.m_oServers.Truncate();
 
 			// Add servers to the table.
-			for (int i = 0; i < astrAddresses.Size(); ++i)
+			for (size_t i = 0; i < astrAddresses.Size(); ++i)
 			{
 				CString strKey = astrAddresses[i];
 
@@ -307,7 +314,7 @@ void CAppCmds::OnServersRefresh()
 				int     nColon  = strKey.Find(':');
 				CString strAddr = strKey.Left(nColon);
 				CString strPort = strKey.Right(nLength-nColon-1);
-				int     nPort   = atoi(strPort);
+				int     nPort   = CStrCvt::ParseUInt(strPort);
 				CRow*   pFavRow = App.m_oFavourites.SelectRow(CFavourites::IP_KEY, strKey);
 
 				// Ignore if blocked by firewall.
@@ -337,14 +344,17 @@ void CAppCmds::OnServersRefresh()
 		oThreadPool.Start();
 
 		Dlg.InitMeter(App.m_oServers.RowCount());
-		Dlg.UpdateLabel("Pinging servers...");
+		Dlg.UpdateLabel(TXT("Pinging servers..."));
 
 		// Start jobs to check all computers.
-		for (int i = 0; i < App.m_oServers.RowCount(); ++i)
-			oThreadPool.AddJob(new CQueryJob(App.m_oServers[i]));
+		for (size_t i = 0; i < App.m_oServers.RowCount(); ++i)
+		{
+			ThreadJobPtr pJob(new CQueryJob(App.m_oServers[i]));
+			oThreadPool.AddJob(pJob);
+		}
 
 		// Wait for jobs to complete OR user to cancel.
-		while (oThreadPool.CompletedJobCount() < App.m_oServers.RowCount())
+		while (oThreadPool.CompletedJobCount() < static_cast<size_t>(App.m_oServers.RowCount()))
 		{
 			Dlg.UpdateMeter(oThreadPool.CompletedJobCount());
 
@@ -353,7 +363,7 @@ void CAppCmds::OnServersRefresh()
 
 			if (Dlg.Abort())
 			{
-				Dlg.UpdateLabel("Cancelling...");
+				Dlg.UpdateLabel(TXT("Cancelling..."));
 				oThreadPool.CancelAllJobs();
 			}
 
@@ -366,7 +376,7 @@ void CAppCmds::OnServersRefresh()
 	}
 	catch (CSocketException& e)
 	{
-		App.AlertMsg("Failed to query master server:\n\n%s", e.ErrorText());
+		App.AlertMsg(TXT("Failed to query master server:\n\n%s"), e.ErrorText());
 	}
 
 	// Remove progress dialog.
@@ -424,7 +434,7 @@ void CAppCmds::OnServersFind()
 void CAppCmds::OnServersFindNext()
 {
 	// Search from last row found...
-	for (int i = App.m_nLastFound+1; i < App.m_oRS.Count(); ++i)
+	for (size_t i = App.m_nLastFound+1; i < App.m_oRS.Count(); ++i)
 	{
 		CString strHostName = App.m_oRS[i][CServers::HOST_NAME];
 
@@ -475,7 +485,7 @@ void CAppCmds::OnServersAddFav()
 	// Not configured?
 	if (pFavFile == NULL)
 	{
-		App.m_AppWnd.AlertMsg("There is no favourites file configured for the %s mod.", strMod);
+		App.m_AppWnd.AlertMsg(TXT("There is no favourites file configured for the %s mod."), strMod);
 		return;
 	}
 
@@ -484,11 +494,11 @@ void CAppCmds::OnServersAddFav()
 	CIniFile oIniFile(strIniFile);
 
 	// Find the next free favourites slot.
-	int nEntry = oIniFile.ReadInt("UBrowser.UBrowserFavoritesFact", "FavoriteCount", -1);
+	int nEntry = oIniFile.ReadInt(TXT("UBrowser.UBrowserFavoritesFact"), TXT("FavoriteCount"), -1);
 
 	if (nEntry == -1)
 	{
-		App.m_AppWnd.AlertMsg("The %s favourites file is missing or corrupt.\n\n%s", strMod, strIniFile);
+		App.m_AppWnd.AlertMsg(TXT("The %s favourites file is missing or corrupt.\n\n%s"), strMod, strIniFile);
 		return;
 	}
 
@@ -500,12 +510,12 @@ void CAppCmds::OnServersAddFav()
 	CString strEntry, strValue;
 
 	// Format the favourite entry.
-	strEntry.Format("Favorites[%d]", nEntry);
-	strValue.Format("%s\\%s\\%s\\False", strName, strAddress, strPort);
+	strEntry.Format(TXT("Favorites[%d]"), nEntry);
+	strValue.Format(TXT("%s\\%s\\%s\\False"), strName, strAddress, strPort);
 
 	// Write it and update the count.
-	oIniFile.WriteString("UBrowser.UBrowserFavoritesFact", strEntry,        strValue);
-	oIniFile.WriteInt   ("UBrowser.UBrowserFavoritesFact", "FavoriteCount", nEntry+1);
+	oIniFile.WriteString(TXT("UBrowser.UBrowserFavoritesFact"), strEntry,        strValue);
+	oIniFile.WriteInt   (TXT("UBrowser.UBrowserFavoritesFact"), TXT("FavoriteCount"), nEntry+1);
 
 	// Update the server entry.
 	pRow->Field(CServers::FAV_ID) = nEntry;
@@ -550,7 +560,7 @@ void CAppCmds::OnServersDelFav()
 	// Not configured?
 	if (pFavFile == NULL)
 	{
-		App.m_AppWnd.AlertMsg("There is no favourites file configured for the %s mod.", strMod);
+		App.m_AppWnd.AlertMsg(TXT("There is no favourites file configured for the %s mod."), strMod);
 		return;
 	}
 
@@ -561,10 +571,10 @@ void CAppCmds::OnServersDelFav()
 	int     nEntry = pRow->Field(CServers::FAV_ID);
 	CString strEntry, strValue;
 
-	strEntry.Format("Favorites[%d]", nEntry);
+	strEntry.Format(TXT("Favorites[%d]"), nEntry);
 
 	// Write an empty entry.
-	oIniFile.WriteString("UBrowser.UBrowserFavoritesFact", strEntry, strValue);
+	oIniFile.WriteString(TXT("UBrowser.UBrowserFavoritesFact"), strEntry, strValue);
 
 	// Update the server entry.
 	pRow->Field(CServers::FAV_ID) = null;
@@ -603,7 +613,7 @@ void CAppCmds::OnServersSummary()
 	CGroupSet oGS = oServersRS.GroupBy(CServers::MOD_NAME);
 
 	// Generate summary table.
-	for (int i = 0; i < oGS.Count(); ++i)
+	for (size_t i = 0; i < oGS.Count(); ++i)
 	{
 		CResultSet& oRS = oGS[i];
 
@@ -611,7 +621,7 @@ void CAppCmds::OnServersSummary()
 		CRow& oRow = App.m_oSummary.CreateRow();
 
 		oRow[CSummary::MOD_NAME]    = oRS[0][CServers::MOD_NAME];
-		oRow[CSummary::NUM_SERVERS] = oRS.Count();
+		oRow[CSummary::NUM_SERVERS] = static_cast<int>(oRS.Count());
 		oRow[CSummary::NUM_PLAYERS] = oRS.Sum(CServers::NUM_PLAYERS).m_iValue;
 
 		App.m_oSummary.InsertRow(oRow);
@@ -676,7 +686,7 @@ void CAppCmds::OnFilterNone()
 *******************************************************************************
 */
 
-void CAppCmds::OnFilter(int nCmdID)
+void CAppCmds::OnFilter(uint nCmdID)
 {
 	// Get the filter to use.
 	App.m_pFilter = App.m_aoFilters[nCmdID-ID_FIRST_FILTER_CMD];
@@ -992,7 +1002,7 @@ void CAppCmds::OnUIServersAddFav()
 	CMenu&   oMenu     = App.m_AppWnd.m_Menu;
 	CAppDlg& oAppDlg   = App.m_AppWnd.m_AppDlg;
 	CRow*    pSelRow   = oAppDlg.SelectedRow();
-	bool     bModValid = ((pSelRow != NULL) && (strlen(pSelRow->Field(CServers::MOD_NAME)) > 0));
+	bool     bModValid = ((pSelRow != NULL) && (tstrlen(pSelRow->Field(CServers::MOD_NAME)) > 0));
 	bool     bCanAdd   = ((bModValid) && (pSelRow->Field(CServers::FAV_ID) == null));
 
 	oMenu.EnableCmd(ID_SERVERS_ADD_FAV, bCanAdd);
@@ -1003,7 +1013,7 @@ void CAppCmds::OnUIServersDelFav()
 	CMenu&   oMenu     = App.m_AppWnd.m_Menu;
 	CAppDlg& oAppDlg   = App.m_AppWnd.m_AppDlg;
 	CRow*    pSelRow   = oAppDlg.SelectedRow();
-	bool     bModValid = ((pSelRow != NULL) && (strlen(pSelRow->Field(CServers::MOD_NAME)) > 0));
+	bool     bModValid = ((pSelRow != NULL) && (tstrlen(pSelRow->Field(CServers::MOD_NAME)) > 0));
 	bool     bCanDel   = ((bModValid) && (pSelRow->Field(CServers::FAV_ID) != null));
 
 	oMenu.EnableCmd(ID_SERVERS_DEL_FAV, bCanDel);
@@ -1054,7 +1064,7 @@ void CAppCmds::OnUIViewSortByIPPort()
 	OnUIViewSortBy(ID_VIEW_SORT_IP_PORT, CAppDlg::IP_PORT);
 }
 
-void CAppCmds::OnUIViewSortBy(uint nCmdID, int nColumn)
+void CAppCmds::OnUIViewSortBy(uint nCmdID, size_t nColumn)
 {
 	CMenu&   oMenu   = App.m_AppWnd.m_Menu;
 	CAppDlg& oAppDlg = App.m_AppWnd.m_AppDlg;

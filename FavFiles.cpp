@@ -24,11 +24,11 @@
 */
 
 CFavFiles::CFavFiles(CMDB& oDB)
-	: CTable(oDB, "FavFiles")
+	: CTable(oDB, TXT("FavFiles"))
 {
 	// Create the table schema.
-	AddColumn("ModName", MDCT_VARSTR, MOD_NAME_LEN, CColumn::UNIQUE  );
-	AddColumn("ModFile", MDCT_VARSTR, MOD_FILE_LEN, CColumn::DEFAULTS);
+	AddColumn(TXT("ModName"), MDCT_VARSTR, MOD_NAME_LEN, CColumn::UNIQUE  );
+	AddColumn(TXT("ModFile"), MDCT_VARSTR, MOD_FILE_LEN, CColumn::DEFAULTS);
 }
 
 /******************************************************************************
@@ -63,8 +63,8 @@ CRow& CFavFiles::CreateRow()
 {
 	CRow& oRow = CTable::CreateRow();
 
-	oRow[MOD_NAME] = "";
-	oRow[MOD_FILE] = "";
+	oRow[MOD_NAME] = TXT("");
+	oRow[MOD_FILE] = TXT("");
 	
 	return oRow;
 }

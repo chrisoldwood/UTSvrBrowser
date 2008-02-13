@@ -91,15 +91,15 @@ void CAppDlg::OnInitDialog()
 //	m_lvGrid.GridLines(true);
 
 	// Create grid columns.
-	m_lvGrid.InsertColumn(HOST_NAME,  "Server",     App.m_anColWidths[HOST_NAME],  LVCFMT_LEFT);
-	m_lvGrid.InsertColumn(MOD_NAME,   "Mod",        App.m_anColWidths[MOD_NAME],   LVCFMT_LEFT);
-	m_lvGrid.InsertColumn(MAP_TITLE,  "Map",        App.m_anColWidths[MAP_TITLE],  LVCFMT_LEFT);
-	m_lvGrid.InsertColumn(GAME_TYPE,  "Type",       App.m_anColWidths[GAME_TYPE],  LVCFMT_LEFT);
-	m_lvGrid.InsertColumn(PLAYERS,    "Players",    App.m_anColWidths[PLAYERS],    LVCFMT_LEFT);
-	m_lvGrid.InsertColumn(PING_TIME,  "Ping",       App.m_anColWidths[PING_TIME],  LVCFMT_LEFT);
-	m_lvGrid.InsertColumn(IP_ADDRESS, "IP Address", App.m_anColWidths[IP_ADDRESS], LVCFMT_LEFT);
-	m_lvGrid.InsertColumn(IP_PORT,    "IP Port",    App.m_anColWidths[IP_PORT],    LVCFMT_LEFT);
-//	m_lvGrid.InsertColumn(LAST_ERROR, "Error",      App.m_anColWidths[LAST_ERROR], LVCFMT_LEFT);
+	m_lvGrid.InsertColumn(HOST_NAME,  TXT("Server"),     App.m_anColWidths[HOST_NAME],  LVCFMT_LEFT);
+	m_lvGrid.InsertColumn(MOD_NAME,   TXT("Mod"),        App.m_anColWidths[MOD_NAME],   LVCFMT_LEFT);
+	m_lvGrid.InsertColumn(MAP_TITLE,  TXT("Map"),        App.m_anColWidths[MAP_TITLE],  LVCFMT_LEFT);
+	m_lvGrid.InsertColumn(GAME_TYPE,  TXT("Type"),       App.m_anColWidths[GAME_TYPE],  LVCFMT_LEFT);
+	m_lvGrid.InsertColumn(PLAYERS,    TXT("Players"),    App.m_anColWidths[PLAYERS],    LVCFMT_LEFT);
+	m_lvGrid.InsertColumn(PING_TIME,  TXT("Ping"),       App.m_anColWidths[PING_TIME],  LVCFMT_LEFT);
+	m_lvGrid.InsertColumn(IP_ADDRESS, TXT("IP Address"), App.m_anColWidths[IP_ADDRESS], LVCFMT_LEFT);
+	m_lvGrid.InsertColumn(IP_PORT,    TXT("IP Port"),    App.m_anColWidths[IP_PORT],    LVCFMT_LEFT);
+//	m_lvGrid.InsertColumn(LAST_ERROR, TXT("Error"),      App.m_anColWidths[LAST_ERROR], LVCFMT_LEFT);
 
 	// Set the listview icons.
 	m_lvGrid.ImageList(LVSIL_SMALL, IDB_LIST_ICONS, 16, RGB(255, 0, 255));
@@ -157,7 +157,7 @@ void CAppDlg::RefreshView()
 	m_lvGrid.Reserve(App.m_oServers.RowCount());
 
 	// For all rows.
-	for (int i = 0; i < App.m_oRS.Count(); ++i)
+	for (size_t i = 0; i < App.m_oRS.Count(); ++i)
 	{
 		CRow& oRow  = App.m_oRS[i];
 		int   nIcon = (oRow[CServers::FAV_ID] == null) ? 1 : 0;
@@ -227,7 +227,7 @@ void CAppDlg::RefreshAllRows()
 	CBusyCursor oCursor;
 
 	// For all rows...
-	for (int i = 0; i < App.m_oRS.Count(); ++i)
+	for (size_t i = 0; i < App.m_oRS.Count(); ++i)
 	{
 		CRow& oRow = App.m_oRS[i];
 
@@ -257,7 +257,7 @@ void CAppDlg::RefreshAllRows()
 *******************************************************************************
 */
 
-void CAppDlg::Sort(int nColumn)
+void CAppDlg::Sort(size_t nColumn)
 {
 	// Reverse sort order by default.
 	CSortColumns::Dir eDir = (CSortColumns::Dir) -m_eSortOrder;
@@ -299,9 +299,9 @@ void CAppDlg::Sort(int nColumn)
 *******************************************************************************
 */
 
-void CAppDlg::ToggleColumn(int nColumn)
+void CAppDlg::ToggleColumn(size_t nColumn)
 {
-	int nWidth = m_lvGrid.ColumnWidth(nColumn);
+	uint nWidth = m_lvGrid.ColumnWidth(nColumn);
 
 	// Show?
 	if (nWidth == 0)
@@ -362,9 +362,9 @@ CString CAppDlg::FmtPlayers(const CRow& oRow)
 	int nMaxPlayers = oRow[CServers::MAX_PLAYERS];
 
 	if (nMaxPlayers != 0)
-		str.Format("%d/%d", nCurPlayers, nMaxPlayers);
+		str.Format(TXT("%d/%d"), nCurPlayers, nMaxPlayers);
 	else
-		str = "N/A";
+		str = TXT("N/A");
 
 	return str;
 }
@@ -376,9 +376,9 @@ CString CAppDlg::FmtPingTime(const CRow& oRow)
 	int nTime = oRow[CServers::PING_TIME];
 
 	if (nTime != INT_MAX)
-		str.Format("%d ms", nTime);
+		str.Format(TXT("%d ms"), nTime);
 	else
-		str = "N/A";
+		str = TXT("N/A");
 
 	return str;
 }
@@ -389,13 +389,13 @@ CString CAppDlg::FmtLastErr(const CRow& oRow)
 
 	switch (nError)
 	{
-		case CServers::ERROR_NONE:		return "";
-		case CServers::ERROR_FAILED:	return "Socket Error";
-		case CServers::ERROR_TIMED_OUT:	return "Timed Out";
+		case CServers::ERROR_NONE:		return TXT("");
+		case CServers::ERROR_FAILED:	return TXT("Socket Error");
+		case CServers::ERROR_TIMED_OUT:	return TXT("Timed Out");
 		default:						break;
 	}
 
-	return "";
+	return TXT("");
 }
 
 /******************************************************************************
@@ -410,7 +410,7 @@ CString CAppDlg::FmtLastErr(const CRow& oRow)
 *******************************************************************************
 */
 
-int CAppDlg::TableColumn(int nColumn)
+size_t CAppDlg::TableColumn(size_t nColumn)
 {
 	int nTabCol = CServers::HOST_NAME;
 
@@ -476,7 +476,7 @@ LRESULT CAppDlg::OnGridRightClick(NMHDR& oNMHdr)
 	bool bAnyRows   = (m_lvGrid.ItemCount() > 0);
 	bool bSelection = (pSelRow != NULL);
 	bool bFiltered  = (App.m_pFilter != NULL);
-	bool bModValid  = ((pSelRow != NULL) && (strlen(pSelRow->Field(CServers::MOD_NAME)) > 0));
+	bool bModValid  = ((pSelRow != NULL) && (tstrlen(pSelRow->Field(CServers::MOD_NAME)) > 0));
 	bool bCanAddFav = ((bModValid) && (pSelRow->Field(CServers::FAV_ID) == null));
 	bool bCanDelFav = ((bModValid) && (pSelRow->Field(CServers::FAV_ID) != null));
 

@@ -36,22 +36,22 @@ CUTSvrBrowser App;
 */
 
 #ifdef _DEBUG
-const char* CUTSvrBrowser::VERSION      = "v1.0 Alpha [Debug]";
+const tchar* CUTSvrBrowser::VERSION = TXT("v1.0 Alpha [Debug]");
 #else
-const char* CUTSvrBrowser::VERSION      = "v1.0 Alpha";
+const tchar* CUTSvrBrowser::VERSION = TXT("v1.0 Alpha");
 #endif
 
-const char* CUTSvrBrowser::APP_INI_FILE_VER   = "1.0";
-const char* CUTSvrBrowser::MOD_INI_FILE_VER  = "1.0";
-const char* CUTSvrBrowser::MOD_INI_FILE      = "UTSBMods.ini";
-const char* CUTSvrBrowser::DEF_MASTER_ADDRESS = "unreal.epicgames.com";
+const tchar* CUTSvrBrowser::APP_INI_FILE_VER  = TXT("1.0");
+const tchar* CUTSvrBrowser::MOD_INI_FILE_VER  = TXT("1.0");
+const tchar* CUTSvrBrowser::MOD_INI_FILE      = TXT("UTSBMods.ini");
+const tchar* CUTSvrBrowser::DEF_MASTER_ADDRESS = TXT("unreal.epicgames.com");
 int         CUTSvrBrowser::DEF_MASTER_PORT    = 28900;
 int         CUTSvrBrowser::DEF_PING_THREADS   = 10;
 int         CUTSvrBrowser::DEF_PING_ATTEMPTS  = 3;
 uint        CUTSvrBrowser::DEF_PING_WAIT_TIME = 1000;
 bool        CUTSvrBrowser::DEF_AUTO_PING      = false;
 int         CUTSvrBrowser::DEF_PING_INTERVAL  = 10;
-const char* CUTSvrBrowser::CACHE_FILENAME     = "UTSvrBrowser.dat";
+const tchar* CUTSvrBrowser::CACHE_FILENAME    = TXT("UTSvrBrowser.dat");
 const char* CUTSvrBrowser::CACHE_FILE_MAGIC   = "UTSB";
 uint16      CUTSvrBrowser::CACHE_FILE_VER     = 0x000A;
 
@@ -128,7 +128,7 @@ CUTSvrBrowser::~CUTSvrBrowser()
 bool CUTSvrBrowser::OnOpen()
 {
 	// Set the app title.
-	m_strTitle = "UT Server Browser";
+	m_strTitle = TXT("UT Server Browser");
 
 	// Load settings.
 	LoadAppConfig();
@@ -138,7 +138,7 @@ bool CUTSvrBrowser::OnOpen()
 
 	if (nResult != 0)
 	{
-		FatalMsg("Failed to initialise WinSock layer: %d.", nResult);
+		FatalMsg(TXT("Failed to initialise WinSock layer: %d."), nResult);
 		return false;
 	}
 
@@ -201,7 +201,7 @@ bool CUTSvrBrowser::OnOpen()
 	}
 	catch (CStreamException& e)
 	{
-		AlertMsg("Warning: Failed to load backup file:\n\n%s\n\n%s", m_strCacheFile, e.what());
+		AlertMsg(TXT("Warning: Failed to load backup file:\n\n%s\n\n%s"), m_strCacheFile, e.what());
 	}
 
 	// Start the ping timer.
@@ -247,7 +247,7 @@ bool CUTSvrBrowser::OnClose()
 	}
 	catch (CStreamException& e)
 	{
-		AlertMsg("Warning: Failed to save backup file:\n\n%s\n\n%s", m_strCacheFile, e.what());
+		AlertMsg(TXT("Warning: Failed to save backup file:\n\n%s\n\n%s"), m_strCacheFile, e.what());
 	}
 
 	// Terminate WinSock.
@@ -274,64 +274,64 @@ bool CUTSvrBrowser::OnClose()
 void CUTSvrBrowser::LoadAppConfig()
 {
 	// Read the file versions.
-	CString strAppVer  = m_oAppIniFile.ReadString("Version", "Version", APP_INI_FILE_VER);
-	CString strModsVer = m_oModIniFile.ReadString("Version", "Version", MOD_INI_FILE_VER);
+	CString strAppVer  = m_oAppIniFile.ReadString(TXT("Version"), TXT("Version"), APP_INI_FILE_VER);
+	CString strModsVer = m_oModIniFile.ReadString(TXT("Version"), TXT("Version"), MOD_INI_FILE_VER);
 
 	// Read the window pos and size.
-	m_rcLastPos.left   = m_oAppIniFile.ReadInt("UI", "Left",   0);
-	m_rcLastPos.top    = m_oAppIniFile.ReadInt("UI", "Top",    0);
-	m_rcLastPos.right  = m_oAppIniFile.ReadInt("UI", "Right",  0);
-	m_rcLastPos.bottom = m_oAppIniFile.ReadInt("UI", "Bottom", 0);
+	m_rcLastPos.left   = m_oAppIniFile.ReadInt(TXT("UI"), TXT("Left"),   0);
+	m_rcLastPos.top    = m_oAppIniFile.ReadInt(TXT("UI"), TXT("Top"),    0);
+	m_rcLastPos.right  = m_oAppIniFile.ReadInt(TXT("UI"), TXT("Right"),  0);
+	m_rcLastPos.bottom = m_oAppIniFile.ReadInt(TXT("UI"), TXT("Bottom"), 0);
 
 	// Read the master server query settings.
-	m_oMtrQryOpts.m_strAddress   = m_oAppIniFile.ReadString("Master", "Address",   DEF_MASTER_ADDRESS);
-	m_oMtrQryOpts.m_nPort        = m_oAppIniFile.ReadInt   ("Master", "Port",      DEF_MASTER_PORT   );
-	m_oMtrQryOpts.m_bFirewall    = m_oAppIniFile.ReadBool  ("Master", "Firewall",  false             );
-	m_oMtrQryOpts.m_nFirstPort   = m_oAppIniFile.ReadInt   ("Master", "FirstPort", 0                 );
-	m_oMtrQryOpts.m_nLastPort    = m_oAppIniFile.ReadInt   ("Master", "LastPort",  65535             );
-	m_oMtrQryOpts.m_bTrimSpace   = m_oAppIniFile.ReadBool  ("Master", "TrimSpace", false             );
-	m_oMtrQryOpts.m_bConvertSyms = m_oAppIniFile.ReadBool  ("Master", "ConvSyms",  false             );
+	m_oMtrQryOpts.m_strAddress   = m_oAppIniFile.ReadString(TXT("Master"), TXT("Address"),   DEF_MASTER_ADDRESS);
+	m_oMtrQryOpts.m_nPort        = m_oAppIniFile.ReadInt   (TXT("Master"), TXT("Port"),      DEF_MASTER_PORT   );
+	m_oMtrQryOpts.m_bFirewall    = m_oAppIniFile.ReadBool  (TXT("Master"), TXT("Firewall"),  false             );
+	m_oMtrQryOpts.m_nFirstPort   = m_oAppIniFile.ReadInt   (TXT("Master"), TXT("FirstPort"), 0                 );
+	m_oMtrQryOpts.m_nLastPort    = m_oAppIniFile.ReadInt   (TXT("Master"), TXT("LastPort"),  65535             );
+	m_oMtrQryOpts.m_bTrimSpace   = m_oAppIniFile.ReadBool  (TXT("Master"), TXT("TrimSpace"), false             );
+	m_oMtrQryOpts.m_bConvertSyms = m_oAppIniFile.ReadBool  (TXT("Master"), TXT("ConvSyms"),  false             );
 
 	// Read the sorting options.
-	m_nSortCol = m_oAppIniFile.ReadInt("View", "SortCol", m_nSortCol);
-	m_nSortDir = m_oAppIniFile.ReadInt("View", "SortDir", m_nSortDir);
+	m_nSortCol = m_oAppIniFile.ReadInt(TXT("View"), TXT("SortCol"), m_nSortCol);
+	m_nSortDir = m_oAppIniFile.ReadInt(TXT("View"), TXT("SortDir"), m_nSortDir);
 
 	// Read the list of column widths.
 	for (int i = 0; i < CAppDlg::NUM_COLUMNS; ++i)
 	{
 		CString strEntry;
 
-		strEntry.Format("Column[%d]", i);
+		strEntry.Format(TXT("Column[%d]"), i);
 
-		m_anColWidths.push_back(m_oAppIniFile.ReadInt("View", strEntry, CAppDlg::DEF_COLUMN_WIDTH));
+		m_anColWidths.push_back(m_oAppIniFile.ReadInt(TXT("View"), strEntry, CAppDlg::DEF_COLUMN_WIDTH));
 	}
 
 	// Read pinging settings.
-	m_oPingOpts.m_nThreads      = m_oAppIniFile.ReadInt ("Ping", "Threads",  DEF_PING_THREADS  );
-	m_oPingOpts.m_nAttempts     = m_oAppIniFile.ReadInt ("Ping", "Attempts", DEF_PING_ATTEMPTS );
-	m_oPingOpts.m_nWaitTime     = m_oAppIniFile.ReadInt ("Ping", "WaitTime", DEF_PING_WAIT_TIME);
-	m_oPingOpts.m_bAutoPing     = m_oAppIniFile.ReadBool("Ping", "AutoPing", DEF_AUTO_PING     );
-	m_oPingOpts.m_nAutoInterval = m_oAppIniFile.ReadInt ("Ping", "Interval", DEF_PING_INTERVAL );
+	m_oPingOpts.m_nThreads      = m_oAppIniFile.ReadInt (TXT("Ping"), TXT("Threads"),  DEF_PING_THREADS  );
+	m_oPingOpts.m_nAttempts     = m_oAppIniFile.ReadInt (TXT("Ping"), TXT("Attempts"), DEF_PING_ATTEMPTS );
+	m_oPingOpts.m_nWaitTime     = m_oAppIniFile.ReadInt (TXT("Ping"), TXT("WaitTime"), DEF_PING_WAIT_TIME);
+	m_oPingOpts.m_bAutoPing     = m_oAppIniFile.ReadBool(TXT("Ping"), TXT("AutoPing"), DEF_AUTO_PING     );
+	m_oPingOpts.m_nAutoInterval = m_oAppIniFile.ReadInt (TXT("Ping"), TXT("Interval"), DEF_PING_INTERVAL );
 
 	// Read the filters.
-	int nFilters = m_oAppIniFile.ReadInt("Filters", "Count", 0);
+	int nFilters = m_oAppIniFile.ReadInt(TXT("Filters"), TXT("Count"), 0);
 
 	for (int i = 0; i < nFilters; ++i)
 	{
 		CString strSection, strEntry;
 
-		strEntry.Format("Filter[%d]", i);
+		strEntry.Format(TXT("Filter[%d]"), i);
 
 		// Get next filter name.
-		CString strFilterName = m_oAppIniFile.ReadString("Filters", strEntry, "");
+		CString strFilterName = m_oAppIniFile.ReadString(TXT("Filters"), strEntry, TXT(""));
 
 		if (strFilterName.Empty())
 			continue;
 
-		strSection.Format("%s Filter", strFilterName);
+		strSection.Format(TXT("%s Filter"), strFilterName);
 
 		// Read the filter definition.
-		CString strName = m_oAppIniFile.ReadString(strSection, "Name", "");
+		CString strName = m_oAppIniFile.ReadString(strSection, TXT("Name"), TXT(""));
 
 		// Ignore, if invalid.
 		if (strName.Empty())
@@ -341,14 +341,14 @@ void CUTSvrBrowser::LoadAppConfig()
 		CFilter* pFilter = new CFilter;
 
 		pFilter->m_strName    = strName;
-		pFilter->m_strDesc    = m_oAppIniFile.ReadString (strSection, "Description",  "");
-		pFilter->m_bFltMods   = m_oAppIniFile.ReadBool   (strSection, "FilterMods",   false);
-		pFilter->m_astrMods   = m_oAppIniFile.ReadStrings(strSection, "Mods", ',',    "");
-		pFilter->m_bFltPing   = m_oAppIniFile.ReadBool   (strSection, "FilterPing",   false);
-		pFilter->m_nPingTime  = m_oAppIniFile.ReadInt    (strSection, "PingTime",     250);
-		pFilter->m_bFltErrors = m_oAppIniFile.ReadBool   (strSection, "FilterErrors", true);
-		pFilter->m_bFltNames  = m_oAppIniFile.ReadBool   (strSection, "FilterNames",  false);
-		pFilter->m_astrNames  = m_oAppIniFile.ReadStrings(strSection, "Names", ',',   "");
+		pFilter->m_strDesc    = m_oAppIniFile.ReadString (strSection, TXT("Description"),  TXT(""));
+		pFilter->m_bFltMods   = m_oAppIniFile.ReadBool   (strSection, TXT("FilterMods"),   false);
+		pFilter->m_astrMods   = m_oAppIniFile.ReadStrings(strSection, TXT("Mods"), ',',    TXT(""));
+		pFilter->m_bFltPing   = m_oAppIniFile.ReadBool   (strSection, TXT("FilterPing"),   false);
+		pFilter->m_nPingTime  = m_oAppIniFile.ReadInt    (strSection, TXT("PingTime"),     250);
+		pFilter->m_bFltErrors = m_oAppIniFile.ReadBool   (strSection, TXT("FilterErrors"), true);
+		pFilter->m_bFltNames  = m_oAppIniFile.ReadBool   (strSection, TXT("FilterNames"),  false);
+		pFilter->m_astrNames  = m_oAppIniFile.ReadStrings(strSection, TXT("Names"), ',',   TXT(""));
 
 		// Add to collection.
 		m_aoFilters.push_back(pFilter);
@@ -360,7 +360,7 @@ void CUTSvrBrowser::LoadAppConfig()
 	LoadFavourites();
 
 	// Set filter to last used.
-	m_pFilter = FindFilter(m_oAppIniFile.ReadString("Filters", "Default", ""));
+	m_pFilter = FindFilter(m_oAppIniFile.ReadString(TXT("Filters"), TXT("Default"), TXT("")));
 }
 
 /******************************************************************************
@@ -378,54 +378,54 @@ void CUTSvrBrowser::LoadAppConfig()
 void CUTSvrBrowser::SaveAppConfig()
 {
 	// Write the file version.
-	m_oAppIniFile.WriteString("Version", "Version", APP_INI_FILE_VER);
+	m_oAppIniFile.WriteString(TXT("Version"), TXT("Version"), APP_INI_FILE_VER);
 
 	// Write the window pos and size.
-	m_oAppIniFile.WriteInt("UI", "Left",   m_rcLastPos.left  );
-	m_oAppIniFile.WriteInt("UI", "Top",    m_rcLastPos.top   );
-	m_oAppIniFile.WriteInt("UI", "Right",  m_rcLastPos.right );
-	m_oAppIniFile.WriteInt("UI", "Bottom", m_rcLastPos.bottom);
+	m_oAppIniFile.WriteInt(TXT("UI"), TXT("Left"),   m_rcLastPos.left  );
+	m_oAppIniFile.WriteInt(TXT("UI"), TXT("Top"),    m_rcLastPos.top   );
+	m_oAppIniFile.WriteInt(TXT("UI"), TXT("Right"),  m_rcLastPos.right );
+	m_oAppIniFile.WriteInt(TXT("UI"), TXT("Bottom"), m_rcLastPos.bottom);
 
 	if (m_oMtrQryOpts.m_bModified)
 	{
 		// Write the master server query settings.
-		m_oAppIniFile.WriteString("Master", "Address",   m_oMtrQryOpts.m_strAddress  );
-		m_oAppIniFile.WriteInt   ("Master", "Port",      m_oMtrQryOpts.m_nPort       );
-		m_oAppIniFile.WriteBool  ("Master", "Firewall",  m_oMtrQryOpts.m_bFirewall   );
-		m_oAppIniFile.WriteInt   ("Master", "FirstPort", m_oMtrQryOpts.m_nFirstPort  );
-		m_oAppIniFile.WriteInt   ("Master", "LastPort",  m_oMtrQryOpts.m_nLastPort   );
-		m_oAppIniFile.WriteBool  ("Master", "TrimSpace", m_oMtrQryOpts.m_bTrimSpace  );
-		m_oAppIniFile.WriteBool  ("Master", "ConvSyms",  m_oMtrQryOpts.m_bConvertSyms);
+		m_oAppIniFile.WriteString(TXT("Master"), TXT("Address"),   m_oMtrQryOpts.m_strAddress  );
+		m_oAppIniFile.WriteInt   (TXT("Master"), TXT("Port"),      m_oMtrQryOpts.m_nPort       );
+		m_oAppIniFile.WriteBool  (TXT("Master"), TXT("Firewall"),  m_oMtrQryOpts.m_bFirewall   );
+		m_oAppIniFile.WriteInt   (TXT("Master"), TXT("FirstPort"), m_oMtrQryOpts.m_nFirstPort  );
+		m_oAppIniFile.WriteInt   (TXT("Master"), TXT("LastPort"),  m_oMtrQryOpts.m_nLastPort   );
+		m_oAppIniFile.WriteBool  (TXT("Master"), TXT("TrimSpace"), m_oMtrQryOpts.m_bTrimSpace  );
+		m_oAppIniFile.WriteBool  (TXT("Master"), TXT("ConvSyms"),  m_oMtrQryOpts.m_bConvertSyms);
 	}
 
 	// Write the sorting options.
-	m_oAppIniFile.WriteInt("View", "SortCol", m_nSortCol);
-	m_oAppIniFile.WriteInt("View", "SortDir", m_nSortDir);
+	m_oAppIniFile.WriteInt(TXT("View"), TXT("SortCol"), m_nSortCol);
+	m_oAppIniFile.WriteInt(TXT("View"), TXT("SortDir"), m_nSortDir);
 
 	// Write the list of column widths.
 	for (int i = 0; i < CAppDlg::NUM_COLUMNS; ++i)
 	{
 		CString strEntry;
 
-		strEntry.Format("Column[%d]", i);
+		strEntry.Format(TXT("Column[%d]"), i);
 
-		m_oAppIniFile.WriteInt("View", strEntry, m_anColWidths[i]);
+		m_oAppIniFile.WriteInt(TXT("View"), strEntry, m_anColWidths[i]);
 	}
 
 	if (m_oPingOpts.m_bModified)
 	{
 		// Write pinging settings.
-		m_oAppIniFile.WriteInt ("Ping", "Threads",  m_oPingOpts.m_nThreads     );
-		m_oAppIniFile.WriteInt ("Ping", "Attempts", m_oPingOpts.m_nAttempts    );
-		m_oAppIniFile.WriteInt ("Ping", "WaitTime", m_oPingOpts.m_nWaitTime    );
-		m_oAppIniFile.WriteBool("Ping", "AutoPing", m_oPingOpts.m_bAutoPing    );
-		m_oAppIniFile.WriteInt ("Ping", "Interval", m_oPingOpts.m_nAutoInterval);
+		m_oAppIniFile.WriteInt (TXT("Ping"), TXT("Threads"),  m_oPingOpts.m_nThreads     );
+		m_oAppIniFile.WriteInt (TXT("Ping"), TXT("Attempts"), m_oPingOpts.m_nAttempts    );
+		m_oAppIniFile.WriteInt (TXT("Ping"), TXT("WaitTime"), m_oPingOpts.m_nWaitTime    );
+		m_oAppIniFile.WriteBool(TXT("Ping"), TXT("AutoPing"), m_oPingOpts.m_bAutoPing    );
+		m_oAppIniFile.WriteInt (TXT("Ping"), TXT("Interval"), m_oPingOpts.m_nAutoInterval);
 	}
 
 	if (m_bFltEdited)
 	{
 		// Write the filters.
-		m_oAppIniFile.WriteInt("Filters", "Count", m_aoFilters.size());
+		m_oAppIniFile.WriteInt(TXT("Filters"), TXT("Count"), m_aoFilters.size());
 
 		for (uint i = 0; i < m_aoFilters.size(); ++i)
 		{
@@ -433,28 +433,28 @@ void CUTSvrBrowser::SaveAppConfig()
 
 			CString strSection, strEntry;
 
-			strEntry.Format("Filter[%d]", i);
+			strEntry.Format(TXT("Filter[%d]"), i);
 
 			// Write the filter name.
-			m_oAppIniFile.WriteString("Filters", strEntry, pFilter->m_strName);
+			m_oAppIniFile.WriteString(TXT("Filters"), strEntry, pFilter->m_strName);
 
-			strSection.Format("%s Filter", pFilter->m_strName);
+			strSection.Format(TXT("%s Filter"), pFilter->m_strName);
 
 			// Write the filter definition.
-			m_oAppIniFile.WriteString (strSection, "Name",         pFilter->m_strName   );
-			m_oAppIniFile.WriteString (strSection, "Description",  pFilter->m_strDesc   );
-			m_oAppIniFile.WriteBool   (strSection, "FilterMods",   pFilter->m_bFltMods  );
-			m_oAppIniFile.WriteStrings(strSection, "Mods", ',',    pFilter->m_astrMods  );
-			m_oAppIniFile.WriteBool   (strSection, "FilterPing",   pFilter->m_bFltPing  );
-			m_oAppIniFile.WriteInt    (strSection, "PingTime",     pFilter->m_nPingTime );
-			m_oAppIniFile.WriteBool   (strSection, "FilterErrors", pFilter->m_bFltErrors);
-			m_oAppIniFile.WriteBool   (strSection, "FilterNames",  pFilter->m_bFltNames );
-			m_oAppIniFile.WriteStrings(strSection, "Names", ',',   pFilter->m_astrNames );
+			m_oAppIniFile.WriteString (strSection, TXT("Name"),         pFilter->m_strName   );
+			m_oAppIniFile.WriteString (strSection, TXT("Description"),  pFilter->m_strDesc   );
+			m_oAppIniFile.WriteBool   (strSection, TXT("FilterMods"),   pFilter->m_bFltMods  );
+			m_oAppIniFile.WriteStrings(strSection, TXT("Mods"), ',',    pFilter->m_astrMods  );
+			m_oAppIniFile.WriteBool   (strSection, TXT("FilterPing"),   pFilter->m_bFltPing  );
+			m_oAppIniFile.WriteInt    (strSection, TXT("PingTime"),     pFilter->m_nPingTime );
+			m_oAppIniFile.WriteBool   (strSection, TXT("FilterErrors"), pFilter->m_bFltErrors);
+			m_oAppIniFile.WriteBool   (strSection, TXT("FilterNames"),  pFilter->m_bFltNames );
+			m_oAppIniFile.WriteStrings(strSection, TXT("Names"), ',',   pFilter->m_astrNames );
 		}
 	}
 
 	// Save filter last used.
-	m_oAppIniFile.WriteString("Filters", "Default", (m_pFilter != NULL) ? m_pFilter->m_strName : "");
+	m_oAppIniFile.WriteString(TXT("Filters"), TXT("Default"), (m_pFilter != NULL) ? m_pFilter->m_strName : TXT(""));
 
 	// Ave the other configs.
 //	SaveModsConfig();
@@ -476,16 +476,16 @@ void CUTSvrBrowser::SaveAppConfig()
 void CUTSvrBrowser::LoadModsConfig()
 {
 	// Read the mods configuration.
-	int nMods = m_oModIniFile.ReadInt("Mods", "Count", 0);
+	int nMods = m_oModIniFile.ReadInt(TXT("Mods"), TXT("Count"), 0);
 
 	for (int i = 0; i < nMods; ++i)
 	{
 		CString strSection, strEntry;
 
-		strEntry.Format("Mod[%d]", i);
+		strEntry.Format(TXT("Mod[%d]"), i);
 
 		// Get next mod name.
-		CString strModName = m_oModIniFile.ReadString("Mods", strEntry, "");
+		CString strModName = m_oModIniFile.ReadString(TXT("Mods"), strEntry, TXT(""));
 
 		if (strModName.Empty())
 			continue;
@@ -494,12 +494,12 @@ void CUTSvrBrowser::LoadModsConfig()
 		CRow& oRow = m_oMods.CreateRow();
 
 		oRow[CMods::MOD_NAME]  = strModName;
-		oRow[CMods::FAVS_FILE] = m_oModIniFile.ReadString(strModName, "FavsFile", "");
+		oRow[CMods::FAVS_FILE] = m_oModIniFile.ReadString(strModName, TXT("FavsFile"), TXT(""));
 
 		m_oMods.InsertRow(oRow, false);
 
 		// Read the list of game types the mod uses.
-		CString strGameTypes = m_oModIniFile.ReadString(strModName, "GameTypes", "");
+		CString strGameTypes = m_oModIniFile.ReadString(strModName, TXT("GameTypes"), TXT(""));
 
 		if (strGameTypes.Empty())
 			continue;
@@ -507,10 +507,10 @@ void CUTSvrBrowser::LoadModsConfig()
 		CStrArray astrGameTypes;
 
 		// Split list of game types.
-		CStrTok::Split(strGameTypes, ",", astrGameTypes);
+		CStrTok::Split(strGameTypes, TXT(","), astrGameTypes);
 
 		// Create game type table entries.
-		for (int j = 0; j < astrGameTypes.Size(); ++j)
+		for (size_t j = 0; j < astrGameTypes.Size(); ++j)
 		{
 			CRow& oRow = m_oGameTypes.CreateRow();
 
@@ -553,14 +553,14 @@ void CUTSvrBrowser::SaveModsConfig()
 void CUTSvrBrowser::LoadFavsConfig()
 {
 	// Read detection setting.
-	m_bDetectFavs = m_oAppIniFile.ReadBool("Favourites", "Detect", m_bDetectFavs);
+	m_bDetectFavs = m_oAppIniFile.ReadBool(TXT("Favourites"), TXT("Detect"), m_bDetectFavs);
 
 	// Read the favourite files configuration.
-	for (int i = 0; i < m_oMods.RowCount(); ++i)
+	for (size_t i = 0; i < m_oMods.RowCount(); ++i)
 	{
 		CRow& oMod = m_oMods[i];
 
-		CString strFile = m_oAppIniFile.ReadString("Favourites", oMod[CMods::MOD_NAME], "");
+		CString strFile = m_oAppIniFile.ReadString(TXT("Favourites"), oMod[CMods::MOD_NAME], TXT(""));
 
 		// Ignore if not set.
 		if (strFile.Empty())
@@ -594,7 +594,7 @@ void CUTSvrBrowser::LoadFavourites()
 	m_oFavourites.Truncate();
 
 	// Read the favourites from the config files.
-	for (int i = 0; i < m_oFavFiles.RowCount(); ++i)
+	for (size_t i = 0; i < m_oFavFiles.RowCount(); ++i)
 	{
 		CRow&    oFavFile = m_oFavFiles[i];
 		CIniFile oIniFile(oFavFile[CFavFiles::MOD_FILE]);
@@ -604,24 +604,24 @@ void CUTSvrBrowser::LoadFavourites()
 			continue;
 
 		// Read number of favourites in file.
-		int nFavs = oIniFile.ReadInt("UBrowser.UBrowserFavoritesFact", "FavoriteCount", 0);
+		int nFavs = oIniFile.ReadInt(TXT("UBrowser.UBrowserFavoritesFact"), TXT("FavoriteCount"), 0);
 
 		// Read all favourites.
 		for (int j = 0; j < nFavs; ++j)
 		{
 			CString strEntry;
 
-			strEntry.Format("Favorites[%d]", j);
+			strEntry.Format(TXT("Favorites[%d]"), j);
 
 			// Format: Favorites[?]=Name\Address\Port\Flag
-			CStrArray astrFavInfo = oIniFile.ReadStrings("UBrowser.UBrowserFavoritesFact", strEntry, '\\', "");
+			CStrArray astrFavInfo = oIniFile.ReadStrings(TXT("UBrowser.UBrowserFavoritesFact"), strEntry, '\\', TXT(""));
 
 			// Invalid entry?
 			if (astrFavInfo.Size() != 4)
 				continue;
 
 			// Generate IP Key.
-			CString strKey = astrFavInfo[1] + ":" + astrFavInfo[2];
+			CString strKey = astrFavInfo[1] + TXT(":") + astrFavInfo[2];
 
 			// Add to favourites table.
 			CRow& oRow = m_oFavourites.CreateRow();
@@ -652,19 +652,19 @@ void CUTSvrBrowser::SaveFavsConfig()
 	if (App.m_oFavFiles.Modified())
 	{
 		// Delete entire secetion.
-		m_oAppIniFile.DeleteSection("Favourites");
+		m_oAppIniFile.DeleteSection(TXT("Favourites"));
 
 		// Write the favourites config files.
-		for (int i = 0; i < App.m_oFavFiles.RowCount(); ++i)
+		for (size_t i = 0; i < App.m_oFavFiles.RowCount(); ++i)
 		{
 			CRow& oRow = App.m_oFavFiles[i];
 
-			m_oAppIniFile.WriteString("Favourites", oRow[CFavFiles::MOD_NAME], oRow[CFavFiles::MOD_FILE]);		
+			m_oAppIniFile.WriteString(TXT("Favourites"), oRow[CFavFiles::MOD_NAME], oRow[CFavFiles::MOD_FILE]);		
 		}
 	}
 
 	// Write detection setting.
-	m_oAppIniFile.WriteBool("Favourites", "Detect", m_bDetectFavs);
+	m_oAppIniFile.WriteBool(TXT("Favourites"), TXT("Detect"), m_bDetectFavs);
 }
 
 /******************************************************************************
@@ -717,7 +717,7 @@ void CUTSvrBrowser::StopPingTimer()
 *******************************************************************************
 */
 
-CFilter* CUTSvrBrowser::FindFilter(const char* pszName) const
+CFilter* CUTSvrBrowser::FindFilter(const tchar* pszName) const
 {
 	// For all filters.
 	for (uint i = 0; i < m_aoFilters.size(); ++i)
@@ -794,14 +794,14 @@ void CUTSvrBrowser::ApplyFilter()
 		CResultSet oRS(App.m_oServers);
 
 		// For all rows...
-		for (int i = 0; i < App.m_oRS.Count(); ++i)
+		for (size_t i = 0; i < App.m_oRS.Count(); ++i)
 		{
 			CRow&   oRow    = App.m_oRS[i];
 			CString strName = CString(oRow[CServers::HOST_NAME]).ToLower();
 			bool    bMatch  = false;
 
 			// Matches any name in the filter?
-			for (int j = 0; ((j < m_pFilter->m_astrNames.Size()) && (!bMatch)); ++j)
+			for (size_t j = 0; ((j < m_pFilter->m_astrNames.Size()) && (!bMatch)); ++j)
 			{
 				if (strName.Find(m_pFilter->m_astrNames[j]) != -1)
 					bMatch = true;
@@ -858,7 +858,7 @@ void CUTSvrBrowser::BuildFilterMenu()
 void CUTSvrBrowser::CheckFavourites()
 {
 	// For all servers.
-	for (int i = 0; i < m_oServers.RowCount(); ++i)
+	for (size_t i = 0; i < m_oServers.RowCount(); ++i)
 	{
 		CRow& oSvrRow = m_oServers[i];
 		CRow* pFavRow = App.m_oFavourites.SelectRow(CFavourites::IP_KEY, oSvrRow[CServers::IP_KEY]);

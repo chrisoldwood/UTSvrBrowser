@@ -16,6 +16,7 @@
 #include <WCL/StrTok.hpp>
 #include "QueryResponse.hpp"
 #include <NCL/SocketException.hpp>
+#include <Core/AnsiWide.hpp>
 
 /******************************************************************************
 **
@@ -24,10 +25,10 @@
 *******************************************************************************
 */
 
-const char* CGameServer::QUERY_INFO      = "\\info\\";
-const char* CGameServer::QUERY_STATUS    = "\\status\\";
-const char* CGameServer::END_OF_RESPONSE = "\\final\\";
-const char* CGameServer::FIELD_SEPS      = "\\";
+const tchar* CGameServer::QUERY_INFO      = TXT("\\info\\");
+const tchar* CGameServer::QUERY_STATUS    = TXT("\\status\\");
+const tchar* CGameServer::END_OF_RESPONSE = TXT("\\final\\");
+const tchar* CGameServer::FIELD_SEPS      = TXT("\\");
 
 /******************************************************************************
 ** Method:		Constructor.
@@ -41,7 +42,7 @@ const char* CGameServer::FIELD_SEPS      = "\\";
 *******************************************************************************
 */
 
-CGameServer::CGameServer(const char* pszAddress, int nPort)
+CGameServer::CGameServer(const tchar* pszAddress, int nPort)
 	: m_strAddress(pszAddress)
 	, m_nPort(nPort)
 {
@@ -111,7 +112,7 @@ bool CGameServer::QueryStatus(CQueryResponse& oResponse)
 *******************************************************************************
 */
 
-bool CGameServer::ExecQuery(const char* pszQuery, CQueryResponse& oResponse)
+bool CGameServer::ExecQuery(const tchar* pszQuery, CQueryResponse& oResponse)
 {
 	int nError = CServers::ERROR_FAILED;
 	int nTime  = INT_MAX;
@@ -131,7 +132,7 @@ bool CGameServer::ExecQuery(const char* pszQuery, CQueryResponse& oResponse)
 			oSocket.Connect(m_strAddress, m_nPort);
 
 			// Send the query.
-			oSocket.Send(pszQuery);
+			oSocket.Send(pszQuery, tstrlen(pszQuery));
 
 			DWORD dwStart = ::GetTickCount();
 
@@ -148,8 +149,10 @@ bool CGameServer::ExecQuery(const char* pszQuery, CQueryResponse& oResponse)
 					// Anything read?
 					if ((nRead = oSocket.Recv(oBuffer)) > 0)
 					{
+						const char* psz = static_cast<const char*>(oBuffer.Buffer());
+
 						// Append to response buffer.
-						strResponse += oBuffer.ToString(nRead);
+						strResponse += A2T(std::string(psz, psz+nRead));
 					}
 				}
 
@@ -181,7 +184,7 @@ bool CGameServer::ExecQuery(const char* pszQuery, CQueryResponse& oResponse)
 				CStrTok::Split(strResponse, FIELD_SEPS, astrFields);
 
 				// Add field/value pairs to response...
-				for (int i = 0; i < (astrFields.Size() / 2); ++i)
+				for (size_t i = 0; i < (astrFields.Size() / 2); ++i)
 				{
 					oResponse.m_astrFields.Add(astrFields[(i*2)+0]);
 					oResponse.m_astrValues.Add(astrFields[(i*2)+1]);

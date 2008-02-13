@@ -14,6 +14,7 @@
 #include "GameServer.hpp"
 #include "Servers.hpp"
 #include "QueryResponse.hpp"
+#include <WCL/StrCvt.hpp>
 
 /******************************************************************************
 **
@@ -69,10 +70,10 @@ void CGameInfoDlg::OnInitDialog()
 	m_lvTeam2.FullRowSelect(true);
 
 	// Create team grids columns.
-	m_lvTeam1.InsertColumn(PLAYER, "Player", 125, LVCFMT_LEFT);
-	m_lvTeam1.InsertColumn(FRAGS,  "Frags",   40, LVCFMT_LEFT);
-	m_lvTeam2.InsertColumn(PLAYER, "Player", 125, LVCFMT_LEFT);
-	m_lvTeam2.InsertColumn(FRAGS,  "Frags",   40, LVCFMT_LEFT);
+	m_lvTeam1.InsertColumn(PLAYER, TXT("Player"), 125, LVCFMT_LEFT);
+	m_lvTeam1.InsertColumn(FRAGS,  TXT("Frags"),   40, LVCFMT_LEFT);
+	m_lvTeam2.InsertColumn(PLAYER, TXT("Player"), 125, LVCFMT_LEFT);
+	m_lvTeam2.InsertColumn(FRAGS,  TXT("Frags"),   40, LVCFMT_LEFT);
 
 	// Get the current game status.
 	RefreshInfo();
@@ -144,7 +145,7 @@ void CGameInfoDlg::RefreshInfo()
 		m_lvTeam2.DeleteAllItems();
 
 		// Get number of players.
-		int nPlayers = atoi(oResponse.FieldValue("numplayers"));
+		int nPlayers = CStrCvt::ParseInt(oResponse.FieldValue(TXT("numplayers")));
 
 		// Add players to team grids...
 		for (int i = 0; i < nPlayers; ++i)
@@ -152,19 +153,19 @@ void CGameInfoDlg::RefreshInfo()
 			CString strIndex;
 
 			// Format player field identifier.
-			strIndex.Format("_%d", i);
+			strIndex.Format(TXT("_%d"), i);
 
 			// Get player details.
-			CString strPlayer = oResponse.FieldValue("player" + strIndex);
-			CString strFrags  = oResponse.FieldValue("frags"  + strIndex);
-			CString strTeam   = oResponse.FieldValue("team"   + strIndex);
+			CString strPlayer = oResponse.FieldValue(TXT("player") + strIndex);
+			CString strFrags  = oResponse.FieldValue(TXT("frags")  + strIndex);
+			CString strTeam   = oResponse.FieldValue(TXT("team")   + strIndex);
 
 			// Ignore if we're missing any details.
 			if (strPlayer.Empty() || strFrags.Empty() || strTeam.Empty())
 				continue;
 
 			// Add them to the team grid.
-			if (atoi(strTeam) == 0)
+			if (CStrCvt::ParseUInt(strTeam) == 0)
 				AddPlayer(m_lvTeam1, strPlayer, strFrags);
 			else
 				AddPlayer(m_lvTeam2, strPlayer, strFrags);
@@ -190,7 +191,7 @@ void CGameInfoDlg::RefreshInfo()
 *******************************************************************************
 */
 
-void CGameInfoDlg::AddPlayer(CListView& lvTeam, const char* pszPlayer, const char* pszFrags)
+void CGameInfoDlg::AddPlayer(CListView& lvTeam, const tchar* pszPlayer, const tchar* pszFrags)
 {
 	ASSERT(pszPlayer != NULL);
 	ASSERT(pszFrags  != NULL);
@@ -199,7 +200,7 @@ void CGameInfoDlg::AddPlayer(CListView& lvTeam, const char* pszPlayer, const cha
 
 	lvTeam.InsertItem(n,        pszPlayer);
 	lvTeam.ItemText  (n, FRAGS, pszFrags );
-	lvTeam.ItemData  (n,        atoi(pszFrags));
+	lvTeam.ItemData  (n,        CStrCvt::ParseInt(pszFrags));
 }
 
 /******************************************************************************

@@ -21,7 +21,7 @@
 *******************************************************************************
 */
 
-static const char* SEL_FOLDER_MSG = "Select The UT System Folder\ne.g. C:\\UnrealTournament\\System";
+static const tchar* SEL_FOLDER_MSG = TXT("Select The UT System Folder\ne.g. C:\\UnrealTournament\\System");
 
 /******************************************************************************
 ** Method:		Default constructor.
@@ -71,11 +71,11 @@ void CFavouritesDlg::OnInitDialog()
 //	m_lvGrid.GridLines(true);
 
 	// Create grid columns.
-	m_lvGrid.InsertColumn(MOD_NAME, "Mod",  100, LVCFMT_LEFT);
-	m_lvGrid.InsertColumn(MOD_FILE, "File", 325, LVCFMT_LEFT);
+	m_lvGrid.InsertColumn(MOD_NAME, TXT("Mod"),  100, LVCFMT_LEFT);
+	m_lvGrid.InsertColumn(MOD_FILE, TXT("File"), 325, LVCFMT_LEFT);
 
 	// Load grid...
-	for (int i = 0; i < m_oFavFiles.RowCount(); ++i)
+	for (size_t i = 0; i < m_oFavFiles.RowCount(); ++i)
 	{
 		CRow& oRow = m_oFavFiles[i];
 		int   nRow = m_lvGrid.ItemCount();
@@ -126,18 +126,18 @@ void CFavouritesDlg::OnDetect()
 	CPath       strFolder;
 
 	// Try and find the regkey that contains the UT base path.
-	if (WCL::RegKey::Exists(HKEY_LOCAL_MACHINE, "SOFTWARE\\Unreal Technology\\Installed Apps\\UnrealTournament"))
+	if (WCL::RegKey::Exists(HKEY_LOCAL_MACHINE, TXT("SOFTWARE\\Unreal Technology\\Installed Apps\\UnrealTournament")))
 	{
-		oKey.Open(HKEY_LOCAL_MACHINE, "SOFTWARE\\Unreal Technology\\Installed Apps\\UnrealTournament", KEY_READ);
+		oKey.Open(HKEY_LOCAL_MACHINE, TXT("SOFTWARE\\Unreal Technology\\Installed Apps\\UnrealTournament"), KEY_READ);
 
-		strFolder = oKey.ReadStringValue("Folder", "") / "System";
+		strFolder = oKey.ReadStringValue(TXT("Folder"), TXT("")) / TXT("System");
 	}
 
 	// Detect failed?
 	if (strFolder.Empty())
 	{
 		// Notify user.
-		if (QueryMsg("Failed to detect the UT installation.\n\nDo you want to locate it manually?") != IDYES)
+		if (QueryMsg(TXT("Failed to detect the UT installation.\n\nDo you want to locate it manually?")) != IDYES)
 			return;
 
 		// Query user for folder.
@@ -146,7 +146,7 @@ void CFavouritesDlg::OnDetect()
 	}
 
 	// For all mods.
-	for (int i = 0; i < App.m_oMods.RowCount(); ++i)
+	for (size_t i = 0; i < App.m_oMods.RowCount(); ++i)
 	{
 		CRow& oMod = App.m_oMods[i];
 
@@ -155,7 +155,7 @@ void CFavouritesDlg::OnDetect()
 			continue;
 
 		// Favs file not available?
-		if (strlen(oMod[CMods::FAVS_FILE]) == 0)
+		if (tstrlen(oMod[CMods::FAVS_FILE]) == 0)
 			continue;
 
 		CPath strIniFile(strFolder, oMod[CMods::FAVS_FILE]);
@@ -276,7 +276,7 @@ void CFavouritesDlg::OnEdit()
 
 void CFavouritesDlg::OnRemove()
 {
-	int nSel = m_lvGrid.Selection();
+	size_t nSel = m_lvGrid.Selection();
 
 	// No selection?
 	if (nSel == LB_ERR)

@@ -30,11 +30,11 @@ CMasterQueryDlg::CMasterQueryDlg()
 	, m_oTranslatePage(m_oConfig)
 {
 	// Set the title.
-	m_strTitle = "Master Query Settings";
+	m_strTitle = TXT("Master Query Settings");
 
 	DEFINE_PAGE_TABLE
-		PAGE(&m_oAddressPage,   "Server"     )
-		PAGE(&m_oFirewallPage,  "Firewall"   )
-		PAGE(&m_oTranslatePage, "Translation")
+		PAGE(&m_oAddressPage,   TXT("Server")     )
+		PAGE(&m_oFirewallPage,  TXT("Firewall")   )
+		PAGE(&m_oTranslatePage, TXT("Translation"))
 	END_PAGE_TABLE
 }

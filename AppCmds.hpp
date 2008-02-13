@@ -52,7 +52,7 @@ public:
 
 	// Filter menu.
 	void OnFilterNone();
-	void OnFilter(int nCmdID);
+	void OnFilter(uint nCmdID);
 
 	// View menu.
 	void OnViewColumnName();
@@ -97,7 +97,7 @@ public:
 	void OnUIViewSortByPing();
 	void OnUIViewSortByIPAddress();
 	void OnUIViewSortByIPPort();
-	void OnUIViewSortBy(uint nCmdID, int nColumn);
+	void OnUIViewSortBy(uint nCmdID, size_t nColumn);
 	void OnUIViewDetails();
 
 	//

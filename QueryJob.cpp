@@ -14,6 +14,7 @@
 #include <limits.h>
 #include "GameServer.hpp"
 #include "QueryResponse.hpp"
+#include <WCL/StrCvt.hpp>
 
 /******************************************************************************
 ** Method:		Constructor.
@@ -63,8 +64,8 @@ CQueryJob::~CQueryJob()
 void CQueryJob::Run()
 {
 	// Clear exisiting data.
-	m_oRow[CServers::MAP_TITLE]   = "";
-	m_oRow[CServers::MAP_NAME]    = "";
+	m_oRow[CServers::MAP_TITLE]   = TXT("");
+	m_oRow[CServers::MAP_NAME]    = TXT("");
 	m_oRow[CServers::NUM_PLAYERS] = 0;
 	m_oRow[CServers::MAX_PLAYERS] = 0;
 	m_oRow[CServers::PING_TIME]   = INT_MAX;
@@ -75,7 +76,7 @@ void CQueryJob::Run()
 	// Ping server and process response.
 	if (oServer.QueryInfo(oResponse))
 	{
-		CString strHostName = oResponse.FieldValue("hostname");
+		CString strHostName = oResponse.FieldValue(TXT("hostname"));
 
 		// Trim excess whitespace from hostname?
 		if (App.m_oMtrQryOpts.m_bTrimSpace)
@@ -85,20 +86,20 @@ void CQueryJob::Run()
 		if (App.m_oMtrQryOpts.m_bConvertSyms)
 			ConvertSymbols(strHostName);
 
-		CString strMapTitle = oResponse.FieldValue("maptitle");
+		CString strMapTitle = oResponse.FieldValue(TXT("maptitle"));
 
 		// If no map title, use name instead.
 		if (strMapTitle.Empty())
-			strMapTitle = oResponse.FieldValue("mapname");
+			strMapTitle = oResponse.FieldValue(TXT("mapname"));
 
 		// Extract relevant fields
 		m_oRow[CServers::HOST_NAME]   = strHostName;
 		m_oRow[CServers::MAP_TITLE]   = strMapTitle;
-		m_oRow[CServers::MAP_NAME]    = oResponse.FieldValue("mapname");
-		m_oRow[CServers::GAME_TYPE]   = oResponse.FieldValue("gametype");
+		m_oRow[CServers::MAP_NAME]    = oResponse.FieldValue(TXT("mapname"));
+		m_oRow[CServers::GAME_TYPE]   = oResponse.FieldValue(TXT("gametype"));
 		m_oRow[CServers::MOD_NAME]    = FindModName(m_oRow[CServers::GAME_TYPE]);
-		m_oRow[CServers::NUM_PLAYERS] = atoi(oResponse.FieldValue("numplayers"));
-		m_oRow[CServers::MAX_PLAYERS] = atoi(oResponse.FieldValue("maxplayers"));
+		m_oRow[CServers::NUM_PLAYERS] = CStrCvt::ParseInt(oResponse.FieldValue(TXT("numplayers")));
+		m_oRow[CServers::MAX_PLAYERS] = CStrCvt::ParseInt(oResponse.FieldValue(TXT("maxplayers")));
 		m_oRow[CServers::PING_TIME]   = oResponse.Time();
 	}
 
@@ -118,9 +119,9 @@ void CQueryJob::Run()
 *******************************************************************************
 */
 
-CString CQueryJob::FindModName(const char* pszGameType)
+CString CQueryJob::FindModName(const tchar* pszGameType)
 {
-	const char* pszModName = "";
+	const tchar* pszModName = TXT("");
 
 	// Lookup game type in table.
 	CRow* pModRow = App.m_oGameTypes.SelectRow(CGameTypes::GAME_TYPE, pszGameType);
@@ -145,15 +146,15 @@ CString CQueryJob::FindModName(const char* pszGameType)
 
 void CQueryJob::ConvertSymbols(CString& strString)
 {
-	static const char* pszSymbols = "@ß©Ð£Þ®§$¥";
-	static const char* pszLetters = "aBcDeprssy";
+	static const tchar* pszSymbols = TXT("@ß©Ð£Þ®§$¥");
+	static const tchar* pszLetters = TXT("aBcDeprssy");
 
-	int nLen = strString.Length();
+	size_t nLen = strString.Length();
 
 	// For all characters...
-	for (int i = 0; i < nLen; ++i)
+	for (size_t i = 0; i < nLen; ++i)
 	{
-		const char* pcSymbol = strchr(pszSymbols, strString[i]);
+		const tchar* pcSymbol = tstrchr(pszSymbols, strString[i]);
 
 		// Remap, if a symbol.
 		if (pcSymbol != NULL)

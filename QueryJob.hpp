@@ -49,7 +49,7 @@ protected:
 	//
 	// Internal methods.
 	//
-	CString FindModName(const char* pszGameType);
+	CString FindModName(const tchar* pszGameType);
 	void    ConvertSymbols(CString& strString);
 };
 

@@ -29,13 +29,13 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CMasterServer(const char* pszAddress, int nPort);
+	CMasterServer(const tchar* pszAddress, int nPort);
 	~CMasterServer();
 	
 	//
 	// Methods.
 	//
-	int QueryServers(const char* pszGameCode, CStrArray& astrAddresses);
+	int QueryServers(const tchar* pszGameCode, CStrArray& astrAddresses);
 
 protected:
 	//
@@ -47,9 +47,9 @@ protected:
 	//
 	// Constants.
 	//
-	static const char* QUERY_STRING;
-	static const char* END_OF_RESPONSE;
-	static const char* FIELD_SEPS;
+	static const char*  QUERY_STRING;
+	static const tchar* END_OF_RESPONSE;
+	static const tchar* FIELD_SEPS;
 };
 
 /******************************************************************************

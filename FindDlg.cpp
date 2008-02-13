@@ -69,7 +69,7 @@ bool CFindDlg::OnOk()
 	// Validate settings.
 	if (m_ebText.TextLength() == 0)
 	{
-		AlertMsg("Please enter the text to find.");
+		AlertMsg(TXT("Please enter the text to find."));
 		m_ebText.Focus();
 		return false;
 	}

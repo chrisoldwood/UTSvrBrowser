@@ -79,21 +79,21 @@ bool CMtrFirewallPage::OnValidate()
 {
 	if ( (m_ebFirstPort.TextLength() == 0) || (m_ebFirstPort.IntValue() > 65535) )
 	{
-		AlertMsg("Please enter a valid 'from' IP port number (0 - 65535).");
+		AlertMsg(TXT("Please enter a valid 'from' IP port number (0 - 65535)."));
 		m_ebFirstPort.Focus();
 		return false;
 	}
 
 	if ( (m_ebLastPort.TextLength() == 0) || (m_ebLastPort.IntValue() > 65535) )
 	{
-		AlertMsg("Please enter a valid 'to' IP port number (0 - 65535).");
+		AlertMsg(TXT("Please enter a valid 'to' IP port number (0 - 65535)."));
 		m_ebLastPort.Focus();
 		return false;
 	}
 
 	if (m_ebLastPort.IntValue() < m_ebFirstPort.IntValue())
 	{
-		AlertMsg("The second port number should be greater than the first.");
+		AlertMsg(TXT("The second port number should be greater than the first."));
 		m_ebLastPort.Focus();
 		return false;
 	}

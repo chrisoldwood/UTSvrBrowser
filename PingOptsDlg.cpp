@@ -78,28 +78,28 @@ bool CPingOptsDlg::OnOk()
 	// Validate new settings.
 	if ( (m_ebThreads.TextLength() == 0) || (m_ebThreads.IntValue() == 0) )
 	{
-		AlertMsg("Please enter a valid thread count (1 - 99).");
+		AlertMsg(TXT("Please enter a valid thread count (1 - 99)."));
 		m_ebThreads.Focus();
 		return false;
 	}
 
 	if ( (m_ebAttempts.TextLength() == 0) || (m_ebAttempts.IntValue() == 0) )
 	{
-		AlertMsg("Please enter a valid number of attempts (1 - 99).");
+		AlertMsg(TXT("Please enter a valid number of attempts (1 - 99)."));
 		m_ebAttempts.Focus();
 		return false;
 	}
 
 	if ( (m_ebTimeout.TextLength() == 0) || (m_ebTimeout.IntValue() == 0) )
 	{
-		AlertMsg("Please enter a valid time out (1 - 9999).");
+		AlertMsg(TXT("Please enter a valid time out (1 - 9999)."));
 		m_ebTimeout.Focus();
 		return false;
 	}
 
 	if ( (m_ebInterval.TextLength() == 0) || (m_ebInterval.IntValue() == 0) )
 	{
-		AlertMsg("Please enter a valid interval (1 - 9999).");
+		AlertMsg(TXT("Please enter a valid interval (1 - 9999)."));
 		m_ebInterval.Focus();
 		return false;
 	}

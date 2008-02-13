@@ -24,23 +24,23 @@
 */
 
 CServers::CServers(CMDB& oDB)
-	: CTable(oDB, "Servers")
+	: CTable(oDB, TXT("Servers"))
 {
 	// Create the table schema.
-	AddColumn("ID",          MDCT_IDENTITY, 0,              CColumn::IDENTITY);
-	AddColumn("IPKey",       MDCT_FXDSTR,   IP_KEY_LEN,     CColumn::UNIQUE  );
-	AddColumn("IPAddress",   MDCT_FXDSTR,   IP_ADDRESS_LEN, CColumn::DEFAULTS);
-	AddColumn("IPPort",      MDCT_INT,      0,              CColumn::DEFAULTS);
-	AddColumn("HostName",    MDCT_VARSTR,   HOST_NAME_LEN,  CColumn::DEFAULTS);
-	AddColumn("MapTitle",    MDCT_VARSTR,   MAP_TITLE_LEN,  CColumn::DEFAULTS);
-	AddColumn("MapName",     MDCT_VARSTR,   MAP_NAME_LEN,   CColumn::DEFAULTS);
-	AddColumn("GameType",    MDCT_VARSTR,   GAME_TYPE_LEN,  CColumn::DEFAULTS);
-	AddColumn("ModName",     MDCT_VARSTR,   MOD_NAME_LEN,   CColumn::DEFAULTS);
-	AddColumn("NumPlayers",  MDCT_INT,      0,              CColumn::DEFAULTS);
-	AddColumn("MaxPlayers",  MDCT_INT,      0,              CColumn::DEFAULTS);
-	AddColumn("PingTime",    MDCT_INT,      0,              CColumn::DEFAULTS);
-	AddColumn("LastError",   MDCT_INT,      0,              CColumn::DEFAULTS);
-	AddColumn("FavID",       MDCT_INT,      0,              CColumn::NULLABLE);
+	AddColumn(TXT("ID"),          MDCT_IDENTITY, 0,              CColumn::IDENTITY);
+	AddColumn(TXT("IPKey"),       MDCT_FXDSTR,   IP_KEY_LEN,     CColumn::UNIQUE  );
+	AddColumn(TXT("IPAddress"),   MDCT_FXDSTR,   IP_ADDRESS_LEN, CColumn::DEFAULTS);
+	AddColumn(TXT("IPPort"),      MDCT_INT,      0,              CColumn::DEFAULTS);
+	AddColumn(TXT("HostName"),    MDCT_VARSTR,   HOST_NAME_LEN,  CColumn::DEFAULTS);
+	AddColumn(TXT("MapTitle"),    MDCT_VARSTR,   MAP_TITLE_LEN,  CColumn::DEFAULTS);
+	AddColumn(TXT("MapName"),     MDCT_VARSTR,   MAP_NAME_LEN,   CColumn::DEFAULTS);
+	AddColumn(TXT("GameType"),    MDCT_VARSTR,   GAME_TYPE_LEN,  CColumn::DEFAULTS);
+	AddColumn(TXT("ModName"),     MDCT_VARSTR,   MOD_NAME_LEN,   CColumn::DEFAULTS);
+	AddColumn(TXT("NumPlayers"),  MDCT_INT,      0,              CColumn::DEFAULTS);
+	AddColumn(TXT("MaxPlayers"),  MDCT_INT,      0,              CColumn::DEFAULTS);
+	AddColumn(TXT("PingTime"),    MDCT_INT,      0,              CColumn::DEFAULTS);
+	AddColumn(TXT("LastError"),   MDCT_INT,      0,              CColumn::DEFAULTS);
+	AddColumn(TXT("FavID"),       MDCT_INT,      0,              CColumn::NULLABLE);
 }
 
 /******************************************************************************
@@ -76,14 +76,14 @@ CRow& CServers::CreateRow()
 	CRow& oRow = CTable::CreateRow();
 
 //	oRow[ID]          = 
-	oRow[IP_KEY]      = "";
-	oRow[IP_ADDRESS]  = "";
+	oRow[IP_KEY]      = TXT("");
+	oRow[IP_ADDRESS]  = TXT("");
 	oRow[IP_PORT]     = 0;
-	oRow[HOST_NAME]   = "";
-	oRow[MAP_TITLE]   = "";
-	oRow[MAP_NAME]    = "";
-	oRow[GAME_TYPE]   = "";
-	oRow[MOD_NAME]    = "";
+	oRow[HOST_NAME]   = TXT("");
+	oRow[MAP_TITLE]   = TXT("");
+	oRow[MAP_NAME]    = TXT("");
+	oRow[GAME_TYPE]   = TXT("");
+	oRow[MOD_NAME]    = TXT("");
 	oRow[NUM_PLAYERS] = 0;
 	oRow[MAX_PLAYERS] = 0;
 	oRow[PING_TIME]   = 999;

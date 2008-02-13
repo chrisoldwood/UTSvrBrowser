@@ -39,7 +39,7 @@ public:
 	//
 	// Properties.
 	//
-	int   SortColumn() const;
+	size_t SortColumn() const;
 	CRow* SelectedRow() const;
 
 	//
@@ -48,10 +48,10 @@ public:
 	void RefreshView();
 	void RefreshRow(CRow& oRow);
 	void RefreshAllRows();
-	void Sort(int nColumn);
-	void ToggleColumn(int nColumn);
+	void Sort(size_t nColumn);
+	void ToggleColumn(size_t nColumn);
 	void AutoSizeColumns();
-	void SelectRow(int nRow);
+	void SelectRow(size_t nRow);
 
 	//
 	// Column indices.
@@ -85,7 +85,7 @@ protected:
 	//
 	// Members.
 	//
-	int					m_nSortColumn;
+	size_t				m_nSortColumn;
 	CSortColumns::Dir	m_eSortOrder;
 
 	//
@@ -101,12 +101,12 @@ protected:
 	//
 	// Internal methods.
 	//
-	CRow*   GridRow(int nRow) const;
+	CRow*   GridRow(size_t nRow) const;
 	CString FmtPlayers(const CRow& oRow);
 	CString FmtPingTime(const CRow& oRow);
 	CString FmtLastErr(const CRow& oRow);
 	CString FmtModName(const CRow& oRow);
-	int     TableColumn(int nColumn);
+	size_t  TableColumn(size_t nColumn);
 };
 
 /******************************************************************************
@@ -116,14 +116,14 @@ protected:
 *******************************************************************************
 */
 
-inline CRow* CAppDlg::GridRow(int nRow) const
+inline CRow* CAppDlg::GridRow(size_t nRow) const
 {
-	ASSERT((nRow >= 0) && (nRow < m_lvGrid.ItemCount()));
+	ASSERT(nRow < m_lvGrid.ItemCount());
 
-	return (CRow*) m_lvGrid.ItemPtr(nRow);
+	return static_cast<CRow*>(m_lvGrid.ItemPtr(nRow));
 }
 
-inline int CAppDlg::SortColumn() const
+inline size_t CAppDlg::SortColumn() const
 {
 	return m_nSortColumn;
 }
@@ -138,9 +138,9 @@ inline CRow* CAppDlg::SelectedRow() const
 	return pRow;
 }
 
-inline void CAppDlg::SelectRow(int nRow)
+inline void CAppDlg::SelectRow(size_t nRow)
 {
-	ASSERT((nRow >= 0) && (nRow < m_lvGrid.ItemCount()));
+	ASSERT(nRow < m_lvGrid.ItemCount());
 
 	m_lvGrid.Select(nRow);
 	m_lvGrid.MakeItemVisible(nRow);

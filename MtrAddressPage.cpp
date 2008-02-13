@@ -74,14 +74,14 @@ bool CMtrAddressPage::OnValidate()
 	// Validate new settings.
 	if (m_ebAddress.TextLength() == 0)
 	{
-		AlertMsg("Please enter the server IP address.");
+		AlertMsg(TXT("Please enter the server IP address."));
 		m_ebAddress.Focus();
 		return false;
 	}
 
 	if ( (m_ebPort.TextLength() == 0) || (m_ebPort.IntValue() > 65535) )
 	{
-		AlertMsg("Please enter a valid IP port number (0 - 65535).");
+		AlertMsg(TXT("Please enter a valid IP port number (0 - 65535)."));
 		m_ebPort.Focus();
 		return false;
 	}

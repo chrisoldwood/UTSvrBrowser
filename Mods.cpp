@@ -24,12 +24,12 @@
 */
 
 CMods::CMods(CMDB& oDB)
-	: CTable(oDB, "Mods", TRANSIENT)
+	: CTable(oDB, TXT("Mods"), TRANSIENT)
 {
 	// Create the table schema.
-	AddColumn("ID",       MDCT_IDENTITY, 0,             CColumn::IDENTITY);
-	AddColumn("ModName",  MDCT_VARSTR,   MOD_NAME_LEN,  CColumn::UNIQUE  );
-	AddColumn("FavsFile", MDCT_VARSTR,   FAVS_FILE_LEN, CColumn::DEFAULTS);
+	AddColumn(TXT("ID"),       MDCT_IDENTITY, 0,             CColumn::IDENTITY);
+	AddColumn(TXT("ModName"),  MDCT_VARSTR,   MOD_NAME_LEN,  CColumn::UNIQUE  );
+	AddColumn(TXT("FavsFile"), MDCT_VARSTR,   FAVS_FILE_LEN, CColumn::DEFAULTS);
 }
 
 /******************************************************************************
@@ -65,8 +65,8 @@ CRow& CMods::CreateRow()
 	CRow& oRow = CTable::CreateRow();
 
 //	oRow[ID]        = 
-	oRow[MOD_NAME]  = "";
-	oRow[FAVS_FILE] = "";
+	oRow[MOD_NAME]  = TXT("");
+	oRow[FAVS_FILE] = TXT("");
 	
 	return oRow;
 }

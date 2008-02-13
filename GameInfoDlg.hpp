@@ -70,7 +70,7 @@ protected:
 	// Internal methods.
 	//
 	void RefreshInfo();
-	void AddPlayer(CListView& lvTeam, const char* pszPlayer, const char* pszFrags);
+	void AddPlayer(CListView& lvTeam, const tchar* pszPlayer, const tchar* pszFrags);
 
 	static int CALLBACK Compare(LPARAM lParam1, LPARAM lParam2, LPARAM);
 };

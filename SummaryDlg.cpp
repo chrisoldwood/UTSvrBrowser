@@ -55,9 +55,9 @@ void CSummaryDlg::OnInitDialog()
 //	m_lvGrid.GridLines(true);
 
 	// Create grid columns.
-	m_lvGrid.InsertColumn(MOD_NAME, "Mod",     125, LVCFMT_LEFT);
-	m_lvGrid.InsertColumn(SERVERS,  "Servers",  60, LVCFMT_LEFT);
-	m_lvGrid.InsertColumn(PLAYERS,  "Players",  60, LVCFMT_LEFT);
+	m_lvGrid.InsertColumn(MOD_NAME, TXT("Mod"),     125, LVCFMT_LEFT);
+	m_lvGrid.InsertColumn(SERVERS,  TXT("Servers"),  60, LVCFMT_LEFT);
+	m_lvGrid.InsertColumn(PLAYERS,  TXT("Players"),  60, LVCFMT_LEFT);
 
 	// Extract active servers only.
 	CResultSet oRS = App.m_oSummary.SelectAll();
@@ -66,7 +66,7 @@ void CSummaryDlg::OnInitDialog()
 	oRS.OrderBy(CSummary::NUM_SERVERS, CSortColumns::DESC);
 
 	// Load grid with data.
-	for (int i = 0; i < oRS.Count(); ++i)
+	for (size_t i = 0; i < oRS.Count(); ++i)
 	{
 		CRow& oRow = oRS[i];
 		int   nRow = m_lvGrid.ItemCount();
@@ -78,8 +78,8 @@ void CSummaryDlg::OnInitDialog()
 		m_lvGrid.ItemPtr   (nRow, &oRow);
 
 		// Set unknown mod to "(other)".
-		if (oRow[CSummary::MOD_NAME] == "")
-			m_lvGrid.ItemText(nRow, MOD_NAME, "(other)");
+		if (oRow[CSummary::MOD_NAME] == TXT(""))
+			m_lvGrid.ItemText(nRow, MOD_NAME, TXT("(other)"));
 	}
 }
 

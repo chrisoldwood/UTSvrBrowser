@@ -24,12 +24,12 @@
 */
 
 CSummary::CSummary(CMDB& oDB)
-	: CTable(oDB, "Summary", TRANSIENT)
+	: CTable(oDB, TXT("Summary"), TRANSIENT)
 {
 	// Create the table schema.
-	AddColumn("ModName",     MDCT_VARSTR, MOD_NAME_LEN, CColumn::UNIQUE  );
-	AddColumn("NumServers",  MDCT_INT,    0,            CColumn::DEFAULTS);
-	AddColumn("NumPlayers",  MDCT_INT,    0,            CColumn::DEFAULTS);
+	AddColumn(TXT("ModName"),     MDCT_VARSTR, MOD_NAME_LEN, CColumn::UNIQUE  );
+	AddColumn(TXT("NumServers"),  MDCT_INT,    0,            CColumn::DEFAULTS);
+	AddColumn(TXT("NumPlayers"),  MDCT_INT,    0,            CColumn::DEFAULTS);
 }
 
 /******************************************************************************
@@ -65,7 +65,7 @@ CRow& CSummary::CreateRow()
 	CRow& oRow = CTable::CreateRow();
 
 //	oRow[ID]          = 
-	oRow[MOD_NAME]    = "";
+	oRow[MOD_NAME]    = TXT("");
 	oRow[NUM_SERVERS] = 0;
 	oRow[NUM_PLAYERS] = 0;
 	

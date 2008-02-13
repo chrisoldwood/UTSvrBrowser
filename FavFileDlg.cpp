@@ -56,7 +56,7 @@ void CFavFileDlg::OnInitDialog()
 	ASSERT(m_pFavFiles != NULL);
 
 	// Initialise controls.
-	for (int i = 0; i < App.m_oMods.RowCount(); ++i)
+	for (size_t i = 0; i < App.m_oMods.RowCount(); ++i)
 		m_cbMod.Add(App.m_oMods[i][CMods::MOD_NAME], &App.m_oMods[i]);
 
 	// Load controls with current settings.
@@ -87,7 +87,7 @@ bool CFavFileDlg::OnOk()
 
 	if (nSelMod == CB_ERR)
 	{
-		AlertMsg("Please select the mod being configured.");
+		AlertMsg(TXT("Please select the mod being configured."));
 		m_cbMod.Focus();
 		return false;
 	}
@@ -96,7 +96,7 @@ bool CFavFileDlg::OnOk()
 
 	if ( (strMod != m_strMod) && (m_pFavFiles->SelectRow(CFavFiles::MOD_NAME, strMod) != NULL) )
 	{
-		AlertMsg("There is already a file configured for the mod.");
+		AlertMsg(TXT("There is already a file configured for the mod."));
 		m_cbMod.Focus();
 		return false;
 	}
@@ -104,7 +104,7 @@ bool CFavFileDlg::OnOk()
 	// Validate mod file.
 	if (m_ebFile.TextLength() == 0)
 	{
-		AlertMsg("Please enter the path to the favourites file.");
+		AlertMsg(TXT("Please enter the path to the favourites file."));
 		m_ebFile.Focus();
 		return false;
 	}
@@ -113,7 +113,7 @@ bool CFavFileDlg::OnOk()
 
 	if (!strPath.Exists())
 	{
-		AlertMsg("The path to the favourites file is invalid.");
+		AlertMsg(TXT("The path to the favourites file is invalid."));
 		m_ebFile.Focus();
 		return false;
 	}
@@ -143,21 +143,21 @@ void CFavFileDlg::OnBrowse()
 	CPath       strDefDir;
 
 	// Try and find the regkey that contains the UT base path.
-	if (WCL::RegKey::Exists(HKEY_LOCAL_MACHINE, "SOFTWARE\\Unreal Technology\\Installed Apps\\UnrealTournament"))
+	if (WCL::RegKey::Exists(HKEY_LOCAL_MACHINE, TXT("SOFTWARE\\Unreal Technology\\Installed Apps\\UnrealTournament")))
 	{
-		oKey.Open(HKEY_LOCAL_MACHINE, "SOFTWARE\\Unreal Technology\\Installed Apps\\UnrealTournament", KEY_READ);
+		oKey.Open(HKEY_LOCAL_MACHINE, TXT("SOFTWARE\\Unreal Technology\\Installed Apps\\UnrealTournament"), KEY_READ);
 
-		strDefDir = oKey.ReadStringValue("Folder", "") / "System";
+		strDefDir = oKey.ReadStringValue(TXT("Folder"), TXT("")) / TXT("System");
 	}
 
 	// File extensions.
-	static char szExts[] = {	"INI Files (*.ini)\0*.ini\0"
-								"All Files (*.*)\0*.*\0"
-								"\0\0"							};
+	static tchar szExts[] = {	TXT("INI Files (*.ini)\0*.ini\0")
+								TXT("All Files (*.*)\0*.*\0")
+								TXT("\0\0")							};
 
 	CPath strFile;
 
 	// Show Select File common dialog.
-	if (strFile.Select(*this, CPath::SaveFile, szExts, "ini", strDefDir))
+	if (strFile.Select(*this, CPath::SaveFile, szExts, TXT("ini"), strDefDir))
 		m_ebFile.Text(strFile);
 }

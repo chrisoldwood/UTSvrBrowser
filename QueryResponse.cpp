@@ -55,12 +55,12 @@ CQueryResponse::~CQueryResponse()
 *******************************************************************************
 */
 
-int CQueryResponse::FindField(const char* pszField) const
+int CQueryResponse::FindField(const tchar* pszField) const
 {
 	ASSERT(pszField != NULL);
 
 	// For all fields.
-	for (int i = 0; i < m_astrFields.Size(); ++i)
+	for (size_t i = 0; i < m_astrFields.Size(); ++i)
 	{
 		if (m_astrFields[i].Compare(pszField, true) == 0)
 			return i;
@@ -81,7 +81,7 @@ int CQueryResponse::FindField(const char* pszField) const
 *******************************************************************************
 */
 
-CString CQueryResponse::FieldValue(const char* pszField) const
+CString CQueryResponse::FieldValue(const tchar* pszField) const
 {
 	ASSERT(pszField != NULL);
 
@@ -90,7 +90,7 @@ CString CQueryResponse::FieldValue(const char* pszField) const
 	if (i != -1)
 		return m_astrValues[i];
 
-	return "";
+	return TXT("");
 }
 
 /******************************************************************************
@@ -108,9 +108,9 @@ CString CQueryResponse::FieldValue(const char* pszField) const
 void CQueryResponse::Dump()
 {
 #ifdef _DEBUG
-	for (int i = 0; i < m_astrFields.Size(); ++i)
+	for (size_t i = 0; i < m_astrFields.Size(); ++i)
 	{
-		TRACE2("%s:%s\n", m_astrFields[i], m_astrValues[i]);
+		TRACE2(TXT("%s:%s\n"), m_astrFields[i], m_astrValues[i]);
 	}
 #endif
 }

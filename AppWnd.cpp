@@ -117,7 +117,7 @@ void CAppWnd::UpdateTitle()
 	CString str = App.m_strTitle;
 
 	if (App.m_pFilter != NULL)
-		str += " - " + App.m_pFilter->m_strName;
+		str += TXT(" - ") + App.m_pFilter->m_strName;
 
 	Title(str);
 }

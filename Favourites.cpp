@@ -24,12 +24,12 @@
 */
 
 CFavourites::CFavourites(CMDB& oDB)
-	: CTable(oDB, "Favourites", TRANSIENT)
+	: CTable(oDB, TXT("Favourites"), TRANSIENT)
 {
 	// Create the table schema.
-	AddColumn("IPKey",   MDCT_FXDSTR, IP_KEY_LEN,   CColumn::UNIQUE  );
-	AddColumn("ModName", MDCT_VARSTR, MOD_NAME_LEN, CColumn::DEFAULTS);
-	AddColumn("FavID",   MDCT_INT,    0,            CColumn::DEFAULTS);
+	AddColumn(TXT("IPKey"),   MDCT_FXDSTR, IP_KEY_LEN,   CColumn::UNIQUE  );
+	AddColumn(TXT("ModName"), MDCT_VARSTR, MOD_NAME_LEN, CColumn::DEFAULTS);
+	AddColumn(TXT("FavID"),   MDCT_INT,    0,            CColumn::DEFAULTS);
 }
 
 /******************************************************************************
@@ -64,8 +64,8 @@ CRow& CFavourites::CreateRow()
 {
 	CRow& oRow = CTable::CreateRow();
 
-	oRow[IP_KEY]   = "";
-	oRow[MOD_NAME] = "";
+	oRow[IP_KEY]   = TXT("");
+	oRow[MOD_NAME] = TXT("");
 	oRow[FAV_ID]   = 0;
 	
 	return oRow;
