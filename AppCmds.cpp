@@ -171,7 +171,7 @@ void CAppCmds::OnServersPingFiltered()
 	}
 
 	// Wait for jobs to complete OR user to cancel.
-	while (oThreadPool.CompletedJobCount() < static_cast<size_t>(App.m_oRS.Count()))
+	while (oThreadPool.CompletedJobCount() < App.m_oRS.Count())
 	{
 		Dlg.UpdateMeter(oThreadPool.CompletedJobCount());
 
@@ -236,7 +236,7 @@ void CAppCmds::OnServersPingAll()
 	}
 
 	// Wait for jobs to complete OR user to cancel.
-	while (oThreadPool.CompletedJobCount() < static_cast<size_t>(App.m_oServers.RowCount()))
+	while (oThreadPool.CompletedJobCount() < App.m_oServers.RowCount())
 	{
 		Dlg.UpdateMeter(oThreadPool.CompletedJobCount());
 
@@ -354,7 +354,7 @@ void CAppCmds::OnServersRefresh()
 		}
 
 		// Wait for jobs to complete OR user to cancel.
-		while (oThreadPool.CompletedJobCount() < static_cast<size_t>(App.m_oServers.RowCount()))
+		while (oThreadPool.CompletedJobCount() < App.m_oServers.RowCount())
 		{
 			Dlg.UpdateMeter(oThreadPool.CompletedJobCount());
 
