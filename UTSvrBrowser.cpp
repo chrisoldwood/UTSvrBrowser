@@ -201,7 +201,7 @@ bool CUTSvrBrowser::OnOpen()
 	}
 	catch (CStreamException& e)
 	{
-		AlertMsg(TXT("Warning: Failed to load backup file:\n\n%s\n\n%s"), m_strCacheFile, e.what());
+		AlertMsg(TXT("Warning: Failed to load backup file:\n\n%s\n\n%s"), m_strCacheFile, e.What());
 	}
 
 	// Start the ping timer.
@@ -247,7 +247,7 @@ bool CUTSvrBrowser::OnClose()
 	}
 	catch (CStreamException& e)
 	{
-		AlertMsg(TXT("Warning: Failed to save backup file:\n\n%s\n\n%s"), m_strCacheFile, e.what());
+		AlertMsg(TXT("Warning: Failed to save backup file:\n\n%s\n\n%s"), m_strCacheFile, e.What());
 	}
 
 	// Terminate WinSock.

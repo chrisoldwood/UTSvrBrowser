@@ -376,7 +376,7 @@ void CAppCmds::OnServersRefresh()
 	}
 	catch (CSocketException& e)
 	{
-		App.AlertMsg(TXT("Failed to query master server:\n\n%s"), e.ErrorText());
+		App.AlertMsg(TXT("Failed to query master server:\n\n%s"), e.What());
 	}
 
 	// Remove progress dialog.
