@@ -1,419 +1,573 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.10"
+	Version="9.00"
 	Name="UTSvrBrowser"
 	ProjectGUID="{107E920C-AD29-44AB-9BF6-BDECC643C33E}"
-	SccProjectName="SAK"
-	SccAuxPath="SAK"
-	SccLocalPath="SAK"
-	SccProvider="SAK">
+	RootNamespace="UTSvrBrowser"
+	TargetFrameworkVersion="131072"
+	>
 	<Platforms>
 		<Platform
-			Name="Win32"/>
+			Name="Win32"
+		/>
 	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory=".\Debug"
 			IntermediateDirectory=".\Debug"
 			ConfigurationType="1"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="0"
-			ATLMinimizesCRunTimeLibraryUsage="FALSE"
-			CharacterSet="1">
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/EHa"
 				Optimization="0"
 				AdditionalIncludeDirectories="../Lib"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
-				MinimalRebuild="TRUE"
-				ExceptionHandling="FALSE"
+				MinimalRebuild="true"
+				ExceptionHandling="0"
 				BasicRuntimeChecks="3"
-				SmallerTypeCheck="TRUE"
+				SmallerTypeCheck="true"
 				RuntimeLibrary="1"
-				TreatWChar_tAsBuiltInType="TRUE"
-				ForceConformanceInForLoopScope="TRUE"
-				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="3"
+				TreatWChar_tAsBuiltInType="true"
+				ForceConformanceInForLoopScope="true"
+				RuntimeTypeInfo="true"
+				UsePrecompiledHeader="2"
 				PrecompiledHeaderThrough="Common.hpp"
 				WarningLevel="4"
-				WarnAsError="TRUE"
-				DebugInformationFormat="3"/>
+				WarnAsError="true"
+				DebugInformationFormat="3"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
-			<Tool
-				Name="VCLinkerTool"
-				GenerateDebugInformation="TRUE"
-				SubSystem="2"
-				TargetMachine="1"/>
-			<Tool
-				Name="VCMIDLTool"/>
-			<Tool
-				Name="VCPostBuildEventTool"/>
-			<Tool
-				Name="VCPreBuildEventTool"/>
-			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
 			<Tool
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="_DEBUG"
-				AdditionalIncludeDirectories="../Lib"/>
+				AdditionalIncludeDirectories="../Lib"
+			/>
 			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
-				Name="VCXMLDataGeneratorTool"/>
+				Name="VCLinkerTool"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				TargetMachine="1"
+			/>
 			<Tool
-				Name="VCWebDeploymentTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
+				Name="VCManifestTool"
+			/>
 			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory=".\Release"
 			IntermediateDirectory=".\Release"
 			ConfigurationType="1"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="0"
-			ATLMinimizesCRunTimeLibraryUsage="FALSE"
-			CharacterSet="1">
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/EHa"
 				AdditionalIncludeDirectories="../Lib"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
-				StringPooling="TRUE"
-				ExceptionHandling="FALSE"
+				StringPooling="true"
+				ExceptionHandling="0"
 				RuntimeLibrary="0"
-				TreatWChar_tAsBuiltInType="TRUE"
-				ForceConformanceInForLoopScope="TRUE"
-				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="3"
+				TreatWChar_tAsBuiltInType="true"
+				ForceConformanceInForLoopScope="true"
+				RuntimeTypeInfo="true"
+				UsePrecompiledHeader="2"
 				PrecompiledHeaderThrough="Common.hpp"
 				WarningLevel="4"
-				WarnAsError="TRUE"
-				DebugInformationFormat="3"/>
+				WarnAsError="true"
+				DebugInformationFormat="3"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
-			<Tool
-				Name="VCLinkerTool"
-				GenerateDebugInformation="TRUE"
-				SubSystem="2"
-				OptimizeReferences="2"
-				EnableCOMDATFolding="2"
-				TargetMachine="1"/>
-			<Tool
-				Name="VCMIDLTool"/>
-			<Tool
-				Name="VCPostBuildEventTool"/>
-			<Tool
-				Name="VCPreBuildEventTool"/>
-			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
 			<Tool
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="NDEBUG"
-				AdditionalIncludeDirectories="../Lib"/>
+				AdditionalIncludeDirectories="../Lib"
+			/>
 			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
-				Name="VCXMLDataGeneratorTool"/>
+				Name="VCLinkerTool"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				TargetMachine="1"
+			/>
 			<Tool
-				Name="VCWebDeploymentTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
+				Name="VCManifestTool"
+			/>
 			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 	</Configurations>
 	<References>
 		<ProjectReference
 			ReferencedProjectIdentifier="{790BC113-52FB-4565-8968-79B8B011C520}"
-			Name="Core"/>
+			RelativePathToProject="..\Lib\Core\Core.vcproj"
+		/>
 		<ProjectReference
 			ReferencedProjectIdentifier="{AED77F84-49CF-4B84-B319-2D07025ECA06}"
-			Name="Legacy"/>
+			RelativePathToProject="..\Lib\Legacy\Legacy.vcproj"
+		/>
 		<ProjectReference
 			ReferencedProjectIdentifier="{9E405156-9B1D-483A-9BBD-B86240FA86BE}"
-			Name="MDBL"/>
+			RelativePathToProject="..\Lib\MDBL\MDBL.vcproj"
+		/>
 		<ProjectReference
 			ReferencedProjectIdentifier="{FAB8D717-85EC-4896-B5DC-FDF0A0B67C92}"
-			Name="NCL"/>
+			RelativePathToProject="..\Lib\NCL\NCL.vcproj"
+		/>
 		<ProjectReference
 			ReferencedProjectIdentifier="{9B0335B6-93BE-4604-8497-27431874D758}"
-			Name="Wcl"/>
+			RelativePathToProject="..\Lib\WCL\Wcl.vcproj"
+		/>
 	</References>
 	<Files>
 		<Filter
 			Name="Source Files"
-			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
+			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
+			>
 			<File
-				RelativePath="AboutDlg.cpp">
+				RelativePath="AboutDlg.cpp"
+				>
 			</File>
 			<File
-				RelativePath="AppCmds.cpp">
+				RelativePath="AppCmds.cpp"
+				>
 			</File>
 			<File
-				RelativePath="AppDlg.cpp">
+				RelativePath="AppDlg.cpp"
+				>
 			</File>
 			<File
-				RelativePath="AppToolBar.cpp">
+				RelativePath="AppToolBar.cpp"
+				>
 			</File>
 			<File
-				RelativePath="AppWnd.cpp">
+				RelativePath="AppWnd.cpp"
+				>
 			</File>
 			<File
-				RelativePath="FavFileDlg.cpp">
+				RelativePath="FavFileDlg.cpp"
+				>
 			</File>
 			<File
-				RelativePath="FavFiles.cpp">
+				RelativePath="FavFiles.cpp"
+				>
 			</File>
 			<File
-				RelativePath="Favourites.cpp">
+				RelativePath="Favourites.cpp"
+				>
 			</File>
 			<File
-				RelativePath="FavouritesDlg.cpp">
+				RelativePath="FavouritesDlg.cpp"
+				>
 			</File>
 			<File
-				RelativePath="FilterDlg.cpp">
+				RelativePath="FilterDlg.cpp"
+				>
 			</File>
 			<File
-				RelativePath="FiltersDlg.cpp">
+				RelativePath="FiltersDlg.cpp"
+				>
 			</File>
 			<File
-				RelativePath="FindDlg.cpp">
+				RelativePath="FindDlg.cpp"
+				>
 			</File>
 			<File
-				RelativePath="FltMiscPage.cpp">
+				RelativePath="FltMiscPage.cpp"
+				>
 			</File>
 			<File
-				RelativePath="FltModsPage.cpp">
+				RelativePath="FltModsPage.cpp"
+				>
 			</File>
 			<File
-				RelativePath="FltNamePage.cpp">
+				RelativePath="FltNamePage.cpp"
+				>
 			</File>
 			<File
-				RelativePath="FltPortsPage.cpp">
+				RelativePath="FltPortsPage.cpp"
+				>
 			</File>
 			<File
-				RelativePath="GameInfoDlg.cpp">
+				RelativePath="GameInfoDlg.cpp"
+				>
 			</File>
 			<File
-				RelativePath="GameServer.cpp">
+				RelativePath="GameServer.cpp"
+				>
 			</File>
 			<File
-				RelativePath="GameTypes.cpp">
+				RelativePath="GameTypes.cpp"
+				>
 			</File>
 			<File
-				RelativePath="MasterQueryDlg.cpp">
+				RelativePath="MasterQueryDlg.cpp"
+				>
 			</File>
 			<File
-				RelativePath="MasterServer.cpp">
+				RelativePath="MasterServer.cpp"
+				>
 			</File>
 			<File
-				RelativePath="Mods.cpp">
+				RelativePath="Mods.cpp"
+				>
 			</File>
 			<File
-				RelativePath="MtrAddressPage.cpp">
+				RelativePath="MtrAddressPage.cpp"
+				>
 			</File>
 			<File
-				RelativePath="MtrFirewallPage.cpp">
+				RelativePath="MtrFirewallPage.cpp"
+				>
 			</File>
 			<File
-				RelativePath="MtrTransformPage.cpp">
+				RelativePath="MtrTransformPage.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\pch.cpp">
+				RelativePath=".\pch.cpp"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"/>
+						UsePrecompiledHeader="1"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32">
+					Name="Release|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"/>
+						UsePrecompiledHeader="1"
+					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="PingOptsDlg.cpp">
+				RelativePath="PingOptsDlg.cpp"
+				>
 			</File>
 			<File
-				RelativePath="ProgressDlg.cpp">
+				RelativePath="ProgressDlg.cpp"
+				>
 			</File>
 			<File
-				RelativePath="QueryJob.cpp">
+				RelativePath="QueryJob.cpp"
+				>
 			</File>
 			<File
-				RelativePath="QueryResponse.cpp">
+				RelativePath="QueryResponse.cpp"
+				>
 			</File>
 			<File
-				RelativePath="Servers.cpp">
+				RelativePath="Servers.cpp"
+				>
 			</File>
 			<File
-				RelativePath="Summary.cpp">
+				RelativePath="Summary.cpp"
+				>
 			</File>
 			<File
-				RelativePath="SummaryDlg.cpp">
+				RelativePath="SummaryDlg.cpp"
+				>
 			</File>
 			<File
-				RelativePath="UTSvrBrowser.cpp">
+				RelativePath="UTSvrBrowser.cpp"
+				>
 			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
-			Filter="h;hpp;hxx;hm;inl">
+			Filter="h;hpp;hxx;hm;inl"
+			>
 			<File
-				RelativePath="AboutDlg.hpp">
+				RelativePath="AboutDlg.hpp"
+				>
 			</File>
 			<File
-				RelativePath="AppCmds.hpp">
+				RelativePath="AppCmds.hpp"
+				>
 			</File>
 			<File
-				RelativePath="AppDlg.hpp">
+				RelativePath="AppDlg.hpp"
+				>
 			</File>
 			<File
-				RelativePath="AppToolBar.hpp">
+				RelativePath="AppToolBar.hpp"
+				>
 			</File>
 			<File
-				RelativePath="AppWnd.hpp">
+				RelativePath="AppWnd.hpp"
+				>
 			</File>
 			<File
-				RelativePath=".\Common.hpp">
+				RelativePath=".\Common.hpp"
+				>
 			</File>
 			<File
-				RelativePath="FavFileDlg.hpp">
+				RelativePath="FavFileDlg.hpp"
+				>
 			</File>
 			<File
-				RelativePath="FavFiles.hpp">
+				RelativePath="FavFiles.hpp"
+				>
 			</File>
 			<File
-				RelativePath="Favourites.hpp">
+				RelativePath="Favourites.hpp"
+				>
 			</File>
 			<File
-				RelativePath="FavouritesDlg.hpp">
+				RelativePath="FavouritesDlg.hpp"
+				>
 			</File>
 			<File
-				RelativePath="Filter.hpp">
+				RelativePath="Filter.hpp"
+				>
 			</File>
 			<File
-				RelativePath="FilterDlg.hpp">
+				RelativePath="FilterDlg.hpp"
+				>
 			</File>
 			<File
-				RelativePath="FiltersDlg.hpp">
+				RelativePath="FiltersDlg.hpp"
+				>
 			</File>
 			<File
-				RelativePath="FindDlg.hpp">
+				RelativePath="FindDlg.hpp"
+				>
 			</File>
 			<File
-				RelativePath="FltMiscPage.hpp">
+				RelativePath="FltMiscPage.hpp"
+				>
 			</File>
 			<File
-				RelativePath="FltModsPage.hpp">
+				RelativePath="FltModsPage.hpp"
+				>
 			</File>
 			<File
-				RelativePath="FltNamePage.hpp">
+				RelativePath="FltNamePage.hpp"
+				>
 			</File>
 			<File
-				RelativePath="FltPortsPage.hpp">
+				RelativePath="FltPortsPage.hpp"
+				>
 			</File>
 			<File
-				RelativePath="GameInfoDlg.hpp">
+				RelativePath="GameInfoDlg.hpp"
+				>
 			</File>
 			<File
-				RelativePath="GameServer.hpp">
+				RelativePath="GameServer.hpp"
+				>
 			</File>
 			<File
-				RelativePath="GameTypes.hpp">
+				RelativePath="GameTypes.hpp"
+				>
 			</File>
 			<File
-				RelativePath="MasterQueryDlg.hpp">
+				RelativePath="MasterQueryDlg.hpp"
+				>
 			</File>
 			<File
-				RelativePath="MasterQueryOpts.hpp">
+				RelativePath="MasterQueryOpts.hpp"
+				>
 			</File>
 			<File
-				RelativePath="MasterServer.hpp">
+				RelativePath="MasterServer.hpp"
+				>
 			</File>
 			<File
-				RelativePath="Mods.hpp">
+				RelativePath="Mods.hpp"
+				>
 			</File>
 			<File
-				RelativePath="MtrAddressPage.hpp">
+				RelativePath="MtrAddressPage.hpp"
+				>
 			</File>
 			<File
-				RelativePath="MtrFirewallPage.hpp">
+				RelativePath="MtrFirewallPage.hpp"
+				>
 			</File>
 			<File
-				RelativePath="MtrTransformPage.hpp">
+				RelativePath="MtrTransformPage.hpp"
+				>
 			</File>
 			<File
-				RelativePath="PingOpts.hpp">
+				RelativePath="PingOpts.hpp"
+				>
 			</File>
 			<File
-				RelativePath="PingOptsDlg.hpp">
+				RelativePath="PingOptsDlg.hpp"
+				>
 			</File>
 			<File
-				RelativePath="ProgressDlg.hpp">
+				RelativePath="ProgressDlg.hpp"
+				>
 			</File>
 			<File
-				RelativePath="QueryJob.hpp">
+				RelativePath="QueryJob.hpp"
+				>
 			</File>
 			<File
-				RelativePath="QueryResponse.hpp">
+				RelativePath="QueryResponse.hpp"
+				>
 			</File>
 			<File
-				RelativePath="Servers.hpp">
+				RelativePath="Servers.hpp"
+				>
 			</File>
 			<File
-				RelativePath="Summary.hpp">
+				RelativePath="Summary.hpp"
+				>
 			</File>
 			<File
-				RelativePath="SummaryDlg.hpp">
+				RelativePath="SummaryDlg.hpp"
+				>
 			</File>
 			<File
-				RelativePath="UTSvrBrowser.hpp">
+				RelativePath="UTSvrBrowser.hpp"
+				>
 			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
-			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe">
+			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
+			>
 			<File
-				RelativePath="App.ico">
+				RelativePath="App.ico"
+				>
 			</File>
 			<File
-				RelativePath="App.rcv">
+				RelativePath="App.rcv"
+				>
 			</File>
 			<File
-				RelativePath="ListIcons.bmp">
+				RelativePath="ListIcons.bmp"
+				>
 			</File>
 			<File
-				RelativePath="Resource.h">
+				RelativePath="Resource.h"
+				>
 			</File>
 			<File
-				RelativePath="Toolbar.bmp">
+				RelativePath="Toolbar.bmp"
+				>
 			</File>
 			<File
-				RelativePath="UTSvrBrowser.rc">
+				RelativePath="UTSvrBrowser.rc"
+				>
 			</File>
 		</Filter>
 		<File
-			RelativePath="ReadMe.txt">
+			RelativePath="ReadMe.txt"
+			>
 		</File>
 		<File
-			RelativePath="RelNotes.txt">
+			RelativePath="RelNotes.txt"
+			>
 		</File>
 		<File
-			RelativePath="TODO.txt">
+			RelativePath="TODO.txt"
+			>
 		</File>
 		<File
-			RelativePath="UTSBMods.ini">
+			RelativePath="UTSBMods.ini"
+			>
 		</File>
 		<File
-			RelativePath="UTSvrBrowser.ini">
+			RelativePath="UTSvrBrowser.ini"
+			>
 		</File>
 	</Files>
 	<Globals>
