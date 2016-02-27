@@ -25,8 +25,8 @@
 *******************************************************************************
 */
 
-const tchar* CGameServer::QUERY_INFO      = TXT("\\info\\");
-const tchar* CGameServer::QUERY_STATUS    = TXT("\\status\\");
+const char*  CGameServer::QUERY_INFO      = "\\info\\";
+const char*  CGameServer::QUERY_STATUS    = "\\status\\";
 const tchar* CGameServer::END_OF_RESPONSE = TXT("\\final\\");
 const tchar* CGameServer::FIELD_SEPS      = TXT("\\");
 
@@ -112,7 +112,7 @@ bool CGameServer::QueryStatus(CQueryResponse& oResponse)
 *******************************************************************************
 */
 
-bool CGameServer::ExecQuery(const tchar* pszQuery, CQueryResponse& oResponse)
+bool CGameServer::ExecQuery(const char* pszQuery, CQueryResponse& oResponse)
 {
 	int nError = CServers::ERROR_FAILED;
 	int nTime  = INT_MAX;
@@ -132,7 +132,7 @@ bool CGameServer::ExecQuery(const tchar* pszQuery, CQueryResponse& oResponse)
 			oSocket.Connect(m_strAddress, m_nPort);
 
 			// Send the query.
-			oSocket.Send(pszQuery, tstrlen(pszQuery));
+			oSocket.Send(pszQuery, strlen(pszQuery));
 
 			DWORD dwStart = ::GetTickCount();
 

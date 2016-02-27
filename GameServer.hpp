@@ -51,15 +51,15 @@ protected:
 	//
 	// Constants.
 	//
-	static const tchar* QUERY_INFO;
-	static const tchar* QUERY_STATUS;
+	static const char*  QUERY_INFO;
+	static const char*  QUERY_STATUS;
 	static const tchar* END_OF_RESPONSE;
 	static const tchar* FIELD_SEPS;
 
 	//
 	// Internal methods.
 	//
-	bool ExecQuery(const tchar* pszQuery, CQueryResponse& oResponse);
+	bool ExecQuery(const char* pszQuery, CQueryResponse& oResponse);
 };
 
 /******************************************************************************
