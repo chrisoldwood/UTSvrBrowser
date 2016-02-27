@@ -23,8 +23,8 @@
 *******************************************************************************
 */
 
-CFavourites::CFavourites(CMDB& oDB)
-	: CTable(oDB, TXT("Favourites"), TRANSIENT)
+CFavourites::CFavourites()
+	: CTable(TXT("Favourites"), TRANSIENT)
 {
 	// Create the table schema.
 	AddColumn(TXT("IPKey"),   MDCT_FXDSTR, IP_KEY_LEN,   CColumn::UNIQUE  );

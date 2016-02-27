@@ -31,7 +31,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CGameTypes(CMDB& oDB);
+	CGameTypes();
 	~CGameTypes();
 	
 	//

@@ -69,16 +69,17 @@ uint16      CUTSvrBrowser::CACHE_FILE_VER     = 0x000A;
 
 CUTSvrBrowser::CUTSvrBrowser()
 	: CApp(m_AppWnd, m_AppCmds)
+	, m_AppCmds(m_AppWnd)
 	, m_oModIniFile(CPath::ApplicationDir(), MOD_INI_FILE)
 	, m_nSortCol(CAppDlg::HOST_NAME)
 	, m_nSortDir(CSortColumns::ASC)
 	, m_bDetectFavs(true)
-	, m_oMods(m_oMDB)
-	, m_oGameTypes(m_oMDB)
-	, m_oServers(m_oMDB)
-	, m_oFavFiles(m_oMDB)
-	, m_oFavourites(m_oMDB)
-	, m_oSummary(m_oMDB)
+	, m_oMods()
+	, m_oGameTypes()
+	, m_oServers()
+	, m_oFavFiles()
+	, m_oFavourites()
+	, m_oSummary()
 	, m_bFltEdited(false)
 	, m_pFilter(NULL)
 	, m_oRS(m_oServers)
@@ -86,13 +87,6 @@ CUTSvrBrowser::CUTSvrBrowser()
 	, m_nPingTimerID(0)
 	, m_nLastFound(-1)
 {
-	// Add tables to MDB.
-	m_oMDB.AddTable(m_oMods);
-	m_oMDB.AddTable(m_oGameTypes);
-	m_oMDB.AddTable(m_oServers);
-	m_oMDB.AddTable(m_oFavFiles);
-	m_oMDB.AddTable(m_oFavourites);
-	m_oMDB.AddTable(m_oSummary);
 }
 
 /******************************************************************************
@@ -142,18 +136,17 @@ bool CUTSvrBrowser::OnOpen()
 		return false;
 	}
 
-	// Load the toolbar bitmap.
-	m_rCmdControl.CmdBitmap().LoadRsc(IDR_APPTOOLBAR);
-
 	// Create the main window.
 	if (!m_AppWnd.Create())
 		return false;
 
 	// Show it.
-	if (ShowNormal() && !m_rcLastPos.Empty())
+	if (!m_rcLastPos.Empty())
 		m_AppWnd.Move(m_rcLastPos);
 
 	m_AppWnd.Show(m_iCmdShow);
+
+	m_AppCmds.InitialiseUI();
 
 	// Create the inital filter menu.
 	BuildFilterMenu();
@@ -201,7 +194,7 @@ bool CUTSvrBrowser::OnOpen()
 	}
 	catch (CStreamException& e)
 	{
-		AlertMsg(TXT("Warning: Failed to load backup file:\n\n%s\n\n%s"), m_strCacheFile, e.What());
+		AlertMsg(TXT("Warning: Failed to load backup file:\n\n%s\n\n%s"), m_strCacheFile, e.twhat());
 	}
 
 	// Start the ping timer.
@@ -247,7 +240,7 @@ bool CUTSvrBrowser::OnClose()
 	}
 	catch (CStreamException& e)
 	{
-		AlertMsg(TXT("Warning: Failed to save backup file:\n\n%s\n\n%s"), m_strCacheFile, e.What());
+		AlertMsg(TXT("Warning: Failed to save backup file:\n\n%s\n\n%s"), m_strCacheFile, e.twhat());
 	}
 
 	// Terminate WinSock.
@@ -831,7 +824,7 @@ void CUTSvrBrowser::ApplyFilter()
 void CUTSvrBrowser::BuildFilterMenu()
 {
 	// Get the filters popup menu.
-	CPopupMenu oMenu = m_AppWnd.m_Menu.Popup(FILTER_MENU_POS);
+	CPopupMenu oMenu = m_AppWnd.m_Menu.GetItemPopup(FILTER_MENU_POS);
 
 	// Delete the old filter entries.
 	while (oMenu.ItemCount() > FILTER_MENU_FIXED_ITEMS)
@@ -861,7 +854,7 @@ void CUTSvrBrowser::CheckFavourites()
 	for (size_t i = 0; i < m_oServers.RowCount(); ++i)
 	{
 		CRow& oSvrRow = m_oServers[i];
-		CRow* pFavRow = App.m_oFavourites.SelectRow(CFavourites::IP_KEY, oSvrRow[CServers::IP_KEY]);
+		CRow* pFavRow = App.m_oFavourites.SelectRow(CFavourites::IP_KEY, oSvrRow[CServers::IP_KEY].ToValue());
 
 		// Update favourites column.
 		if (pFavRow != NULL)

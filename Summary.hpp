@@ -32,7 +32,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CSummary(CMDB& oDB);
+	CSummary();
 	~CSummary();
 	
 	//

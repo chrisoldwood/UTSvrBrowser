@@ -31,7 +31,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CFavFiles(CMDB& oDB);
+	CFavFiles();
 	~CFavFiles();
 	
 	//

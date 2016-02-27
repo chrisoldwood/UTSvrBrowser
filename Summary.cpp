@@ -23,8 +23,8 @@
 *******************************************************************************
 */
 
-CSummary::CSummary(CMDB& oDB)
-	: CTable(oDB, TXT("Summary"), TRANSIENT)
+CSummary::CSummary()
+	: CTable(TXT("Summary"), TRANSIENT)
 {
 	// Create the table schema.
 	AddColumn(TXT("ModName"),     MDCT_VARSTR, MOD_NAME_LEN, CColumn::UNIQUE  );

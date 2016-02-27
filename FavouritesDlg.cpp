@@ -37,7 +37,7 @@ static const tchar* SEL_FOLDER_MSG = TXT("Select The UT System Folder\ne.g. C:\\
 
 CFavouritesDlg::CFavouritesDlg()
 	: CDialog(IDD_FAVOURITES)
-	, m_oFavFiles(App.m_oMDB)
+	, m_oFavFiles()
 {
 	DEFINE_CTRL_TABLE
 		CTRL(IDC_GRID, &m_lvGrid)
@@ -151,7 +151,7 @@ void CFavouritesDlg::OnDetect()
 		CRow& oMod = App.m_oMods[i];
 
 		// Mod already configured?
-		if (m_oFavFiles.SelectRow(CFavFiles::MOD_NAME, oMod[CMods::MOD_NAME]) != NULL)
+		if (m_oFavFiles.SelectRow(CFavFiles::MOD_NAME, oMod[CMods::MOD_NAME].ToValue()) != NULL)
 			continue;
 
 		// Favs file not available?

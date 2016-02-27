@@ -23,8 +23,8 @@
 *******************************************************************************
 */
 
-CMods::CMods(CMDB& oDB)
-	: CTable(oDB, TXT("Mods"), TRANSIENT)
+CMods::CMods()
+	: CTable(TXT("Mods"), TRANSIENT)
 {
 	// Create the table schema.
 	AddColumn(TXT("ID"),       MDCT_IDENTITY, 0,             CColumn::IDENTITY);

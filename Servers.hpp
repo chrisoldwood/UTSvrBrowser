@@ -31,7 +31,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CServers(CMDB& oDB);
+	CServers();
 	~CServers();
 	
 	//

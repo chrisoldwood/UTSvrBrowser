@@ -23,8 +23,8 @@
 *******************************************************************************
 */
 
-CGameTypes::CGameTypes(CMDB& oDB)
-	: CTable(oDB, TXT("GameTypes"), TRANSIENT)
+CGameTypes::CGameTypes()
+	: CTable(TXT("GameTypes"), TRANSIENT)
 {
 	// Create the table schema.
 	AddColumn(TXT("ID"),       MDCT_IDENTITY, 0,             CColumn::IDENTITY);

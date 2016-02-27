@@ -23,8 +23,8 @@
 *******************************************************************************
 */
 
-CFavFiles::CFavFiles(CMDB& oDB)
-	: CTable(oDB, TXT("FavFiles"))
+CFavFiles::CFavFiles()
+	: CTable(TXT("FavFiles"))
 {
 	// Create the table schema.
 	AddColumn(TXT("ModName"), MDCT_VARSTR, MOD_NAME_LEN, CColumn::UNIQUE  );

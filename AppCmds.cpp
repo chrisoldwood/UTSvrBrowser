@@ -41,7 +41,8 @@
 *******************************************************************************
 */
 
-CAppCmds::CAppCmds()
+CAppCmds::CAppCmds(CAppWnd& appWnd)
+	: CCmdControl(appWnd, IDR_APPTOOLBAR)
 {
 	// Define the command table.
 	DEFINE_CMD_TABLE
@@ -376,7 +377,7 @@ void CAppCmds::OnServersRefresh()
 	}
 	catch (CSocketException& e)
 	{
-		App.AlertMsg(TXT("Failed to query master server:\n\n%s"), e.What());
+		App.AlertMsg(TXT("Failed to query master server:\n\n%s"), e.twhat());
 	}
 
 	// Remove progress dialog.
@@ -580,7 +581,7 @@ void CAppCmds::OnServersDelFav()
 	pRow->Field(CServers::FAV_ID) = null;
 
 	// Remove from favourites table.
-	CRow* pFavRow = App.m_oFavourites.SelectRow(CFavourites::IP_KEY, pRow->Field(CServers::IP_KEY));
+	CRow* pFavRow = App.m_oFavourites.SelectRow(CFavourites::IP_KEY, pRow->Field(CServers::IP_KEY).ToValue());
 
 	App.m_oFavourites.DeleteRow(*pFavRow);
 

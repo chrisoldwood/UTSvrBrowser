@@ -31,7 +31,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CFavourites(CMDB& oDB);
+	CFavourites();
 	~CFavourites();
 	
 	//

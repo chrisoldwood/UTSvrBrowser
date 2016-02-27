@@ -23,8 +23,8 @@
 *******************************************************************************
 */
 
-CServers::CServers(CMDB& oDB)
-	: CTable(oDB, TXT("Servers"))
+CServers::CServers()
+	: CTable(TXT("Servers"))
 {
 	// Create the table schema.
 	AddColumn(TXT("ID"),          MDCT_IDENTITY, 0,              CColumn::IDENTITY);

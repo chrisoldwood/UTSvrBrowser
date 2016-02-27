@@ -23,7 +23,6 @@
 #include <WCL/IniFile.hpp>
 #include "MasterQueryOpts.hpp"
 #include "PingOpts.hpp"
-#include <MDBL/MDB.hpp>
 #include "Mods.hpp"
 #include "GameTypes.hpp"
 #include "Servers.hpp"
@@ -86,7 +85,6 @@ public:
 	CPingOpts			m_oPingOpts;		// The ping settings.
 	bool				m_bDetectFavs;		// Detect favourites files?
 
-	CMDB				m_oMDB;				// Memory database.
 	CMods				m_oMods;			// Mods table.
 	CGameTypes			m_oGameTypes;		// Game types table.
 	CServers			m_oServers;			// Servers table.

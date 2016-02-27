@@ -31,7 +31,7 @@ public:
 	//
 	// Constructors/Destructor.
 	//
-	CMods(CMDB& oDB);
+	CMods();
 	~CMods();
 	
 	//
