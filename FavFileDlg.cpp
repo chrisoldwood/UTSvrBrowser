@@ -27,7 +27,7 @@
 
 CFavFileDlg::CFavFileDlg()
 	: CDialog(IDD_FAV_FILE)
-	, m_pFavFiles(NULL)
+	, m_pFavFiles(nullptr)
 {
 	DEFINE_CTRL_TABLE
 		CTRL(IDC_MOD,  &m_cbMod )
@@ -53,7 +53,7 @@ CFavFileDlg::CFavFileDlg()
 
 void CFavFileDlg::OnInitDialog()
 {
-	ASSERT(m_pFavFiles != NULL);
+	ASSERT(m_pFavFiles != nullptr);
 
 	// Initialise controls.
 	for (size_t i = 0; i < App.m_oMods.RowCount(); ++i)
@@ -94,7 +94,7 @@ bool CFavFileDlg::OnOk()
 
 	CString strMod = m_cbMod.Text();
 
-	if ( (strMod != m_strMod) && (m_pFavFiles->SelectRow(CFavFiles::MOD_NAME, strMod) != NULL) )
+	if ( (strMod != m_strMod) && (m_pFavFiles->SelectRow(CFavFiles::MOD_NAME, strMod) != nullptr) )
 	{
 		AlertMsg(TXT("There is already a file configured for the mod."));
 		m_cbMod.Focus();

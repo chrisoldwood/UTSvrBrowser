@@ -19,3 +19,5 @@
 - Store lowercase version of host name.
 
 - Add game type column.
+
+- Drop version number back to 0.1.

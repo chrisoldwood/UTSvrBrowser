@@ -130,7 +130,7 @@ inline size_t CAppDlg::SortColumn() const
 
 inline CRow* CAppDlg::SelectedRow() const
 {
-	CRow* pRow = NULL;
+	CRow* pRow = nullptr;
 
 	if (m_lvGrid.IsSelection())
 		pRow = GridRow(m_lvGrid.Selection());

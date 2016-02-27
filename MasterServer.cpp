@@ -77,7 +77,7 @@ CMasterServer::~CMasterServer()
 
 int CMasterServer::QueryServers(const tchar* /*pszGameCode*/, CStrArray& astrAddresses)
 {
-//	ASSERT(pszGameCode != NULL);
+//	ASSERT(pszGameCode != nullptr);
 
 	CTCPCltSocket oSocket;
 	CString       strResponse;

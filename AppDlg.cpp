@@ -474,9 +474,9 @@ LRESULT CAppDlg::OnGridRightClick(NMHDR& oNMHdr)
 
 	CRow* pSelRow   = SelectedRow();
 	bool bAnyRows   = (m_lvGrid.ItemCount() > 0);
-	bool bSelection = (pSelRow != NULL);
-	bool bFiltered  = (App.m_pFilter != NULL);
-	bool bModValid  = ((pSelRow != NULL) && (tstrlen(pSelRow->Field(CServers::MOD_NAME)) > 0));
+	bool bSelection = (pSelRow != nullptr);
+	bool bFiltered  = (App.m_pFilter != nullptr);
+	bool bModValid  = ((pSelRow != nullptr) && (tstrlen(pSelRow->Field(CServers::MOD_NAME)) > 0));
 	bool bCanAddFav = ((bModValid) && (pSelRow->Field(CServers::FAV_ID) == null));
 	bool bCanDelFav = ((bModValid) && (pSelRow->Field(CServers::FAV_ID) != null));
 
@@ -498,7 +498,7 @@ LRESULT CAppDlg::OnGridRightClick(NMHDR& oNMHdr)
 	uint nCmdID = oMenu.TrackMenu(m_lvGrid, ptMenu);
 
 	// Dispatch command.
-	if (nCmdID != NULL)
+	if (nCmdID != 0)
 		App.m_AppWnd.PostCommand(nCmdID);
 
 	return 0;

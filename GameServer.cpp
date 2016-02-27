@@ -195,7 +195,7 @@ bool CGameServer::ExecQuery(const tchar* pszQuery, CQueryResponse& oResponse)
 			}
 		}
 	}
-	catch (CSocketException& /*e*/)
+	catch (const CSocketException& /*e*/)
 	{
 //		TRACE3("SocketException (%s:%d): %s\n", m_strAddress, m_nPort, e.ErrorText());
 	}

@@ -151,7 +151,7 @@ void CFavouritesDlg::OnDetect()
 		CRow& oMod = App.m_oMods[i];
 
 		// Mod already configured?
-		if (m_oFavFiles.SelectRow(CFavFiles::MOD_NAME, oMod[CMods::MOD_NAME].ToValue()) != NULL)
+		if (m_oFavFiles.SelectRow(CFavFiles::MOD_NAME, oMod[CMods::MOD_NAME].ToValue()) != nullptr)
 			continue;
 
 		// Favs file not available?

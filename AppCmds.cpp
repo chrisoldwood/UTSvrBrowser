@@ -47,29 +47,29 @@ CAppCmds::CAppCmds(CAppWnd& appWnd)
 	// Define the command table.
 	DEFINE_CMD_TABLE
 		// Servers menu.
-		CMD_ENTRY(ID_SERVERS_PING,				&CAppCmds::OnServersPing,			NULL,								-1)
+		CMD_ENTRY(ID_SERVERS_PING,				&CAppCmds::OnServersPing,			nullptr,							-1)
 		CMD_ENTRY(ID_SERVERS_PING_FILTERED,		&CAppCmds::OnServersPingFiltered,	&CAppCmds::OnUIServersPingFiltered,	-1)
-		CMD_ENTRY(ID_SERVERS_PING_ALL,			&CAppCmds::OnServersPingAll,		NULL,								-1)
-		CMD_ENTRY(ID_SERVERS_REFRESH,			&CAppCmds::OnServersRefresh,		NULL,								-1)
-		CMD_ENTRY(ID_SERVERS_FIND,				&CAppCmds::OnServersFind,			NULL,								-1)
+		CMD_ENTRY(ID_SERVERS_PING_ALL,			&CAppCmds::OnServersPingAll,		nullptr,							-1)
+		CMD_ENTRY(ID_SERVERS_REFRESH,			&CAppCmds::OnServersRefresh,		nullptr,							-1)
+		CMD_ENTRY(ID_SERVERS_FIND,				&CAppCmds::OnServersFind,			nullptr,							-1)
 		CMD_ENTRY(ID_SERVERS_FIND_NEXT,			&CAppCmds::OnServersFindNext,		&CAppCmds::OnUIServersFindNext,		-1)
 		CMD_ENTRY(ID_SERVERS_ADD_FAV,			&CAppCmds::OnServersAddFav,			&CAppCmds::OnUIServersAddFav,		-1)
 		CMD_ENTRY(ID_SERVERS_DEL_FAV,			&CAppCmds::OnServersDelFav,			&CAppCmds::OnUIServersDelFav,		-1)
-		CMD_ENTRY(ID_SERVERS_SUMMARY,			&CAppCmds::OnServersSummary,		NULL,								-1)
-		CMD_ENTRY(ID_SERVERS_EXIT,				&CAppCmds::OnServersExit,			NULL,								-1)
+		CMD_ENTRY(ID_SERVERS_SUMMARY,			&CAppCmds::OnServersSummary,		nullptr,							-1)
+		CMD_ENTRY(ID_SERVERS_EXIT,				&CAppCmds::OnServersExit,			nullptr,							-1)
 		// Filter menu.
 		CMD_ENTRY(ID_FILTER_NONE,				&CAppCmds::OnFilterNone,			&CAppCmds::OnUIFilter,				-1)
 		CMD_RANGE(ID_FIRST_FILTER_CMD,
-				  ID_LAST_FILTER_CMD,			&CAppCmds::OnFilter,				NULL,								-1)
+				  ID_LAST_FILTER_CMD,			&CAppCmds::OnFilter,				nullptr,							-1)
 		// View menu.
-		CMD_ENTRY(ID_VIEW_COLUMN_NAME,			&CAppCmds::OnViewColumnName,		NULL,								-1)
-		CMD_ENTRY(ID_VIEW_COLUMN_MOD,			&CAppCmds::OnViewColumnMod,			NULL,								-1)
-		CMD_ENTRY(ID_VIEW_COLUMN_MAP,			&CAppCmds::OnViewColumnMap,			NULL,								-1)
-		CMD_ENTRY(ID_VIEW_COLUMN_PLAYERS,		&CAppCmds::OnViewColumnPlayers,		NULL,								-1)
-		CMD_ENTRY(ID_VIEW_COLUMN_PING,			&CAppCmds::OnViewColumnPing,		NULL,								-1)
-		CMD_ENTRY(ID_VIEW_COLUMN_IP_ADDRESS,	&CAppCmds::OnViewColumnIPAddress,	NULL,								-1)
-		CMD_ENTRY(ID_VIEW_COLUMN_IP_PORT,		&CAppCmds::OnViewColumnIPPort,		NULL,								-1)
-		CMD_ENTRY(ID_VIEW_COLUMN_AUTO_SIZE,		&CAppCmds::OnViewColumnAutoSize,	NULL,								-1)
+		CMD_ENTRY(ID_VIEW_COLUMN_NAME,			&CAppCmds::OnViewColumnName,		nullptr,							-1)
+		CMD_ENTRY(ID_VIEW_COLUMN_MOD,			&CAppCmds::OnViewColumnMod,			nullptr,							-1)
+		CMD_ENTRY(ID_VIEW_COLUMN_MAP,			&CAppCmds::OnViewColumnMap,			nullptr,							-1)
+		CMD_ENTRY(ID_VIEW_COLUMN_PLAYERS,		&CAppCmds::OnViewColumnPlayers,		nullptr,							-1)
+		CMD_ENTRY(ID_VIEW_COLUMN_PING,			&CAppCmds::OnViewColumnPing,		nullptr,							-1)
+		CMD_ENTRY(ID_VIEW_COLUMN_IP_ADDRESS,	&CAppCmds::OnViewColumnIPAddress,	nullptr,							-1)
+		CMD_ENTRY(ID_VIEW_COLUMN_IP_PORT,		&CAppCmds::OnViewColumnIPPort,		nullptr,							-1)
+		CMD_ENTRY(ID_VIEW_COLUMN_AUTO_SIZE,		&CAppCmds::OnViewColumnAutoSize,	nullptr,							-1)
 		CMD_ENTRY(ID_VIEW_SORT_NAME,			&CAppCmds::OnViewSortByName,		&CAppCmds::OnUIViewSortByName,		-1)
 		CMD_ENTRY(ID_VIEW_SORT_MOD,				&CAppCmds::OnViewSortByMod,			&CAppCmds::OnUIViewSortByMod,		-1)
 		CMD_ENTRY(ID_VIEW_SORT_MAP,				&CAppCmds::OnViewSortByMap,			&CAppCmds::OnUIViewSortByMap,		-1)
@@ -79,12 +79,12 @@ CAppCmds::CAppCmds(CAppWnd& appWnd)
 		CMD_ENTRY(ID_VIEW_SORT_IP_PORT,			&CAppCmds::OnViewSortByIPPort,		&CAppCmds::OnUIViewSortByIPPort,	-1)
 		CMD_ENTRY(ID_VIEW_DETAILS,				&CAppCmds::OnViewDetails,			&CAppCmds::OnUIViewDetails,			-1)
 		// Options menu.
-		CMD_ENTRY(ID_OPTIONS_MASTER,			&CAppCmds::OnOptionsMaster,			NULL,								-1)
-		CMD_ENTRY(ID_OPTIONS_PING,				&CAppCmds::OnOptionsPing,			NULL,								-1)
-		CMD_ENTRY(ID_OPTIONS_FILTERS,			&CAppCmds::OnOptionsFilters,		NULL,								-1)
-		CMD_ENTRY(ID_OPTIONS_FAVOURITES,		&CAppCmds::OnOptionsFavourites,		NULL,								-1)
+		CMD_ENTRY(ID_OPTIONS_MASTER,			&CAppCmds::OnOptionsMaster,			nullptr,							-1)
+		CMD_ENTRY(ID_OPTIONS_PING,				&CAppCmds::OnOptionsPing,			nullptr,							-1)
+		CMD_ENTRY(ID_OPTIONS_FILTERS,			&CAppCmds::OnOptionsFilters,		nullptr,							-1)
+		CMD_ENTRY(ID_OPTIONS_FAVOURITES,		&CAppCmds::OnOptionsFavourites,		nullptr,							-1)
 		// Help menu.
-		CMD_ENTRY(ID_HELP_ABOUT,				&CAppCmds::OnHelpAbout,				NULL,								10)
+		CMD_ENTRY(ID_HELP_ABOUT,				&CAppCmds::OnHelpAbout,				nullptr,							10)
 	END_CMD_TABLE
 }
 
@@ -123,7 +123,7 @@ void CAppCmds::OnServersPing()
 	// Get selected server, if one.
 	CRow* pRow = App.m_AppWnd.m_AppDlg.SelectedRow();
 
-	if (pRow == NULL)
+	if (pRow == nullptr)
 		return;
 
 	// Ping server.
@@ -307,7 +307,7 @@ void CAppCmds::OnServersRefresh()
 				CString strKey = astrAddresses[i];
 
 				// Ignore duplicates.
-				if (App.m_oServers.SelectRow(CServers::IP_KEY, strKey) != NULL)
+				if (App.m_oServers.SelectRow(CServers::IP_KEY, strKey) != nullptr)
 					continue;
 
 				// Split key into IP Address & Port.
@@ -332,7 +332,7 @@ void CAppCmds::OnServersRefresh()
 				oRow[CServers::IP_PORT]     = nPort;
 				oRow[CServers::LAST_ERROR]  = CServers::ERROR_FAILED;
 
-				if (pFavRow != NULL)
+				if (pFavRow != nullptr)
 					oRow[CServers::FAV_ID] = pFavRow->Field(CFavourites::FAV_ID);
 
 				App.m_oServers.InsertRow(oRow);
@@ -375,7 +375,7 @@ void CAppCmds::OnServersRefresh()
 		oThreadPool.DeleteCompletedJobs();
 		oThreadPool.Stop();
 	}
-	catch (CSocketException& e)
+	catch (const CSocketException& e)
 	{
 		App.AlertMsg(TXT("Failed to query master server:\n\n%s"), e.twhat());
 	}
@@ -476,7 +476,7 @@ void CAppCmds::OnServersAddFav()
 {
 	CRow* pRow = App.m_AppWnd.m_AppDlg.SelectedRow();
 
-	ASSERT(pRow != NULL);
+	ASSERT(pRow != nullptr);
 	ASSERT(pRow->Field(CServers::FAV_ID) == null);
 
 	// Find the .ini file for the mod.
@@ -484,7 +484,7 @@ void CAppCmds::OnServersAddFav()
 	CRow*   pFavFile = App.m_oFavFiles.SelectRow(CFavFiles::MOD_NAME, strMod);
 
 	// Not configured?
-	if (pFavFile == NULL)
+	if (pFavFile == nullptr)
 	{
 		App.m_AppWnd.AlertMsg(TXT("There is no favourites file configured for the %s mod."), strMod);
 		return;
@@ -551,7 +551,7 @@ void CAppCmds::OnServersDelFav()
 {
 	CRow* pRow = App.m_AppWnd.m_AppDlg.SelectedRow();
 
-	ASSERT(pRow != NULL);
+	ASSERT(pRow != nullptr);
 	ASSERT(pRow->Field(CServers::FAV_ID) != null);
 
 	// Find the .ini file for the mod.
@@ -559,7 +559,7 @@ void CAppCmds::OnServersDelFav()
 	CRow*   pFavFile = App.m_oFavFiles.SelectRow(CFavFiles::MOD_NAME, strMod);
 
 	// Not configured?
-	if (pFavFile == NULL)
+	if (pFavFile == nullptr)
 	{
 		App.m_AppWnd.AlertMsg(TXT("There is no favourites file configured for the %s mod."), strMod);
 		return;
@@ -664,7 +664,7 @@ void CAppCmds::OnServersExit()
 
 void CAppCmds::OnFilterNone()
 {
-	App.m_pFilter = NULL;
+	App.m_pFilter = nullptr;
 
 	// Apply the new filter.
 	App.ApplyFilter();
@@ -836,7 +836,7 @@ void CAppCmds::OnViewDetails()
 	// Get selected server, if one.
 	CRow* pRow = App.m_AppWnd.m_AppDlg.SelectedRow();
 
-	if (pRow == NULL)
+	if (pRow == nullptr)
 		return;
 
 	CGameInfoDlg Dlg(*pRow);
@@ -988,7 +988,7 @@ void CAppCmds::OnUIServersPingFiltered()
 {
 	CMenu& oMenu = App.m_AppWnd.m_Menu;
 
-	oMenu.EnableCmd(ID_SERVERS_PING_FILTERED, (App.m_pFilter != NULL));
+	oMenu.EnableCmd(ID_SERVERS_PING_FILTERED, (App.m_pFilter != nullptr));
 }
 
 void CAppCmds::OnUIServersFindNext()
@@ -1003,7 +1003,7 @@ void CAppCmds::OnUIServersAddFav()
 	CMenu&   oMenu     = App.m_AppWnd.m_Menu;
 	CAppDlg& oAppDlg   = App.m_AppWnd.m_AppDlg;
 	CRow*    pSelRow   = oAppDlg.SelectedRow();
-	bool     bModValid = ((pSelRow != NULL) && (tstrlen(pSelRow->Field(CServers::MOD_NAME)) > 0));
+	bool     bModValid = ((pSelRow != nullptr) && (tstrlen(pSelRow->Field(CServers::MOD_NAME)) > 0));
 	bool     bCanAdd   = ((bModValid) && (pSelRow->Field(CServers::FAV_ID) == null));
 
 	oMenu.EnableCmd(ID_SERVERS_ADD_FAV, bCanAdd);
@@ -1014,7 +1014,7 @@ void CAppCmds::OnUIServersDelFav()
 	CMenu&   oMenu     = App.m_AppWnd.m_Menu;
 	CAppDlg& oAppDlg   = App.m_AppWnd.m_AppDlg;
 	CRow*    pSelRow   = oAppDlg.SelectedRow();
-	bool     bModValid = ((pSelRow != NULL) && (tstrlen(pSelRow->Field(CServers::MOD_NAME)) > 0));
+	bool     bModValid = ((pSelRow != nullptr) && (tstrlen(pSelRow->Field(CServers::MOD_NAME)) > 0));
 	bool     bCanDel   = ((bModValid) && (pSelRow->Field(CServers::FAV_ID) != null));
 
 	oMenu.EnableCmd(ID_SERVERS_DEL_FAV, bCanDel);
@@ -1024,7 +1024,7 @@ void CAppCmds::OnUIFilter()
 {
 	CMenu& oMenu = App.m_AppWnd.m_Menu;
 
-	oMenu.CheckCmd(ID_FILTER_NONE, (App.m_pFilter == NULL));
+	oMenu.CheckCmd(ID_FILTER_NONE, (App.m_pFilter == nullptr));
 
 	for (uint i = 0; i < App.m_aoFilters.size(); ++i)
 		oMenu.CheckCmd(ID_FIRST_FILTER_CMD+i, (App.m_pFilter == App.m_aoFilters[i]));
@@ -1078,7 +1078,7 @@ void CAppCmds::OnUIViewDetails()
 	CMenu&   oMenu   = App.m_AppWnd.m_Menu;
 	CAppDlg& oAppDlg = App.m_AppWnd.m_AppDlg;
 
-	oMenu.EnableCmd(ID_VIEW_DETAILS, (oAppDlg.SelectedRow() != NULL));
+	oMenu.EnableCmd(ID_VIEW_DETAILS, (oAppDlg.SelectedRow() != nullptr));
 }
 
 /******************************************************************************

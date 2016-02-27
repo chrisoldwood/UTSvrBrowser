@@ -172,8 +172,8 @@ void CGameInfoDlg::RefreshInfo()
 		}
 
 		// Sort the team grids by frag count.
-		m_lvTeam1.Sort(Compare, NULL);
-		m_lvTeam2.Sort(Compare, NULL);
+		m_lvTeam1.Sort(Compare);
+		m_lvTeam2.Sort(Compare);
 	}
 }
 
@@ -193,8 +193,8 @@ void CGameInfoDlg::RefreshInfo()
 
 void CGameInfoDlg::AddPlayer(CListView& lvTeam, const tchar* pszPlayer, const tchar* pszFrags)
 {
-	ASSERT(pszPlayer != NULL);
-	ASSERT(pszFrags  != NULL);
+	ASSERT(pszPlayer != nullptr);
+	ASSERT(pszFrags  != nullptr);
 
 	int n = lvTeam.ItemCount();
 

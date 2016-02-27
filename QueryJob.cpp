@@ -126,7 +126,7 @@ CString CQueryJob::FindModName(const tchar* pszGameType)
 	// Lookup game type in table.
 	CRow* pModRow = App.m_oGameTypes.SelectRow(CGameTypes::GAME_TYPE, pszGameType);
 
-	if (pModRow != NULL)
+	if (pModRow != nullptr)
 		pszModName = pModRow->Field(CGameTypes::MOD_NAME);
 
 	return pszModName;
@@ -157,7 +157,7 @@ void CQueryJob::ConvertSymbols(CString& strString)
 		const tchar* pcSymbol = tstrchr(pszSymbols, strString[i]);
 
 		// Remap, if a symbol.
-		if (pcSymbol != NULL)
+		if (pcSymbol != nullptr)
 			strString[i] = pszLetters[pcSymbol-pszSymbols];
 	}
 }

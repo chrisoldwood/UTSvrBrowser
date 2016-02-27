@@ -57,7 +57,7 @@ CQueryResponse::~CQueryResponse()
 
 int CQueryResponse::FindField(const tchar* pszField) const
 {
-	ASSERT(pszField != NULL);
+	ASSERT(pszField != nullptr);
 
 	// For all fields.
 	for (size_t i = 0; i < m_astrFields.Size(); ++i)
@@ -83,7 +83,7 @@ int CQueryResponse::FindField(const tchar* pszField) const
 
 CString CQueryResponse::FieldValue(const tchar* pszField) const
 {
-	ASSERT(pszField != NULL);
+	ASSERT(pszField != nullptr);
 
 	int i = FindField(pszField);
 

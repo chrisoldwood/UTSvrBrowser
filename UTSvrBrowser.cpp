@@ -81,7 +81,7 @@ CUTSvrBrowser::CUTSvrBrowser()
 	, m_oFavourites()
 	, m_oSummary()
 	, m_bFltEdited(false)
-	, m_pFilter(NULL)
+	, m_pFilter(nullptr)
 	, m_oRS(m_oServers)
 	, m_strCacheFile(CPath::ApplicationDir(), CACHE_FILENAME)
 	, m_nPingTimerID(0)
@@ -192,7 +192,7 @@ bool CUTSvrBrowser::OnOpen()
 			m_AppWnd.m_AppDlg.RefreshView();
 		}
 	}
-	catch (CStreamException& e)
+	catch (const CStreamException& e)
 	{
 		AlertMsg(TXT("Warning: Failed to load backup file:\n\n%s\n\n%s"), m_strCacheFile, e.twhat());
 	}
@@ -238,7 +238,7 @@ bool CUTSvrBrowser::OnClose()
 
 		oFile.Close();
 	}
-	catch (CStreamException& e)
+	catch (const CStreamException& e)
 	{
 		AlertMsg(TXT("Warning: Failed to save backup file:\n\n%s\n\n%s"), m_strCacheFile, e.twhat());
 	}
@@ -447,7 +447,7 @@ void CUTSvrBrowser::SaveAppConfig()
 	}
 
 	// Save filter last used.
-	m_oAppIniFile.WriteString(TXT("Filters"), TXT("Default"), (m_pFilter != NULL) ? m_pFilter->m_strName : TXT(""));
+	m_oAppIniFile.WriteString(TXT("Filters"), TXT("Default"), (m_pFilter != nullptr) ? m_pFilter->m_strName : TXT(""));
 
 	// Ave the other configs.
 //	SaveModsConfig();
@@ -705,7 +705,7 @@ void CUTSvrBrowser::StopPingTimer()
 **
 ** Parameters:	pszName		The filters name.
 **
-** Returns:		The filter or NULL.
+** Returns:		The filter or nullptr.
 **
 *******************************************************************************
 */
@@ -721,7 +721,7 @@ CFilter* CUTSvrBrowser::FindFilter(const tchar* pszName) const
 			return pFilter;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 /******************************************************************************
@@ -766,7 +766,7 @@ void CUTSvrBrowser::ApplyFilter()
 	App.m_oRS = App.m_oServers.SelectAll();
 
 	// No filter in use?
-	if (m_pFilter == NULL)
+	if (m_pFilter == nullptr)
 		return;
 
 	// Filter by ping times?
@@ -857,7 +857,7 @@ void CUTSvrBrowser::CheckFavourites()
 		CRow* pFavRow = App.m_oFavourites.SelectRow(CFavourites::IP_KEY, oSvrRow[CServers::IP_KEY].ToValue());
 
 		// Update favourites column.
-		if (pFavRow != NULL)
+		if (pFavRow != nullptr)
 			oSvrRow[CServers::FAV_ID] = pFavRow->Field(CFavourites::FAV_ID);
 		else
 			oSvrRow[CServers::FAV_ID] = null;
