@@ -10,13 +10,13 @@
 
 #include "Common.hpp"
 #include "UTSvrBrowser.hpp"
-#include <Legacy/STLUtils.hpp>
 #include <NCL/WinSock.hpp>
 #include <WCL/File.hpp>
 #include <WCL/StreamException.hpp>
 #include <WCL/StrTok.hpp>
 #include <MDBL/WhereCmp.hpp>
 #include <MDBL/WhereIn.hpp>
+#include <Core/Algorithm.hpp>
 
 /******************************************************************************
 **
@@ -104,7 +104,7 @@ CUTSvrBrowser::CUTSvrBrowser()
 CUTSvrBrowser::~CUTSvrBrowser()
 {
 	// Cleanup filters.
-	DeleteAll(m_aoFilters);
+	Core::deleteAll(m_aoFilters);
 }
 
 /******************************************************************************
