@@ -486,7 +486,7 @@ void CAppCmds::OnServersAddFav()
 	// Not configured?
 	if (pFavFile == nullptr)
 	{
-		App.m_AppWnd.AlertMsg(TXT("There is no favourites file configured for the %s mod."), strMod);
+		App.m_AppWnd.AlertMsg(TXT("There is no favourites file configured for the %s mod."), strMod.c_str());
 		return;
 	}
 
@@ -499,7 +499,7 @@ void CAppCmds::OnServersAddFav()
 
 	if (nEntry == -1)
 	{
-		App.m_AppWnd.AlertMsg(TXT("The %s favourites file is missing or corrupt.\n\n%s"), strMod, strIniFile);
+		App.m_AppWnd.AlertMsg(TXT("The %s favourites file is missing or corrupt.\n\n%s"), strMod.c_str(), strIniFile.c_str());
 		return;
 	}
 
@@ -512,7 +512,7 @@ void CAppCmds::OnServersAddFav()
 
 	// Format the favourite entry.
 	strEntry.Format(TXT("Favorites[%d]"), nEntry);
-	strValue.Format(TXT("%s\\%s\\%s\\False"), strName, strAddress, strPort);
+	strValue.Format(TXT("%s\\%s\\%s\\False"), strName.c_str(), strAddress.c_str(), strPort.c_str());
 
 	// Write it and update the count.
 	oIniFile.WriteString(TXT("UBrowser.UBrowserFavoritesFact"), strEntry,        strValue);
@@ -561,7 +561,7 @@ void CAppCmds::OnServersDelFav()
 	// Not configured?
 	if (pFavFile == nullptr)
 	{
-		App.m_AppWnd.AlertMsg(TXT("There is no favourites file configured for the %s mod."), strMod);
+		App.m_AppWnd.AlertMsg(TXT("There is no favourites file configured for the %s mod."), strMod.c_str());
 		return;
 	}
 

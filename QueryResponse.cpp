@@ -110,7 +110,7 @@ void CQueryResponse::Dump()
 #ifdef _DEBUG
 	for (size_t i = 0; i < m_astrFields.Size(); ++i)
 	{
-		TRACE2(TXT("%s:%s\n"), m_astrFields[i], m_astrValues[i]);
+		TRACE2(TXT("%s:%s\n"), m_astrFields[i].c_str(), m_astrValues[i].c_str());
 	}
 #endif
 }

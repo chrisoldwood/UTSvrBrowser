@@ -194,7 +194,7 @@ bool CUTSvrBrowser::OnOpen()
 	}
 	catch (const CStreamException& e)
 	{
-		AlertMsg(TXT("Warning: Failed to load backup file:\n\n%s\n\n%s"), m_strCacheFile, e.twhat());
+		AlertMsg(TXT("Warning: Failed to load backup file:\n\n%s\n\n%s"), m_strCacheFile.c_str(), e.twhat());
 	}
 
 	// Start the ping timer.
@@ -240,7 +240,7 @@ bool CUTSvrBrowser::OnClose()
 	}
 	catch (const CStreamException& e)
 	{
-		AlertMsg(TXT("Warning: Failed to save backup file:\n\n%s\n\n%s"), m_strCacheFile, e.twhat());
+		AlertMsg(TXT("Warning: Failed to save backup file:\n\n%s\n\n%s"), m_strCacheFile.c_str(), e.twhat());
 	}
 
 	// Terminate WinSock.
@@ -321,7 +321,7 @@ void CUTSvrBrowser::LoadAppConfig()
 		if (strFilterName.Empty())
 			continue;
 
-		strSection.Format(TXT("%s Filter"), strFilterName);
+		strSection.Format(TXT("%s Filter"), strFilterName.c_str());
 
 		// Read the filter definition.
 		CString strName = m_oAppIniFile.ReadString(strSection, TXT("Name"), TXT(""));
@@ -431,7 +431,7 @@ void CUTSvrBrowser::SaveAppConfig()
 			// Write the filter name.
 			m_oAppIniFile.WriteString(TXT("Filters"), strEntry, pFilter->m_strName);
 
-			strSection.Format(TXT("%s Filter"), pFilter->m_strName);
+			strSection.Format(TXT("%s Filter"), pFilter->m_strName.c_str());
 
 			// Write the filter definition.
 			m_oAppIniFile.WriteString (strSection, TXT("Name"),         pFilter->m_strName   );
@@ -484,12 +484,12 @@ void CUTSvrBrowser::LoadModsConfig()
 			continue;
 
 		// Create the mod table entry.
-		CRow& oRow = m_oMods.CreateRow();
+		CRow& mod = m_oMods.CreateRow();
 
-		oRow[CMods::MOD_NAME]  = strModName;
-		oRow[CMods::FAVS_FILE] = m_oModIniFile.ReadString(strModName, TXT("FavsFile"), TXT(""));
+		mod[CMods::MOD_NAME]  = strModName;
+		mod[CMods::FAVS_FILE] = m_oModIniFile.ReadString(strModName, TXT("FavsFile"), TXT(""));
 
-		m_oMods.InsertRow(oRow, false);
+		m_oMods.InsertRow(mod, false);
 
 		// Read the list of game types the mod uses.
 		CString strGameTypes = m_oModIniFile.ReadString(strModName, TXT("GameTypes"), TXT(""));
